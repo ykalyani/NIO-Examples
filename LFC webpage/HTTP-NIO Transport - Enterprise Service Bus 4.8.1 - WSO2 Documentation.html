@@ -1,0 +1,2749 @@
+<!DOCTYPE html>
+<html class="splitter-invoked"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>HTTP-NIO Transport - Enterprise Service Bus 4.8.1 - WSO2 Documentation</title>
+
+        
+
+                        
+    
+                        
+    
+                        
+    
+
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE,chrome=IE7">
+<meta charset="UTF-8">
+<meta id="confluence-context-path" name="confluence-context-path" content="">
+<meta id="confluence-base-url" name="confluence-base-url" content="https://docs.wso2.com">
+
+<meta id="atlassian-token" name="atlassian-token" content="211d2fdf1f42ebbeda4d1e9bafadb1572869b3d8">
+
+<meta id="confluence-space-key" name="confluence-space-key" content="ESB481">
+<script src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/analytics.js" async="" type="text/javascript"></script><script src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/insight.js" async="" type="text/javascript"></script><script src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/gtm.js" async=""></script><script type="text/javascript">
+        var contextPath = '';
+</script>
+
+    
+
+<!-- include system css resources -->
+
+
+    <link type="text/css" rel="stylesheet" href="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/batch_005.css" media="all">
+<link type="text/css" rel="stylesheet" href="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/batch.css" media="print">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4532/e44e912a19b4356578af38c61df778d5fda2d014.80/108/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 8]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4532/e44e912a19b4356578af38c61df778d5fda2d014.80/108/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+8" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4532/e44e912a19b4356578af38c61df778d5fda2d014.80/108/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/batch_004.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4532/e44e912a19b4356578af38c61df778d5fda2d014.80/729d840660f576421d31c053876168f6/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop,main,viewcontent,atl.general/batch.css?conditionalComment=lt+IE+9&amp;supportedApplication=true" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/batch_002.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4532/e44e912a19b4356578af38c61df778d5fda2d014.80/5ff119ce441732154e38829042845958/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/batch_003.css" media="all">
+<link type="text/css" rel="stylesheet" href="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/confluence_002.css" media="all">
+<link type="text/css" rel="stylesheet" href="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/confluence.css" media="all">
+<link type="text/css" rel="stylesheet" href="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/colors.css" media="all">
+<link type="text/css" rel="stylesheet" href="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/custom.css" media="all">
+
+<!-- end system css resources -->
+
+    <meta name="confluence-request-time" content="1442040408157">
+        
+            <script type="text/x-template" title="share-content-popup">
+    <form action="#" method="post" class="aui share-content-popup">
+        <div class="field-group">
+            <div class="autocomplete-user-target">
+                <input class="text autocomplete-sharepage" id="users" data-max="10" data-dropdown-target=".autocomplete-user-target" data-none-message="No matches" placeholder="User name, group or email"/>
+            </div>
+            <ol class="recipients">
+            </ol>
+        </div>
+        <div class="field-group">
+            <textarea class="textarea" id="note" placeholder="Add an optional note"/>
+        </div>
+        <div class="field-group button-panel">
+            <div class="progress-messages-icon"></div>
+            <div class="progress-messages">
+            </div>
+            <input class="button submit" type="submit" value="Share" disabled/>
+            <a class="close-dialog" href="#">Cancel</a>
+        </div>
+    </form>
+</script>
+
+<script type="text/x-template" title="share-content-popup-recipient-userKey">
+    <li data-userkey="{userKey}" style="display: none">
+        <img src="{thumbnailLink.href}" title="{title}">
+        <span class="title" title="{title}">{title}</span>
+        <span class="remove-recipient"/>
+    </li>
+</script>
+
+<script type="text/x-template" title="share-content-popup-recipient-email">
+    <li data-email="{email}" style="display: none">
+        <img src="{icon}" title="{email}">
+        <span class="title" title="{email}">{email}</span>
+        <span class="remove-recipient"/>
+    </li>
+</script>
+
+<script type="text/x-template" title="share-content-popup-recipient-group">
+    <li data-group="{title}" style="display: none">
+        <span>
+            <img src="{thumbnailLink.href}" title="{title}">
+            <span>{title}</span>
+            <span class="remove-recipient"/>
+        </span>
+    </li>
+</script>
+
+    
+        
+            <meta name="ajs-is-confluence-admin" content="false">
+            <meta name="ajs-connection-timeout" content="10000">
+            <meta name="ajs-use-keyboard-shortcuts" content="true">
+            <meta name="ajs-keyboardshortcut-hash" content="5d7ec035206453675b84ffa1955402e6">
+            
+
+    
+            
+    
+    
+            <meta name="ajs-page-id" content="33136231">
+            <meta name="ajs-content-type" content="page">
+            <meta name="ajs-page-title" content="HTTP-NIO Transport">
+            <meta name="ajs-parent-page-title" content="ESB Transports">
+            <meta name="ajs-parent-page-id" content="33136225">
+            <meta name="ajs-space-key" content="ESB481">
+            <meta name="ajs-space-name" content="Enterprise Service Bus 4.8.1">
+            <meta name="ajs-from-page-title" content="">
+            <meta name="ajs-editor.loader.comment.resources" content="&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4532/e44e912a19b4356578af38c61df778d5fda2d014.80/a9eb5a758e295bbaaaefe728f24f6600/_/download/contextbatch/css/comment-editor/batch.css&quot; media=&quot;all&quot;&gt;
+">
+            <meta name="ajs-context-path" content="">
+            <meta name="ajs-base-url" content="https://docs.wso2.com">
+            <meta name="ajs-version-number" content="5.3.4">
+            <meta name="ajs-build-number" content="4532">
+            <meta name="ajs-remote-user" content="">
+            <meta name="ajs-current-user-fullname" content="">
+            <meta name="ajs-current-user-avatar-url" content="">
+            <meta name="ajs-static-resource-url-prefix" content="/s/en_GB-1988229788/4532/e44e912a19b4356578af38c61df778d5fda2d014.80/_">
+            <meta name="ajs-global-settings-attachment-max-size" content="20971520">
+            <meta name="ajs-user-locale" content="en_GB">
+            <meta name="ajs-enabled-dark-features" content="sync.event">
+            <meta name="ajs-atl-token" content="211d2fdf1f42ebbeda4d1e9bafadb1572869b3d8">
+            <meta name="ajs-confluence-flavour" content="VANILLA">
+            <meta name="ajs-editor.loader.resources" content="&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4532/e44e912a19b4356578af38c61df778d5fda2d014.80/58622a2922b8436dd4b20254d1f1f633/_/download/contextbatch/css/editor,macro-browser,fullpage-editor,-viewcontent,-atl.general/batch.css&quot; media=&quot;all&quot;&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4532/e44e912a19b4356578af38c61df778d5fda2d014.80/58622a2922b8436dd4b20254d1f1f633/_/download/contextbatch/css/editor,macro-browser,fullpage-editor,-viewcontent,-atl.general/batch.css?media=%28max-width%3A+1450px%29&quot; media=&quot;(max-width: 1450px)&quot;&gt;
+&lt;!--[if lt IE 9]&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4532/e44e912a19b4356578af38c61df778d5fda2d014.80/58622a2922b8436dd4b20254d1f1f633/_/download/contextbatch/css/editor,macro-browser,fullpage-editor,-viewcontent,-atl.general/batch.css?conditionalComment=lt+IE+9&quot; media=&quot;all&quot;&gt;
+&lt;![endif]--&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4532/e44e912a19b4356578af38c61df778d5fda2d014.80/58622a2922b8436dd4b20254d1f1f633/_/download/contextbatch/js/editor,macro-browser,fullpage-editor,-viewcontent,-atl.general/batch.js&quot; &gt;&lt;/script&gt;
+">
+            <meta name="ajs-date.format" content="MMM dd, yyyy">
+    
+    <link rel="shortcut icon" href="https://docs.wso2.com/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://docs.wso2.com/favicon.ico">
+
+<link rel="search" type="application/opensearchdescription+xml" href="https://docs.wso2.com/opensearch/osd.action" title="WSO2 Documentation">
+
+    <!-- include system javascript resources -->
+    <script type="text/javascript" src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/batch.js"></script><style type="text/css"></style>
+<!--[if lte IE 8]>
+<script type="text/javascript" src="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4532/e44e912a19b4356578af38c61df778d5fda2d014.80/108/_/download/superbatch/js/batch.js?conditionalComment=lte+IE+8" ></script>
+<![endif]-->
+<script type="text/javascript" src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/batch_004.js"></script>
+<script type="text/javascript" src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/batch_002.js"></script>
+<script type="text/javascript" src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/batch_003.js"></script>
+<script type="text/javascript" src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/com.js"></script>
+
+    
+
+        
+    <!-- end system javascript resources -->
+    <meta name="google-site-verification" content="pRwRUP0jDUECheRt5DziuVd3gSs2UTw6EhL4nud3NMk">
+<link rel="shortcut icon" href="https://wso2.com/files/favicon.ico" type="image/x-icon">
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TSWTP6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TSWTP6');</script>
+<!-- End Google Tag Manager -->
+
+
+
+
+
+
+
+
+<style type="text/css">
+tt{
+	font-weight: bold;
+}
+#splitter-content{
+	text-align: left;
+}
+#main p{
+	text-align: left !important;
+}
+#splitter-content img{
+	border-color: #bfbfbf !important;
+}
+#footer p.license, #footer p.license a{
+	background: #000000 !important;
+}
+
+#breadcrumbs{
+	line-height: 90%;
+	padding: 8px 0 4px;
+}
+
+h1{
+	font-family: Arial, Verdana, Helvetika, scans-sherif !important;
+	font-size: 20pt !important;
+	font-weight: bold !important;
+	color: #000000 !important;
+	line-height: 90% !important;
+	margin: 10px 0px 10px !important;
+}
+h1.pagetitle{
+	margin-top: 10px !important;
+}
+h2{
+	font-size: 16pt !important;
+	font-weight: normal !important;
+	font-family: Arial, Verdana, Helvetika, scans-sherif !important;
+	text-transform: uppercase !important;
+	color: #bfbfbf !important;
+	letter-spacing: 1px !important;
+}
+h3{
+	font-family:Arial, Verdana, Helvetika, scans-sherif !important;
+	font-weight: bold !important;
+	text-transform: capitalize !important;
+	color: #000000 !important;
+	font-size: 16pt !important;
+}
+h4{
+	font-size: 14pt !important;
+	font-weight: bold !important;
+	font-family:Arial, Verdana, Helvetika, scans-sherif !important;
+}
+h5{
+	font-weight: bold !important;
+	font-family:Arial, Verdana, Helvetika, scans-sherif !important;
+	font-size: 12pt !important;
+}
+</style>
+
+<script>
+AJS.toInit(function() {
+AJS.$("#children-section").css("display","none");
+});
+</script>
+
+<script>
+jQuery(document).ready(function() {
+    jQuery(".external-link").attr("target", "_blank");
+});
+</script>
+
+<style type="text/css">
+   #action-export-word-link{ display: none}
+</style>
+
+    
+                <link rel="canonical" href="https://docs.wso2.com/display/ESB481/HTTP-NIO+Transport">
+        <link rel="shortlink" href="https://docs.wso2.com/x/Z575AQ">
+    <meta name="wikilink" content="[ESB481:HTTP-NIO Transport]">
+    <meta name="page-version" content="6">
+
+</head>
+
+<body data-aui-version="5.1.3" onload="placeFocus()" id="com-atlassian-confluence" class="theme-documentation  aui-theme-default aui-layout splitter-invoked">
+
+        
+    <div id="full-height-container">
+    <div id="header-precursor">
+        
+                    </div>
+
+
+
+
+
+
+<header id="header" role="banner">
+    <nav data-aui-responsive="true" class="aui-header aui-dropdown2-trigger-group" role="navigation"><div class="aui-header-inner"><div class="aui-header-primary"><h1 style="" id="logo" class="aui-header-logo aui-header-logo-custom"><a href="https://docs.wso2.com/"><img data-aui-responsive-header-index="0" src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/confluence-logo.png" alt="WSO2 Documentation"></a></h1><ul style="width: auto;" class="aui-nav">
+                            <li>
+            
+        
+        
+<a id="space-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="space-menu-link-content" title="Spaces"><span class="browse">Spaces</span><span class="aui-icon-dropdown"></span></a><div id="space-menu-link-content" class="aui-dropdown2 aui-style-default aui-dropdown2-in-header" aria-hidden="false"><div class="aui-dropdown2-section" id="recent-spaces-section"></div><div class="aui-dropdown2-section"><ul id="view-all-spaces-link-content" class="aui-list-truncate section-user-content"><li><a id="view-all-spaces-link" href="https://docs.wso2.com/spacedirectory/view.action" title="Space directory">Space directory</a></li></ul></div></div>
+        </li>
+                            <li id="browseMenu" role="menu">
+            
+    
+        <a id="browse-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="browse-menu-link-content" title="Browse">
+        <span class="browse">Browse</span>
+    </a>
+    <nav id="browse-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+                    <div class="aui-dropdown2-section">
+                <ul id="browse-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+    
+        
+<a id="space-pages-link" href="https://docs.wso2.com/pages/listpages.action?key=ESB481" class="    " title="Browse pages in the Enterprise Service Bus 4.8.1 space (g , s)">
+        Pages
+</a>
+</li>
+                                            <li>
+    
+        
+<a id="space-blogposts-link" href="https://docs.wso2.com/pages/viewrecentblogposts.action?key=ESB481" class="    " title="Browse blogs in the Enterprise Service Bus 4.8.1 space">
+        Blog
+</a>
+</li>
+                                            <li>
+    
+        
+<a id="space-labels-link" href="https://docs.wso2.com/labels/listlabels-heatmap.action?key=ESB481" class="    " title="Browse labels in the Enterprise Service Bus 4.8.1 space">
+        Labels
+</a>
+</li>
+                                            <li>
+    
+        
+<a id="space-advanced-link" href="https://docs.wso2.com/spaces/viewspacesummary.action?key=ESB481" class="    " title="Browse additional space functions in the Enterprise Service Bus 4.8.1 space">
+        Space Operations
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    
+        </li>
+        <li style="display: none;"><a id="aui-responsive-header-dropdown-trigger-0" class="aui-dropdown2-trigger" aria-owns="aui-responsive-header-dropdown-content-0" aria-haspopup="true" href="#">More<span class="icon aui-icon-dropdown"></span></a><div id="aui-responsive-header-dropdown-content-0" class="aui-dropdown2 aui-style-default"><div class="aui-dropdown2-section"><ul id="aui-responsive-header-dropdown-list-0"></ul></div></div></li></ul>
+</div><div class="aui-header-secondary"><ul class="aui-nav">
+                <li>
+        
+    
+            
+<a id="doctheme-anchor" class=" aui-nav-imagelink" title=""><div id="splitter-button" class="" title="Show or hide sidebar ([)"></div></a>
+    </li>
+        <li>
+<form id="quick-search" class="aui-quicksearch dont-default-focus header-quicksearch" action="/dosearchsite.action" method="get">
+    <fieldset>
+                        <label for="quick-search-query" class="assistive">Quick Search</label>
+        <input id="quick-search-query" class="text app-search search quick-search-query" accesskey="q" autocomplete="off" name="queryString" title="Quick Search (/or g , g)" placeholder="Search" type="text">
+        <input id="quick-search-submit" class="quick-search-submit" value="Search" type="submit">
+
+        <div class="aui-dd-parent quick-nav-drop-down"></div>
+    </fieldset>
+    <div class="hidden parameters">
+                    <!-- putMetadata failed to add value for key "quick-nav-enabled" so rendering metadata inline - see server debug log for details -->
+        <meta name="ajs-quick-nav-enabled" content="true">
+                </div>
+</form>
+</li>
+    <li>    
+        <a id="help-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="help-menu-link-content" title="Help">
+        <span class="aui-icon aui-icon-small aui-iconfont-help">Help</span>
+    </a>
+    <nav id="help-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+                    <div class="aui-dropdown2-section">
+                <ul id="help-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+    
+        
+<a id="confluence-help-link" href="http://docs.atlassian.com/confluence/docs-53/Getting+Help+And+Support" class="interactive" title="Visit the Confluence documentation home" target="_blank">
+        Online Help
+</a>
+</li>
+                                            <li>
+    
+            
+<a id="keyboard-shortcuts-link" href="#" class="interactive" title="View available keyboard shortcuts (?)">
+        Keyboard Shortcuts
+</a>
+</li>
+                                            <li>
+    
+        
+<a id="feed-builder-link" href="https://docs.wso2.com/dashboard/configurerssfeed.action" class="interactive" title="Create your custom RSS feed.">
+        Feed Builder
+</a>
+</li>
+                                            <li>
+    
+            
+<a id="gadget-directory-link" href="#" class="user-item administration-link  interactive" title="Browse gadgets provided by Confluence">
+        Available Gadgets
+</a>
+</li>
+                                            <li>
+    
+        
+<a id="confluence-about-link" href="https://docs.wso2.com/aboutconfluencepage.action" class="interactive" title="Get more information about Confluence">
+        About Confluence
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    </li>
+    <li>    
+    </li>
+                <li>                                    </li><li>
+    
+        
+<a id="login-link" href="https://docs.wso2.com/login.action?os_destination=%2Fdisplay%2FESB481%2FHTTP-NIO%2BTransport" class="   user-item login-link " title="">
+        Log In
+</a>
+</li>
+                        
+</ul>
+</div></div><!-- .aui-header-inner--></nav><!-- .aui-header -->
+    <br class="clear">
+</header>
+
+    <div style="position: relative; height: 590px;" id="splitter">
+    <div style="position: absolute; left: 0px; width: 301px; height: 590px;" id="splitter-sidebar">
+        
+        <ul>
+	<li><a target="_blank" href="http://docs.wso2.com/" class="external-link" rel="nofollow">WSO2 Documentation</a></li>
+	<li><a target="_blank" href="http://wso2.com/products/enterprise-service-bus" class="external-link" rel="nofollow">Download Product</a></li>
+	<li></li>
+</ul>
+
+
+<form method="get" class="confluence-searchbox adaptavist-searchbox marginlessForm " action="/dosearchsite.action">
+    <input name="key" value="ESB481" type="hidden">
+    <input class="search-query searchQuery" name="searchQuery.queryString" id="searchQuery.queryString" type="text">
+     <input name="searchQuery.spaceKey" value="ESB481" type="hidden">
+     <input class="search-button searchButton" value="Search" type="submit">
+</form>
+
+
+
+
+<div class="plugin_pagetree">
+
+        
+                <div>
+            <span class="plugin_pagetree_status hidden">Collapse all</span>
+            <div class="plugin_pagetree_expandcollapse">
+                <a class="plugin_pagetree_expandall" href="#">Expand all</a>&nbsp;&nbsp;
+                <a class="plugin_pagetree_collapseall" href="#">Collapse all</a>
+            </div>
+        </div>
+    
+    <ul class="plugin_pagetree_children_list plugin_pagetree_children_list_noleftspace">
+        <div id="children33135863-0" class="plugin_pagetree_children">
+<ul class="plugin_pagetree_children_list" id="child_ul33135863-0">
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33135876-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33135876-0">                        <a href="https://docs.wso2.com/display/ESB481/About+WSO2+ESB">About WSO2 ESB</a>
+        </span>
+            </div>
+
+        <div id="children33135876-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136141-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136141-0">                        <a href="https://docs.wso2.com/display/ESB481/Getting+Started">Getting Started</a>
+        </span>
+            </div>
+
+        <div id="children33136141-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136175-0" class="plugin_pagetree_childtoggle icon icon-section-opened" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136175-0">                        <a href="https://docs.wso2.com/display/ESB481/User+Guide">User Guide</a>
+        </span>
+            </div>
+
+        <div id="children33136175-0" class="plugin_pagetree_children_container">
+                                                        <ul class="plugin_pagetree_children_list" id="child_ul33136175-0">
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136398-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136398-0">                        <a href="https://docs.wso2.com/display/ESB481/Triggering+Messages">Triggering Messages</a>
+        </span>
+            </div>
+
+        <div id="children33136398-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136243-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136243-0">                        <a href="https://docs.wso2.com/display/ESB481/Mediating+Messages">Mediating Messages</a>
+        </span>
+            </div>
+
+        <div id="children33136243-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136353-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136353-0">                        <a href="https://docs.wso2.com/display/ESB481/Working+with+Endpoints">Working with Endpoints</a>
+        </span>
+            </div>
+
+        <div id="children33136353-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136328-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136328-0">                        <a href="https://docs.wso2.com/display/ESB481/Working+with+Web+Services">Working with Web Services</a>
+        </span>
+            </div>
+
+        <div id="children33136328-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136373-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136373-0">                        <a href="https://docs.wso2.com/display/ESB481/Working+with+Templates">Working with Templates</a>
+        </span>
+            </div>
+
+        <div id="children33136373-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136423-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136423-0">                        <a href="https://docs.wso2.com/display/ESB481/Working+with+Connectors">Working with Connectors</a>
+        </span>
+            </div>
+
+        <div id="children33136423-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136224-0" class="plugin_pagetree_childtoggle icon icon-section-opened" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136224-0">                        <a href="https://docs.wso2.com/display/ESB481/Working+with+Transports">Working with Transports</a>
+        </span>
+            </div>
+
+        <div id="children33136224-0" class="plugin_pagetree_children_container">
+                                                        <ul class="plugin_pagetree_children_list" id="child_ul33136224-0">
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136242-0">                        <a href="https://docs.wso2.com/display/ESB481/Configuring+Transports">Configuring Transports</a>
+        </span>
+            </div>
+
+        <div id="children33136242-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136225-0" class="plugin_pagetree_childtoggle icon icon-section-opened" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136225-0">                        <a href="https://docs.wso2.com/display/ESB481/ESB+Transports">ESB Transports</a>
+        </span>
+            </div>
+
+        <div id="children33136225-0" class="plugin_pagetree_children_container">
+                                                        <ul class="plugin_pagetree_children_list" id="child_ul33136225-0">
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136238-0">                        <a href="https://docs.wso2.com/display/ESB481/HTTP+PassThrough+Transport">HTTP PassThrough Transport</a>
+        </span>
+            </div>
+
+        <div id="children33136238-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span plugin_pagetree_current" id="childrenspan33136231-0">                        <a href="https://docs.wso2.com/display/ESB481/HTTP-NIO+Transport">HTTP-NIO Transport</a>
+        </span>
+            </div>
+
+        <div id="children33136231-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136230-0">                        <a href="https://docs.wso2.com/display/ESB481/HTTPS-NIO+Transport">HTTPS-NIO Transport</a>
+        </span>
+            </div>
+
+        <div id="children33136230-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan34614578-0">                        <a href="https://docs.wso2.com/display/ESB481/HTTP+Servlet+Transport">HTTP Servlet Transport</a>
+        </span>
+            </div>
+
+        <div id="children34614578-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan34614580-0">                        <a href="https://docs.wso2.com/display/ESB481/HTTPS+Servlet+Transport">HTTPS Servlet Transport</a>
+        </span>
+            </div>
+
+        <div id="children34614580-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136235-0">                        <a href="https://docs.wso2.com/display/ESB481/FIX+Transport">FIX Transport</a>
+        </span>
+            </div>
+
+        <div id="children33136235-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136232-0">                        <a href="https://docs.wso2.com/display/ESB481/JMS+Transport">JMS Transport</a>
+        </span>
+            </div>
+
+        <div id="children33136232-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136229-0">                        <a href="https://docs.wso2.com/display/ESB481/VFS+Transport">VFS Transport</a>
+        </span>
+            </div>
+
+        <div id="children33136229-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136234-0">                        <a href="https://docs.wso2.com/display/ESB481/Local+Transport">Local Transport</a>
+        </span>
+            </div>
+
+        <div id="children33136234-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136233-0">                        <a href="https://docs.wso2.com/display/ESB481/MailTo+Transport">MailTo Transport</a>
+        </span>
+            </div>
+
+        <div id="children33136233-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136239-0">                        <a href="https://docs.wso2.com/display/ESB481/MSMQ+Transport">MSMQ Transport</a>
+        </span>
+            </div>
+
+        <div id="children33136239-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136240-0">                        <a href="https://docs.wso2.com/display/ESB481/RabbitMQ+AMQP+Transport">RabbitMQ AMQP Transport</a>
+        </span>
+            </div>
+
+        <div id="children33136240-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136236-0">                        <a href="https://docs.wso2.com/display/ESB481/TCP+Transport">TCP Transport</a>
+        </span>
+            </div>
+
+        <div id="children33136236-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136237-0">                        <a href="https://docs.wso2.com/display/ESB481/UDP+Transport">UDP Transport</a>
+        </span>
+            </div>
+
+        <div id="children33136237-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136226-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136226-0">                        <a href="https://docs.wso2.com/display/ESB481/HL7+Transport">HL7 Transport</a>
+        </span>
+            </div>
+
+        <div id="children33136226-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136241-0">                        <a href="https://docs.wso2.com/display/ESB481/Multi-HTTPS+Transport">Multi-HTTPS Transport</a>
+        </span>
+            </div>
+
+        <div id="children33136241-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                        </ul>
+                                        </div>
+    </li>
+                                        </ul>
+                                        </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136387-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136387-0">                        <a href="https://docs.wso2.com/display/ESB481/Working+with+Security">Working with Security</a>
+        </span>
+            </div>
+
+        <div id="children33136387-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136386-0">                        <a href="https://docs.wso2.com/display/ESB481/Error+Handling">Error Handling</a>
+        </span>
+            </div>
+
+        <div id="children33136386-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136190-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136190-0">                        <a href="https://docs.wso2.com/display/ESB481/Java+Message+Service+%28JMS%29+Support">Java Message Service (JMS) Support</a>
+        </span>
+            </div>
+
+        <div id="children33136190-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136189-0">                        <a href="https://docs.wso2.com/display/ESB481/JSON+Support">JSON Support</a>
+        </span>
+            </div>
+
+        <div id="children33136189-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136223-0">                        <a href="https://docs.wso2.com/display/ESB481/REST+Support">REST Support</a>
+        </span>
+            </div>
+
+        <div id="children33136223-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136185-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136185-0">                        <a href="https://docs.wso2.com/display/ESB481/Integrating+with+Other+Technologies">Integrating with Other Technologies</a>
+        </span>
+            </div>
+
+        <div id="children33136185-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136176-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136176-0">                        <a href="https://docs.wso2.com/display/ESB481/ESB+Knowledge+Base">ESB Knowledge Base</a>
+        </span>
+            </div>
+
+        <div id="children33136176-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                        </ul>
+                                        </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33135998-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33135998-0">                        <a href="https://docs.wso2.com/display/ESB481/Samples">Samples</a>
+        </span>
+            </div>
+
+        <div id="children33135998-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33135879-0">                        <a href="https://docs.wso2.com/pages/viewpage.action?pageId=33135879">Enterprise Integration Patterns (EIP)</a>
+        </span>
+            </div>
+
+        <div id="children33135879-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33135885-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33135885-0">                        <a href="https://docs.wso2.com/display/ESB481/Administration+Guide">Administration Guide</a>
+        </span>
+            </div>
+
+        <div id="children33135885-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33135864-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33135864-0">                        <a href="https://docs.wso2.com/display/ESB481/Extending+the+ESB">Extending the ESB</a>
+        </span>
+            </div>
+
+        <div id="children33135864-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus33136158-0" class="plugin_pagetree_childtoggle icon icon-section-closed" href="#">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136158-0">                        <a href="https://docs.wso2.com/display/ESB481/Reference+Guide">Reference Guide</a>
+        </span>
+            </div>
+
+        <div id="children33136158-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33135884-0">                        <a href="https://docs.wso2.com/display/ESB481/Glossary">Glossary</a>
+        </span>
+            </div>
+
+        <div id="children33135884-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33135883-0">                        <a href="https://docs.wso2.com/display/ESB481/Getting+Support">Getting Support</a>
+        </span>
+            </div>
+
+        <div id="children33135883-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan33136157-0">                        <a href="https://docs.wso2.com/display/ESB481/Searchable+List+of+All+Topics">Searchable List of All Topics</a>
+        </span>
+            </div>
+
+        <div id="children33136157-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+    </ul>
+</div>
+    </ul>
+
+    <fieldset class="hidden">
+        <input name="treeId" value="" type="hidden">
+        <input name="treeRequestId" value="/plugins/pagetree/naturalchildren.action?decorator=none&amp;excerpt=false&amp;sort=position&amp;reverse=false&amp;disableLinks=false&amp;expandCurrent=false" type="hidden">
+        <input name="treePageId" value="33136231" type="hidden">
+
+        <input name="noRoot" value="false" type="hidden">
+        <input name="rootPageId" value="33135863" type="hidden">
+
+        <input name="rootPage" value="" type="hidden">
+        <input name="startDepth" value="0" type="hidden">
+        <input name="spaceKey" value="ESB481" type="hidden">
+
+        <input name="i18n-pagetree.loading" value="Loading..." type="hidden">
+        <input name="i18n-pagetree.error.permission" value="Unable to load page tree. It seems that you do not have permission to view the root page." type="hidden">
+        <input name="i18n-pagetree.eeror.general" value="There was a problem retrieving the page tree. Please check the server log file for more information." type="hidden">
+        <input name="loginUrl" value="/login.action?os_destination=%2Fpages%2Fviewpage.action%3Ftitle%3DHTTP-NIO%2BTransport%26spaceKey%3DESB481" type="hidden">
+        <input name="mobile" value="false" type="hidden">
+
+                <fieldset class="hidden">
+                                                <input name="ancestorId" value="33136225" type="hidden">
+                                    <input name="ancestorId" value="33136224" type="hidden">
+                                    <input name="ancestorId" value="33136175" type="hidden">
+                                    <input name="ancestorId" value="33135863" type="hidden">
+                                    </fieldset>
+    </fieldset>
+</div>
+
+
+    
+
+            </div><div unselectable="on" class="vsplitbar" style="z-index: 4; position: absolute; -moz-user-select: none; cursor: ew-resize; left: 301px; height: 590px;"><a title="vsplitbar" tabindex="0" accesskey="L" href="javascript:void(0)"></a></div>
+    <div style="position: absolute; left: 304px; width: 1069px; height: 590px;" id="splitter-content">
+
+                    <script type="text/javascript" src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/doc-theme.js"></script>
+    
+                        
+        <div id="theme-header">
+                <div class="aui-message warning shadowed information-macro has-no-icon">
+                        <div class="message-content">
+                            <p><strong>This documentation is for WSO2 ESB version 4.8.1</strong>. <a target="_blank" href="http://docs.wso2.com/enterprise-service-bus" class="external-link" rel="nofollow">View documentation for the latest release.</a></p>
+                    </div>
+    </div>
+
+ 
+ 
+ 
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                              <div class="pag-nav3"><a href="https://docs.wso2.com/display/ESB481/HTTP+PassThrough+Transport" class="previous" rel="nofollow"></a>|<a href="https://docs.wso2.com/display/ESB481/HTTPS-NIO+Transport" class="next" rel="nofollow"></a>|<a href="https://docs.wso2.com/display/ESB481/WSO2+Enterprise+Service+Bus+Documentation" class="home" rel="nofollow"></a></div>
+        </div>
+    
+            
+<div id="main" class="aui-page-panel">
+    <div id="main-header">
+        
+        
+    <div id="navigation" class="content-navigation view">
+                    <ul class="ajs-menu-bar">
+                                    
+                    
+        <li class="normal ajs-menu-item">
+        <a id="action-menu-link" class="action ajs-menu-title aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="action-menu" data-container="#navigation"><span><span>Tools</span></span></a>         <div id="action-menu" class="aui-dropdown2 aui-style-default most-right-menu-item">
+                            <ul id="action-menu-primary" class="section-primary first aui-dropdown2-section">
+                                            <li>
+
+    
+        
+    
+    <a id="view-attachments-link" href="https://docs.wso2.com/pages/viewpageattachments.action?pageId=33136231" class="action-view-attachments" accesskey="t" title="View Attachments (t)">
+                <span>A<u>t</u>tachments (0)</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+    
+    <a id="action-view-history-link" href="https://docs.wso2.com/pages/viewpreviousversions.action?pageId=33136231" class="action-view-history" title="">
+                <span>Page History</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+    
+    <a id="action-page-permissions-link" href="https://docs.wso2.com/pages/viewinfo.action?pageId=33136231" class="action-page-permissions" title="Edit restrictions">
+                <span>Restrictions</span>    </a>
+</li>
+                                </ul>
+                            <ul id="action-menu-secondary" class="section-secondary aui-dropdown2-section">
+                                            <li>
+
+    
+        
+    
+    <a id="view-page-info-link" href="https://docs.wso2.com/pages/viewinfo.action?pageId=33136231" class="action-view-info" title="">
+                <span>Page Information</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+    
+    <a id="link-to-page-link" href="https://docs.wso2.com/pages/viewinfo.action?pageId=33136231" class="" title="Link to this Page (k)">
+                <span>Link to this Page…</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+    
+    <a id="view-in-hierarchy-link" href="https://docs.wso2.com/pages/listpages-dirview.action?key=ESB481&amp;openId=33136231#selectedPageInHierarchy" class="" title="">
+                <span>View in Hierarchy</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+    
+    <a id="action-view-source-link" href="https://docs.wso2.com/plugins/viewsource/viewpagesrc.action?pageId=33136231" class="action-view-source popup-link" title="">
+                <span>View Source</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+    
+    <a id="action-export-pdf-link" href="https://docs.wso2.com/spaces/flyingpdf/pdfpageexport.action?pageId=33136231" class="" title="">
+                <span>Export to PDF</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+    
+    <a id="action-export-word-link" href="https://docs.wso2.com/exportword?pageId=33136231" class="action-export-word" title="">
+                <span>Export to Word</span>    </a>
+</li>
+                                </ul>
+                            <ul id="action-menu-modify" class="section-modify aui-dropdown2-section">
+                                            <li>
+
+    
+        
+    
+    <a id="treecopy-action" href="https://docs.wso2.com/plugins/treecopy/setnames.action?pageId=33136231" class="" title="">
+                <span>Copy Page Tree</span>    </a>
+</li>
+                                </ul>
+                    </div>
+    </li>
+            </ul>
+    </div>
+
+        
+                <div id="title-heading" class="pagetitle with-breadcrumbs">
+        
+                                        
+                            <div id="breadcrumb-section">
+                    
+    
+    
+    <ol id="breadcrumbs">
+                    
+                
+        <li class="first">
+                
+
+                    <span class=""><a href="https://docs.wso2.com/display/ESB481?src=breadcrumbs-homepage">Enterprise Service Bus 4.8.1</a></span>
+                                                </li><li id="ellipsis" title="Show all breadcrumbs"><span><strong>…</strong></span></li>
+                                    
+                
+        <li class="hidden-crumb">
+                
+
+                    <span class=""><a href="https://docs.wso2.com/display/ESB481/WSO2+Enterprise+Service+Bus+Documentation?src=breadcrumbs-expanded">WSO2 Enterprise Service Bus Documentation</a></span>
+                                        
+                
+        </li><li class="hidden-crumb">
+                
+
+                    <span class=""><a href="https://docs.wso2.com/display/ESB481/User+Guide?src=breadcrumbs-expanded">User Guide</a></span>
+                                        
+                
+        </li><li class="hidden-crumb">
+                
+
+                    <span class=""><a href="https://docs.wso2.com/display/ESB481/Working+with+Transports?src=breadcrumbs-expanded">Working with Transports</a></span>
+                            
+                
+        </li><li>
+                
+
+                    <span class=""><a href="https://docs.wso2.com/display/ESB481/ESB+Transports?src=breadcrumbs-parent">ESB Transports</a></span>
+                </li></ol>
+
+
+                </div>
+            
+            <h1 id="title-text" class="with-breadcrumbs">
+                                        <a href="https://docs.wso2.com/display/ESB481/HTTP-NIO+Transport">HTTP-NIO Transport</a>
+                            </h1>
+        </div>
+    </div>
+
+    
+
+    
+    
+    
+    
+    
+
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                      
+
+
+
+
+        
+
+
+
+
+    
+
+    
+
+    
+
+
+
+
+
+
+
+    
+    
+        
+    
+    
+                    
+    
+
+    
+
+
+<div id="content" class="page view">
+    
+
+<div id="action-messages">
+                        </div>
+
+
+
+    
+<script type="text/x-template" title="movePageDialog">
+    <div class="row information">
+        <div class="inner">
+            <div class="element">
+                Specify the new parent page for this page and its children by space and title.
+            </div>
+        </div>
+    </div>
+        <form class="aui" onsubmit="return false;">
+	        <fieldset>
+	                
+
+    <legend class="assistive"><span>Change the Parent Page to a Known Page</span></legend>
+	            <div class="field-group">
+	                <label for="new-space">New space:</label>
+	                <div class="value new-space-value">
+	                    <input id="new-space-key" name="new-space-key" type="hidden" value="ESB481">
+	                    	                        <span class="space-input">
+	                            <input id="new-space" name="new-space" value="Enterprise Service Bus 4.8.1" disabled="disabled" class="text long-field">
+	                        </span>
+                            <div class="description warning">You cannot move this page to another space because you do not have permission to delete it from this space.</div>
+	                    	                    <div class="new-space-dropdown aui-dd-parent autocomplete"></div>
+	                </div>
+	            </div>
+	            <div class="field-group">
+	                <label for="new-parent-page">New parent page:</label>
+	                <div class="value new-parent-page-value">
+	                    <span class="page-input">
+	                        <input id="new-parent-page" name="new-parent-page" value="ESB Transports" class="text long-field">
+	                    </span>
+                        <div class="description">Start typing a page title to see a list of suggestions.</div>
+	                    <div class="new-parent-page-dropdown aui-dd-parent autocomplete"></div>
+	                </div>
+	            </div>
+	        </fieldset>
+        </form>
+    <div class="location-info">
+        <div class="row">
+            <label>Current location:</label>
+            <div class="value breadcrumbs-container">
+                <div class="breadcrumbs-line">
+                    <ul id="current-parent-breadcrumbs" class="breadcrumbs">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label>New location:</label>
+            <div class="value breadcrumbs-container">
+                <div class="breadcrumbs-line">
+                    <ul id="new-parent-breadcrumbs" class="breadcrumbs">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-template" title="movePageSearchPanel">
+    <div class="row information">
+        <div class="inner">
+            <div class="element">
+                Search for and select the new parent page for this page and its children.
+            </div>
+        </div>
+    </div>
+    <div id="move-page-search-container" class="row">
+	        <form class="aui" onsubmit="return false;">
+	            <fieldset>
+	                    
+
+    <legend class="assistive"><span>Search for a New Parent Page</span></legend>
+	                    
+
+    <label  for="move-page-search-query" class="assistive">Search keywords</label>
+	                <input class="search-query text" id="move-page-search-query">
+	                    
+
+    <label  for="move-page-search-space" class="assistive">Search in space</label>
+	                	                    <select id="move-page-search-space" class="search-space select" disabled="disabled">
+	                        <option value="ESB481" selected="selected">Enterprise Service Bus 4.8.1</option>
+	                    </select>
+	                	                <input type="button" value="Search" class="button submit">
+	                	                    <div class="description warning">You cannot move this page to another space because you do not have permission to delete it from this space.</div>
+	                	            </fieldset>
+	        </form>
+        <div class="search-results">
+        </div>
+    </div>
+</script>
+<script type="text/x-template" title="searchResultsGrid">
+    <table class="aui">
+        <thead>
+            <tr class="header">
+                <th class="search-result-title">Page Title</th>
+                <th class="search-result-space">Space</th>
+                <th class="search-result-date">Updated</th>
+            </tr>
+        </thead>
+    </table>
+</script>
+<script type="text/x-template" title="searchResultsGridCount">
+    <p class="search-result-count">{0}</p>
+</script>
+<script type="text/x-template" title="searchResultsGridRow">
+    <tr class="search-result">
+        <th class="search-result-title"><a href="{1}" class="content-type-{2}"><span>{0}</span></a></th>
+        <td class="search-result-space"><a class="space" href="/display/{4}/" title="{3}">{3}</a></td>
+        <td class="search-result-date"><span class="date" title="{6}">{5}</span></td>
+    </tr>
+</script><!-- Start restrictions section -->
+<script type="text/x-template" title="page-permissions-div">
+<div id="page-permissions-div">
+    <div id="page-permissions-editor-form">
+                <div id="page-permissions-error-div" class="aui-message warning shadowed closeable hidden">
+            <p class="title"/>
+            <span class="aui-icon icon-warning"></span>
+            <span class="aui-icon icon-close" tabindex="0" role="button"></span>
+        </div>
+                <div id="page-permissions-type-radios" class="page-permissions-label-rows">
+            <div class="radio">
+                <input id="restrictViewRadio" class="radio" type="radio" checked="checked" name="pagePermissionTypeRadio" value="view"/>
+                <label for="restrictViewRadio">Restrict viewing of this page</label>
+                <input id="restrictEditRadio" class="radio" type="radio" name="pagePermissionTypeRadio" value="edit"/>
+                <label for="restrictEditRadio">Restrict editing of this page</label>
+            </div>
+        </div>
+        <div id="page-permissions-input" class="page-permissions-label-rows">
+            <div class="page-permissions-label">To:</div>
+            <div id="page-permissions-chooser-box">
+                                <span id="page-permissions-choose-user" class="aui-button">
+                    
+
+
+    
+    
+
+
+
+
+
+
+<a id='userpicker-popup-link'  href='#' onClick="var picker = window.open('/spaces/openuserpicker.action?key=ESB481&amp;startIndex=0&amp;onPopupSubmit=AJS.PagePermissions.addUserPermissions', 'EntitiesPicker', 'status=yes,resizable=yes,top=100,left=200,width=700,height=680,scrollbars=yes'); picker.focus(); return false;">
+    				    <img src="/s/en_GB-1988229788/4532/e44e912a19b4356578af38c61df778d5fda2d014.80/_/images/icons/user_16.png" height=16 width=16 border=0 align="absmiddle"  title="Choose users" />
+						    Person...
+	        </a>
+
+
+                </span>
+                <span id="page-permissions-choose-group" class="aui-button">
+                    
+
+
+    
+    
+
+ 
+
+
+
+
+<a id='grouppicker-popup-link'  href='#' onClick="var picker = window.open('/spaces/opengrouppicker.action?key=ESB481&amp;startIndex=0&amp;actionName=dosearchgroups.action&amp;onPopupSubmit=AJS.PagePermissions.addGroupPermissions', 'EntitiesPicker', 'status=yes,resizable=yes,top=100,left=200,width=580,height=550,scrollbars=yes'); picker.focus(); return false;">
+    				    <img src="/s/en_GB-1988229788/4532/e44e912a19b4356578af38c61df778d5fda2d014.80/_/images/icons/group_16.png" height=16 width=16 border=0 align="absmiddle"  title="Choose groups" />
+						    Group...
+	        </a>
+
+
+                </span>
+            </div>
+            <div id="page-permissions-input-box">
+                <input id="page-permissions-names-input" class="autocomplete-user-or-group text" type="text" name="permissionNames"
+                    placeholder="Enter user or group name:"
+                    data-max="10" data-none-message="No matches"
+                    data-target="#page-permissions-names-hidden"
+                    data-dropdown-target="#page-perms-name-dropdown-wrapper" data-resize-to-input="true"
+                    size="30"/>
+                <input
+    type="hidden"
+                            id="page-permissions-names-hidden"           />                <button class="aui-button" id="add-typed-names">Restrict</button>
+                <div id="page-perms-name-dropdown-wrapper" class="aui-dd-parent autocomplete autocomplete-user-or-group-target"></div>
+            </div>
+        </div>
+    </div>
+    <div id="page-permissions-tables">
+        <div id="page-permissions-table-div">
+                        <table id="page-permissions-table" class="page-permissions-table">
+                <tr id="page-permissions-no-views" class="marker-row">
+                    <td colspan="3" class="page-permissions-marker-cell">
+                            <span class="aui-icon aui-icon-small aui-iconfont-view"></span>
+                        <span>No view restrictions are defined for this page</span>
+                    </td>
+                </tr>
+                <tr id="page-permissions-no-edits" class="marker-row">
+                    <td colspan="3" class="page-permissions-marker-cell">
+                            <span class="aui-icon aui-icon-small edit-icon"></span>
+                        <span>No edit restrictions are defined for this page</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="page-inherited-permissions-table-div" class="hidden">
+            <span id="page-inherited-permissions-table-desc">
+                <a class="icon twisty-closed">Show/Hide</a>
+                <a id="toggle-inherited-permissions" title="Click to see inherited restrictions">This page has restricted parent pages. It can only be seen by users who can see those parent pages.</a>
+            </span>
+            <div id="page-inherited-permissions-tables" class="hidden page-inheritance-togglable"></div>
+        </div>
+    </div>
+</div>
+</script>
+
+<!-- End restrictions section -->
+
+        
+    
+    
+        <fieldset class="hidden parameters">
+            <input title="parentPageId" value="33136225" type="hidden">
+        </fieldset>
+
+                            
+    
+
+                    
+
+        
+        <a href="#page-metadata-end" class="assistive">Skip to end of metadata</a>
+<div id="page-metadata-start" class="assistive"></div>
+
+    <div class="page-metadata">
+        <ul>
+                            <li class="page-metadata-item noprint">
+
+    
+            
+    
+    <a id="content-metadata-page-restrictions" href="#" class="hidden" title="Page restrictions apply">
+                    <img alt="" src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/red_padlock.png" title="" height="16" width="16">
+                <span></span>    </a>
+</li>
+                        <li class="page-metadata-modification-info">
+                                    Added by     <a href="https://docs.wso2.com/display/%7Ejackie@wso2.com" class="url fn">Jackie Wheeler</a>, last edited by     <a href="https://docs.wso2.com/display/%7Enisrin@wso2.com" class="url fn">Nisrin Sheriff</a> on Nov 03, 2014
+                                                                <span class="noprint">&nbsp;(<a id="view-change-link" href="https://docs.wso2.com/pages/diffpages.action?pageId=33136231&amp;originalId=43979427">view change</a>)</span>
+                                                </li>
+                    </ul>
+                </div>
+
+
+<a href="#page-metadata-start" class="assistive">Go to start of metadata</a>
+<div id="page-metadata-end" class="assistive"></div>
+        
+        <fieldset class="hidden parameters">
+                        <input title="browsePageTreeMode" value="view" type="hidden">
+        </fieldset>
+
+        <div class="wiki-content">
+                           
+        <p><strong>HTTP-NIO transport</strong> is a module of the Apache Synapse project. The two classes that implement the receiver and sender APIs are <code>org.apache.synapse.transport.nhttp.HttpCoreNIOListener</code> and <code>org.apache.synapse.transport.nhttp.HttpCoreNIOSender</code> respectively. These classes are available in the JAR file named <code>synapse-nhttp-transport.jar</code>.
+ This non-blocking transport implementation is one of the secrets behind
+ the blistering performance figures of Apache Synapse and WSO2 ESB. The 
+transport implementation is based on Apache HTTP Core - NIO and uses a 
+configurable pool of non-blocking worker threads to grab incoming HTTP 
+messages off the wire.</p><hr><h3 id="HTTP-NIOTransport-Transportreceiverparameters">Transport receiver parameters</h3>    <div class="aui-message hint shadowed information-macro">
+                            <span class="aui-icon icon-hint">Icon</span>
+                <div class="message-content">
+                            <p>In transport parameter tables, literals 
+displayed in italic mode under the "Possible Values" column should be 
+considered as fixed literal constant values. Those values can be 
+directly put in transport configurations.</p>
+                    </div>
+    </div>
+<div class="table-wrap"><table class="confluenceTable tablesorter"><thead><tr class="sortableHeader"><th data-column="0" class="confluenceTh sortableHeader"><div class="tablesorter-header-inner"><p>Parameter Name</p></div></th><th data-column="1" class="confluenceTh sortableHeader"><div class="tablesorter-header-inner"><p>Description</p></div></th><th data-column="2" class="confluenceTh sortableHeader"><div class="tablesorter-header-inner"><p>Requried</p></div></th><th data-column="3" class="confluenceTh sortableHeader"><div class="tablesorter-header-inner"><p>Possible Values</p></div></th><th data-column="4" class="confluenceTh sortableHeader"><div class="tablesorter-header-inner"><p>Default Value</p></div></th></tr></thead><tbody><tr><td class="confluenceTd"><p>port</p></td><td class="confluenceTd"><p>The port on which this transport receiver should listen for incoming messages.</p></td><td class="confluenceTd"><p>No</p></td><td class="confluenceTd"><p>A positive integer less than 65535</p></td><td class="confluenceTd"><p>8280</p></td></tr><tr><td class="confluenceTd"><p>non-blocking</p></td><td class="confluenceTd"><p>Setting this parameter to true is vital for a number of scenarios to work properly.</p></td><td class="confluenceTd"><p>Yes</p></td><td class="confluenceTd"><p><em>true/false</em></p></td><td class="confluenceTd"><p><em>true</em></p></td></tr><tr><td class="confluenceTd"><p>bind-address</p></td><td class="confluenceTd"><p>The address of the interface to which the transport listener should bind.</p></td><td class="confluenceTd"><p>No</p></td><td class="confluenceTd"><p>A host name or an IP address</p></td><td class="confluenceTd"><p>127.0.0.1</p></td></tr><tr><td class="confluenceTd"><p>hostname</p></td><td class="confluenceTd"><p>The
+ host name of the server to be displayed in service EPRs, WSDLs etc. 
+This parameter takes effect only when the WSDLEPRPrefix parameter is not
+ set.</p></td><td class="confluenceTd"><p>No</p></td><td class="confluenceTd"><p>A host name or an IP address</p></td><td class="confluenceTd"><p>localhost</p></td></tr><tr><td class="confluenceTd"><p>WSDLEPRPrefix</p></td><td class="confluenceTd"><p>A URL prefix which will be added to all service EPRs and EPRs in WSDLs etc.</p></td><td class="confluenceTd"><p>No</p></td><td class="confluenceTd"><p>A URL of the form &lt;protocol&gt;://&lt;hostname&gt;:&lt;port&gt;/</p></td><td class="confluenceTd"><p>&nbsp;</p></td></tr></tbody></table></div><h3 id="HTTP-NIOTransport-Transportsenderparameters">Transport sender parameters</h3><div class="table-wrap"><table class="confluenceTable tablesorter"><thead><tr class="sortableHeader"><th data-column="0" class="confluenceTh sortableHeader"><div class="tablesorter-header-inner"><p>Parameter Name</p></div></th><th data-column="1" class="confluenceTh sortableHeader"><div class="tablesorter-header-inner"><p>Description</p></div></th><th data-column="2" class="confluenceTh sortableHeader"><div class="tablesorter-header-inner"><p>Requried</p></div></th><th data-column="3" class="confluenceTh sortableHeader"><div class="tablesorter-header-inner"><p>Possible Values</p></div></th><th data-column="4" class="confluenceTh sortableHeader"><div class="tablesorter-header-inner"><p>Default Value</p></div></th></tr></thead><tbody><tr><td class="confluenceTd"><p>http.proxyHost</p></td><td class="confluenceTd"><p>If the outgoing messages should be sent through an HTTP proxy server, use this parameter to specify the target proxy.</p></td><td class="confluenceTd"><p>No</p></td><td class="confluenceTd"><p>A host name or an IP address</p></td><td class="confluenceTd"><p>&nbsp;</p></td></tr><tr><td class="confluenceTd"><p>http.proxyPort</p></td><td class="confluenceTd"><p>The port through which the target proxy accepts HTTP traffic.</p></td><td class="confluenceTd"><p>No</p></td><td class="confluenceTd"><p>A positive integer less than 65535</p></td><td class="confluenceTd"><p>&nbsp;</p></td></tr><tr><td class="confluenceTd"><p>http.nonProxyHosts</p></td><td class="confluenceTd"><p>The list of hosts to which the HTTP traffic should be sent directly without going through the proxy.</p></td><td class="confluenceTd"><p>No</p></td><td class="confluenceTd"><p>A list of host names or IP addresses separated by '|'</p></td><td class="confluenceTd"><p>&nbsp;</p></td></tr><tr><td class="confluenceTd"><p>non-blocking</p></td><td class="confluenceTd"><p>Setting this parameter to true is vital for a number of scenarios to work properly.</p></td><td class="confluenceTd"><p>Yes</p></td><td class="confluenceTd"><p><em>true/false</em></p></td><td class="confluenceTd"><p><em>true</em></p></td></tr></tbody></table></div><p>For more information, see&nbsp;<a href="https://docs.wso2.com/display/ESB481/Working+with+Transports">Working with Transports</a>.</p><p></p><h3 id="HTTP-NIOTransport-Connectionthrottling">Connection throttling</h3><p>With
+ the HTTP PassThrough and HTTP NIO transports, you can enable connection
+ throttling to restrict the number of simultaneous open connections. To 
+enable connection throttling, edit the <code>&lt;PRODUCT_HOME&gt;/repository/conf/nhttp.properties</code> (for the HTTP NIO transport) or <code>&lt;PRODUCT_HOME&gt;/repository/conf/passthru-http.properties</code> (for the PassThrough transport) and add the following line:</p><p><code>max_open_connections = 2</code></p><p>This will restrict simultaneous open incoming connections to 2. To disable throttling, delete the <code>max_open_connections</code> setting or set it to -1.</p>    <div class="aui-message hint shadowed information-macro">
+                            <span class="aui-icon icon-hint">Icon</span>
+                <div class="message-content">
+                            <p>Connection throttling is never exact. For
+ example, setting this property to 2 will result in roughly two 
+simultaneous open connections at any given time.</p>
+                    </div>
+    </div><p></p><p>&nbsp;</p>
+
+                
+        
+    
+        </div>
+
+        <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="https://docs.wso2.com/display/ESB481/HTTP-NIO+Transport"
+    dc:identifier="https://docs.wso2.com/display/ESB481/HTTP-NIO+Transport"
+    dc:title="HTTP-NIO Transport"
+    trackback:ping="https://docs.wso2.com/rpc/trackback/33136231"/>
+</rdf:RDF>
+-->
+
+            
+    
+
+
+
+<div id="likes-and-labels-container"><div style="display: none;" id="likes-section"><span class="like-summary"></span></div><div id="labels-section" class="pageSection group">
+    <div class="labels-section-content content-column" entityid="33136231" entitytype="page">
+	<div class="labels-content">
+		
+    <ul class="label-list label-list-right ">
+            <li class="no-labels-message">
+            No labels
+        </li>
+            </ul>
+
+    </div>
+</div></div></div>
+
+            
+            
+
+
+
+
+            
+    
+
+
+
+
+
+
+
+
+                    
+    
+<div id="comments-section" class="pageSection group">
+    
+    
+    
+    
+            <div class="bottom-comment-panels comment-panels">
+                                    
+    
+
+
+    
+            </div>
+    
+    </div>
+
+
+            
+</div>
+
+
+    
+
+
+
+
+    
+    
+
+    
+    
+    
+
+
+
+
+
+
+
+
+</div>
+  
+        <div id="theme-footer">
+             
+ 
+ 
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                              <div class="pag-nav2"><a href="https://docs.wso2.com/display/ESB481/HTTP+PassThrough+Transport" class="previous" rel="nofollow"></a>|<a href="https://docs.wso2.com/display/ESB481/HTTPS-NIO+Transport" class="next" rel="nofollow"></a>|<a href="https://docs.wso2.com/display/ESB481/WSO2+Enterprise+Service+Bus+Documentation" class="home" rel="nofollow"></a></div>
+<ul>
+	<li><a href="https://docs.wso2.com/display/ESB481/Getting+Support" title="Getting Support">Get Support</a></li>
+	<li><a target="_blank" href="https://wso2.org/jira/browse/DOCUMENTATION" class="external-link" rel="nofollow">Report a bug</a></li>
+</ul>
+
+
+<p>&nbsp;<br>
+Copyright © WSO2 Inc. 2005-2014</p>
+        </div>
+    
+    </div>
+</div>
+
+
+        
+            <div id="footer">
+
+    <section class="footer-body">
+
+                                                <p class="license license-community">
+                  Powered by a free <b>Atlassian Confluence Community License</b> granted to WSO2, Inc.. <a href="http://www.atlassian.com/c/conf/11460">Evaluate Confluence today</a>.<br>
+                </p>
+                        
+    
+
+    <ul id="poweredby">
+        <li class="noprint">Powered by <a href="http://www.atlassian.com/software/confluence" class="hover-footer-link">Atlassian Confluence</a> <span id="footer-build-information">5.3.4</span>, <a href="http://www.atlassian.com/software/confluence/overview/team-collaboration-software?utm_source=confluence-footer" class="hover-footer-link">Team Collaboration Software</a></li>
+        <li class="print-only">Printed by Atlassian Confluence 5.3.4, Team Collaboration Software.</li>
+        <li class="noprint"><a href="http://jira.atlassian.com/secure/BrowseProject.jspa?id=10470" class="hover-footer-link">Report a bug</a></li>
+        <li class="noprint"><a href="http://www.atlassian.com/about/connected.jsp?s_kwcid=Confluence-stayintouch" class="hover-footer-link">Atlassian News</a></li>
+    </ul>
+
+    
+
+            <script type="text/javascript">
+ 
+AJS.toInit(function ($) {
+        var search = jQuery(".quick-search-query");
+        search.each(function() {
+            searchBox = jQuery(this);
+            searchBox.data("quicksearch", {
+                placeholder: "Search WSO2 documentation",
+                placeholded: true
+            });
+            searchBox.trigger("focus");
+            searchBox.trigger("blur");
+        });
+ 
+        
+ 
+});
+ 
+</script>
+
+<script>
+AJS.$(document).ready(function() {
+  if (AJS.$('#wysiwygTextarea_ifr').length > 0) {
+    AJS.$('#wysiwygTextarea_ifr').height(AJS.$('#rte').height());
+  }
+});
+</script>
+
+
+<script type="text/javascript">
+  _bizo_data_partner_id = "7067";
+</script>
+<script type="text/javascript">
+(function() {
+  var s = document.getElementsByTagName("script")[0];
+  var b = document.createElement("script");
+  b.type = "text/javascript";
+  b.async = true;
+  b.src = (window.location.protocol === "https:" ? "https://sjs" : "http://js") + ".bizographics.com/insight.min.js";
+  s.parentNode.insertBefore(b, s);
+})();
+</script>
+<noscript>
+  <img height="1" width="1" alt="" style="display:none;" src="//www.bizographics.com/collect/?pid=7067&fmt=gif" />
+</noscript>
+    
+    </section>
+
+</div>
+
+            
+    </div>
+
+
+<div id="fancybox-tmp"></div><div id="fancybox-loading"><div></div></div><div id="fancybox-overlay"></div><div id="fancybox-wrap"><div id="fancybox-outer"><div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div><div id="fancybox-content"></div><a id="fancybox-close"></a><div id="fancybox-title"></div><a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a></div></div><div style="display: none;" id="content-hover-shadow"><div class="tl"></div><div class="tr"></div><div class="l"></div><div class="r"></div><div class="bl"></div><div class="br"></div><div class="b"></div></div><div class="qr-notice aui-message warning"></div><div style="position: relative; z-index: 0;" id="fileuploadShim"></div><div class="plupload html5" style="position: absolute; background: transparent none repeat scroll 0% 0%; width: 1364px; height: 0px; overflow: hidden; z-index: -1; opacity: 0; top: 707px; left: 0px;" id="p19v04sthn54ulp4t1dkkr1qrf0_html5_container"><input id="p19v04sthn54ulp4t1dkkr1qrf0_html5" style="font-size: 999px; position: absolute; width: 100%; height: 100%;" accept="" multiple="multiple" type="file"></div><div id="cw-notification-container"></div><script type="text/javascript" src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/a"></script><img style="display: none;" alt="" src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/seg_002.gif" height="1" width="1" border="0"><img style="display: none;" alt="" src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/seg.gif" height="1" width="1" border="0"><img style="display: none;" alt="" src="HTTP-NIO%20Transport%20-%20Enterprise%20Service%20Bus%204.8.1%20-%20WSO2%20Documentation_files/l.gif" height="1" width="1" border="0"></body></html>

@@ -1,0 +1,797 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+		<!-- Page Info -->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="description" content="Blogs.Oracle.Com - SpiderLogic">
+  <meta name="keywords" content="blogs, oracle, blogs.oracle, blogging, bloggers">
+		            <title>Java.nio vs Java.io (SpiderLogic)</title>
+                           <meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="imagetoolbar" content="no">
+
+           <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://blogs.oracle.com/slc/rsd">
+        
+            <link rel="alternate" type="application/atom+xml" title="Recent Entries (Atom)" href="https://blogs.oracle.com/slc/feed/entries/atom">
+    <link rel="alternate" type="application/rss+xml" title="Recent Entries (RSS)" href="https://blogs.oracle.com/slc/feed/entries/rss">
+    <link rel="alternate" type="application/atom+xml" title="Recent Comments (Atom)" href="https://blogs.oracle.com/slc/feed/comments/atom">
+    <link rel="alternate" type="application/rss+xml" title="Recent Comments (RSS)" href="https://blogs.oracle.com/slc/feed/comments/rss">
+
+    
+    
+<!-- Stylesheets -->
+<link rel="stylesheet" href="Java.nio%20vs%20Java.io%20%28SpiderLogic%29_files/theme.css" type="text/css" media="screen">
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="https://blogs.oracle.com/slc/resource/oracle2col/favicon.gif">    	</head>
+	<body>
+		<div id="container" class="two-columns"> <!-- Note: Change the class from "two-columns" to "three-columns" if needed -->
+			
+			<!-- Header -->
+			<div id="header">
+				<ul id="nav">
+					<li id="logo"><h6><a href="http://www.oracle.com/">Oracle</a></h6></li>
+					<li class="current"><a href="https://blogs.oracle.com/">Blogs Home</a></li>
+					<li><a href="http://www.oracle.com/us/products/index.html">Products &amp; Services</a></li>
+					<li><a href="http://www.oracle.com/technetwork/indexes/downloads/index.html">Downloads</a></li>
+					<li><a href="http://www.oracle.com/us/support/index.html">Support</a></li>
+					<li><a href="http://www.oracle.com/us/partnerships/index.html">Partners</a></li>
+					<li><a href="http://www.oracle.com/us/community/index.html">Communities</a></li>
+					<li><a href="http://www.oracle.com/us/corporate/index.html">About</a></li>
+                                            <li id="signIn"><a href="https://blogs.oracle.com/roller-ui/login-redirect.rol">Login</a></li>
+                    				</ul>
+				<div id="jumbotron">
+					<h4>Oracle Blog</h4>
+          <h5><a href="https://blogs.oracle.com/slc/">SpiderLogic</a></h5>
+          <h5 class="subhead">.. useful blog on java and middleware technologies. </h5>
+				</div>
+                																										</div>
+			
+			<!-- Content -->
+			<div id="content">
+                <div id="mainColumn">
+                    
+                    <!-- Previous and Next Entries -->
+                    <div id="pager">
+                                                    « <a href="https://blogs.oracle.com/slc/entry/introduction_to_bayeux_protoco">Introduction to...</a> |  
+                <a href="https://blogs.oracle.com/slc/">Main</a>
+                | <a href="https://blogs.oracle.com/slc/entry/servlet_reveal">Servlet Reveal</a> »
+                        </div>
+
+                    <!-- Entries -->
+				    
+                <div class="day">
+
+
+	<div class="entry" id="javanio_vs_javaio">
+
+	<h3 class="entry-title">
+			Java.nio vs Java.io
+	    </h3>
+
+    <h4 class="entry-meta">By Nino Guarnacci-Oracle on <a href="#">Jun 18, 2009</a></h4>
+
+    <div class="entry-body">
+                                        	<p></p><div style="width: 500px">   <blockquote>     <h5>……… posted by <a href="mailto:d.pisano79@gmail.com"><em>Davide Pisano</em></a></h5>   </blockquote>    <p>This
+ document is not a Java.io or a Java.nio manual, or a technical document
+ about Java.io and Java.nio use. It only attempts to compare these two 
+packages, highlighting differences and features in the most simple way. 
+Java.nio presents new stream communication aspects and inserts new 
+buffer, file streaming and socket features.</p> <div id="extendedEntryBreak" name="extendedEntryBreak"></div>    <h2>java.io overview</h2>    <p>This
+ package is used for system input and output through data streams, and 
+serialization. Streams support many different kinds of data, including 
+simple bytes, primitive data types, localized characters, and objects. A
+ stream is a sequence of data: a program uses an <i>input stream</i> to read data from a source. <a href="http://blogs.oracle.com/slc/resource/WindowsLiveWriter-Java.niovsJava.io_8CFE/ds-prog_4.gif"><img title="ds-prog" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; margin-left: 0px; margin-right: 0px; border-right-width: 0px" alt="ds-prog" src="Java.nio%20vs%20Java.io%20%28SpiderLogic%29_files/ds-prog_thumb_1.gif" height="86" width="244" border="0" align="left"></a> </p>    <p>&nbsp;</p>    <p>&nbsp;</p>    <p>A program uses an <i>output stream</i> to write and send data to a destination:<a href="http://blogs.oracle.com/slc/resource/WindowsLiveWriter-Java.niovsJava.io_8CFE/prog-ds_2.gif"><img title="prog-ds" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="prog-ds" src="Java.nio%20vs%20Java.io%20%28SpiderLogic%29_files/prog-ds_thumb.gif" height="84" width="244" border="0"></a>&nbsp;</p>    <p align="justify">Programs use <i>byte streams</i> to perform byte input and output. All byte stream classes extends <u><a href="http://java.sun.com/javase/6/docs/api/java/io/InputStream.html">InputStream</a></u> and <u><a href="http://java.sun.com/javase/6/docs/api/java/io/OutputStream.html">OutputStream</a></u>.</p>    <h3>About InputStream and OutputStream</h3>    <p align="justify">Performing
+ InputStream operations or OutputStream operations means generally 
+having a loop that reads the input stream and writes the output stream 
+one byte at a time. You can use <i>buffered</i> I/O streams for an 
+overhead reduction (overhead generated by each such request often 
+triggers disk access, network activity, or some other operation that is 
+relatively expensive). Buffered input streams read data from a memory 
+area known as a <i>buffer</i>; the native input API is called only when 
+the buffer is empty. Similarly, buffered output streams write data to a 
+buffer, and the native output API is called only when the buffer is 
+full. Those buffered API wrap the unbuffered streams: <a href="http://java.sun.com/javase/6/docs/api/java/io/BufferedInputStream.html"><u>BufferedInputStream</u></a> and <a href="http://java.sun.com/javase/6/docs/api/java/io/BufferedOutputStream.html"><u>BufferedOutputStream</u></a>.</p>    <h3>File I/O</h3>    <p>The
+ above section focuses on streams, which provide a simple model for 
+reading and writing data. Streams work with a large variety of data 
+sources and destinations, including disk files. However, streams don't 
+support all the operations that are common with disk files.The following
+ links give information on non-stream file I/O. There are two topics:</p>    <ul>     <li>       <p><a href="http://java.sun.com/docs/books/tutorial/essential/io/file.html"><u>File</u></a> is a class that helps to write platform independent code for examining and manipulating files and directories.</p>     </li>      <li>       <p><u><a href="http://java.sun.com/docs/books/tutorial/essential/io/rafs.html">Random access files</a></u> support non sequential access to disk file data.</p>     </li>   </ul>    <h3>java.net socket</h3>    <p align="justify">A
+ socket is one endpoint of a two-way communication link between two 
+programs running on the network. Socket classes are used to represent 
+the connection between a client program and a server program. The 
+java.net package provides two classes: Socket and ServerSocket. These 
+implement the client side of the connection and the server side of the 
+connection, respectively.</p>    <p align="justify">The client knows the
+ host-name of the machine on which the server is running ,and the port 
+number on which the server is listening. Clients try to connect to the 
+server and if everything goes well, the server accepts the connection. 
+Upon acceptance, the server gets a new socket bound to the same local 
+port and also has its remote endpoint set to the address and port of the
+ client. It needs a new socket so that it can continue to listen to the 
+original socket for connection requests while tending to the needs of 
+the connected client.</p>    <p align="justify">The server waits for a client connection in blocking mode: <b>serverSocket.accept() is a blocking instruction, the server waits for a connection </b>and
+ no other operation can be executed by the thread which runs the server.
+ Because of this, the server can work in multitasking only by 
+implementing a multi-thread server: having to create a thread for every 
+new socket created by the server.</p>    <h2>NIO API</h2>    <p align="justify">The
+ I/O performance, often, is a modern application critical aspect. 
+Operative Systems (OS) continuously improve the I/O performance. JVM 
+provides a uniform operating environment that helps the Java programmer 
+in most of the differences between operating-system environments. This 
+makes it faster and easier to write, but the OS feature becomes hidden. 
+To increase IO performance you could write a specific code to access the
+ OS feature directly, but this isn’t the best solution - your code could
+ be OS dependent. Java.nio provides new equipment to address this 
+problem. It provides high-performance I/O features to perform operations
+ on commonly available commercial operating systems today.</p>    <p align="justify">The NIO packages of JDK 1.4 introduce a new set of abstractions for doing I/O. </p>    <h3>java.nio overview</h3>    <p>Java.nio is the new package that implements the <b>New I/O APIs for the Java Platform. </b>The NIO APIs include the following features:</p>    <ul>     <li>       <p>Buffers for data of primitive types</p>     </li>      <li>       <p>Character-set encoders and decoders</p>     </li>      <li>       <p>A pattern-matching facility based on Perl-style regular expressions</p>     </li>      <li>       <p>Channels, a new primitive I/O abstraction</p>     </li>      <li>       <p>A file interface that supports locks and memory mapping</p>     </li>      <li>       <p>A multiplexed, non-blocking I/O facility for writing scalable servers</p>     </li>   </ul>    <p align="justify">At
+ the sun site is it possible to find exhaustive technical documentation 
+about java.nio. Now I’ll explain some of nio's aspects to show the 
+difference betwen the old library java.io. and java.nio. Be advised, 
+java.nio is not a java.io substitute, rather it is a java.io 
+‘expansion’. Nio's birth has caused a revision of Io's class and 
+interface (<u><a href="http://java.sun.com/j2se/1.4.2/docs/guide/nio/">look at this link</a></u>).</p>    <p align="justify">One
+ of the most important aspects of NIO is the ability to operate in 
+non-blocking mode, denied to the traditional java I/O library. But what 
+is non-blocking mode?</p>    <h3>Non blocking mode</h3>    <p align="justify">The
+ bytes of an I/O stream must be accessed sequentially. Devices, printer 
+ports, and network connections are common examples of streams.</p>    <p align="justify">Streams
+ are generally, but not necessarily, slower than block devices, and are 
+often the source of intermittent input. Most operating systems allow 
+streams to be placed into non-blocking mode, which permits a process to 
+check if input is available on the stream, without getting stuck if none
+ is available at a given moment. Such a capability allows a process to 
+handle input as it arrives but perform other functions while the input 
+stream is idle. The operating system can be told to watch a collection 
+of streams and indicate which of those streams are ready. This ability 
+permits a process to multiplex many active streams using common code and
+ a single thread by leveraging the readiness information returned by the
+ operating system. This is widely used in network servers to handle 
+large numbers of network connections.</p>    <h3>Buffers</h3>    <p align="justify">Starting
+ from the simplest and building up to the most complex, the first 
+improvement to mention is the set of Buffer classes found in the 
+java.nio package. These buffers provide a mechanism to store a set of 
+primitive data elements in an <i>in-memory container</i>. A <i>Buffer </i>object is a container for a fixed amount of data, a container where data can be read and written.</p>    <p align="justify">All buffers are readable, but not all are writable. Each buffer class implements <i>isReadOnly() </i>to indicate whether it will allow the buffer content to be modified.</p>    <h3>Channels</h3>    <p align="justify">Buffers
+ work with channels. Channels are portals through which I/O transfers 
+take place, and buffers are the sources or targets of those data 
+transfers. Data you want to send is placed in a buffer, which is passed 
+to a channel; otherwise, a channel deposits data in a buffer you 
+provide.</p>    <p align="justify">A Channel is like a tube that 
+transports data efficiently between byte buffers and the entity on the 
+other end of the channel. Channels are gateways through which the native
+ I/O services of the operating system can be accessed with a minimum of 
+overhead, and buffers are the internal endpoints used by channels to 
+send and receive data.</p>    <p align="justify">Channels can operate in <i>blocking </i>or <i>non-blocking </i>modes.
+ A channel in non-blocking mode never puts the invoking thread to sleep.
+ The requested operation either completes immediately or returns a 
+result indicating that nothing was done. Only stream-orientated 
+channels, such as sockets can be placed in nonblocking mode. In the 
+java.nio channel family there are <i>FileChannel</i>, <i>ServerSocketChannel</i> and <i>SocketChannel</i>; these are specific channels created for file and socket management.</p>    <h3>FileChannel</h3>    <p align="justify">FileChannels
+ are read/write channels, they are always blocking and cannot be placed 
+into nonblocking mode. The nonblocking paradigm of stream-oriented I/O 
+doesn't make as much sense for file-oriented operations because of the 
+fundamentally different nature of file I/O.</p>    <p align="justify">FileChannel objects cannot be created directly. A FileChannel instance can be obtained only by calling <i>getChannel() </i>on an open file object (<i>RandomAccessFile</i>, <i>FileInputStream</i>, or F<i>ileOutputStream</i>). <i>GetChannel() </i>method returns a <i>FileChannel </i>object connected to the same file, with the same access permissions as the file object.<i> FileChannel </i>objects
+ are thread-safe. Multiple threads can concurrently call methods on the 
+same instance without causing any problems, but not all operations are 
+multi-thread. Operations that affect the channel's position or the file 
+size are single-threaded.</p>    <p align="justify">Using FileChannel, operations like file copy become a channel to channel trasfer (<i>transferTo() </i>and <i>transferFrom()</i>)and read/write operations become easy using buffers.</p>    <h3>SocketChannel</h3>    <p align="justify">SocketChannel
+ is different to FileChannel: The new socket channels can operate in 
+nonblocking mode and are selectable. It's no longer necessary to 
+dedicate a thread to each socket connection, Using the new NIO classes, 
+one or a few threads can manage hundreds or even thousands of active 
+socket connections with little or no performance loss. It's possible to 
+perform readiness selection of socket channels using a <i>Selector </i>object.</p>    <p align="justify">There are three socket channel type: <i>SocketChannel</i>, <i>ServerSocketChannel</i>, and <i>DatagramChannel</i>;
+ SocketChannel and DatagramChannel are able to read and write, 
+ServerSocketChannel listens for incoming connects and creates new 
+SocketChannel objects. All the socket channels create a peer socket 
+object when they are instantiated (java.net sockets). The peer socket 
+can be obtained from a channel by invoking its <i>socket() </i>method. 
+While every socket channel (in java.nio.channels) has an associated 
+java.net socket object, not all sockets have an associated channel. If 
+you create a <i>Socket </i>object in the traditional way, by instantiating it directly, it will not have an associated <i>SocketChannel</i>, and its <i>getChannel() </i>method will always return null.</p>    <p align="justify">Socket
+ channels can operate in nonblocking mode. The blocking nature of 
+traditional Java sockets has traditionally been one of the most 
+significant limitations to Java application scalability. Non-blocking 
+I/O is the basis upon which many sophisticated, high-performance 
+applications are built. Setting or resetting a channel's blocking mode 
+is easy. Simply call <i>configureBlocking().</i></p>    <p align="justify">Nonblocking
+ sockets are usually thought of for server-side use because they make it
+ easier to manage many sockets simultaneously.</p>    <h3>Selector</h3>    <p align="justify">Selectors
+ provide the ability to have a channel readiness selection, which 
+enables multiplexed I/O. To understand selector feature, I can explain 
+selector advantage using the following example.</p>    <p align="justify">Imagine you are in a train station (<i>non-selector</i>), and there are three platforms (<i>channels</i>), and on each platform a train arrives (<i>buffer</i>). On each platform there is a controller for each arrived train (<i>worker </i><i>thread</i>). That is non-selector.&nbsp; Now imagine selector.&nbsp; There are three platforms (<i>channel</i>),
+ on each platform arrives a train (buffer), and each platform has an 
+indicator (a bell for example) that says “Train arrived” (<em>selection key</em>). In this instance there is only one controller for all three platforms.&nbsp; He looks at the indicator (<i>selector.select()</i>) to find out if a train has arrived and goes to meet that train.</p>    <p align="justify">It's
+ simple to understand the advantages of using selector: with a single 
+thread you can obtain a multitasking application. As well as this, you 
+can obtain more advantages using non-blocking selector! Imagine that the
+ train controller looks at the indicator: he can wait for a new train 
+and not do any other thing (blocking mode using <i>selector.select()</i>). But he can instead control tickets, for example, while waiting for a new train (non-blocking mode using <i>selector.selectNow()</i>).&nbsp; In this way selector returns null and continue to execute code.</p>    <h2>IO vs. NIO</h2>    <p align="justify">NIO
+ construction makes I/O faster than traditional I/O. In a program where 
+the I/O operations constitute a significant amount of the processing, 
+expect to see some difference. For example if an application has to copy
+ files or transfer bytes using sockets, using Nio is possible to obtain a
+ faster performance because it is closer to the OS than the I/O API. 
+Increasing the byte size, the difference becomes&nbsp; more appreciable.
+ Nio also provides other features not in io API, for streaming 
+operations. However, it is not possible to substitute IO with NIO 
+because NIO API adds functionalities to the java.io. NIO extends the 
+native IO API introducing new possibilities for the developer to 
+manipulate stream data in a powerful way.</p>    <h2>References</h2>    <ul>     <li>       <h3><a href="http://java.sun.com/javase/6/docs/">JDK 6 Documentation</a></h3>     </li>      <li>       <h3>“JAVA NIO” - Ron Hitchens - Publisher: O'Reilly</h3>     </li>   </ul>    <blockquote>     <p>&nbsp;</p>   </blockquote> </div>  <blockquote>   <h5>……… posted by <a href="mailto:d.pisano79@gmail.com"><em>Davide Pisano</em></a></h5> <br><br> </blockquote>  <div class="wlWriterEditableSmartContent" id="scid:0767317B-992E-4b12-91E0-4F059A8CECA8:778e7e5f-6862-428a-914c-06f815f5de37" style="padding-right: 0px; display: inline; padding-left: 0px; float: none; padding-bottom: 0px; margin: 0px; padding-top: 0px">Technorati Tag: <a href="http://technorati.com/tags/java" rel="tag">java</a>,<a href="http://technorati.com/tags/java.nio" rel="tag">java.nio</a>,<a href="http://technorati.com/tags/java.io" rel="tag">java.io</a></div><p></p>
+        
+    </div>
+
+    <div class="entry-footer">
+        <p class="entry-category">Category: Oracle</p>
+        <p class="entry-tags">Tags:  none </p>
+        <p class="entry-links">
+        <a href="https://blogs.oracle.com/slc/entry/javanio_vs_javaio">Permanent link to this entry</a>
+                        </p>
+    </div>
+
+	    
+	</div>
+
+</div>    
+    
+          
+                    <!-- Previous and Next Entries -->
+                    <div id="pagerBottom">
+                                                    « <a href="https://blogs.oracle.com/slc/entry/introduction_to_bayeux_protoco">Introduction to...</a> |  
+                <a href="https://blogs.oracle.com/slc/">Main</a>
+                | <a href="https://blogs.oracle.com/slc/entry/servlet_reveal">Servlet Reveal</a> »
+                        </div> 
+                    
+                    <!-- Comments -->
+                                                <a name="comments"></a>
+    <div class="comments" id="comments">
+
+            <div class="comments-head">Comments:</div>
+            
+    <br>
+                        <a name="comment-1245290159000" id="comment-1245290159000"></a>
+            <div class="comment odd" id="comment1">
+
+                Very well summarised explanation on the basics of java I/O and threads.
+
+
+                <p class="comment-details">
+                Posted by
+                                    <b>santosh loke</b>
+                
+                on June 18, 2009 at 03:55 AM CEST
+
+                <a href="https://blogs.oracle.com/slc/entry/javanio_vs_javaio#comment-1245290159000" class="entrypermalink" title="comment permalink">#</a>
+                </p>
+
+            </div>
+
+                                <a name="comment-1256473724000" id="comment-1256473724000"></a>
+            <div class="comment even" id="comment2">
+
+                NIO is great. however, you must limit your selector 
+thread to one thread (and one only) . Using a Thread pool is very 
+complicated and you can end up in a deadlock or race condition.
+
+BUT - You can use multiple selector threads in order to load balancing 
+your channels selection.
+
+                <p class="comment-details">
+                Posted by
+                                    <b>konradito</b>
+                
+                on October 25, 2009 at 01:28 PM CET
+
+                <a href="https://blogs.oracle.com/slc/entry/javanio_vs_javaio#comment-1256473724000" class="entrypermalink" title="comment permalink">#</a>
+                </p>
+
+            </div>
+
+                                <a name="comment-1257462742000" id="comment-1257462742000"></a>
+            <div class="comment odd" id="comment3">
+
+                Fabulous absolutely fabulous......
+I loved this..
+this is what i wanted to get read of all those confusion created by 100 of IO classes...
+
+THAX A MILLLOIN...
+PLZ KEEP UP THESE KIND OF POST TO HELP OTHER :) 
+
+                <p class="comment-details">
+                Posted by
+                                    <b>SANDEEP</b>
+                
+                on November 06, 2009 at 12:12 AM CET
+
+                <a href="https://blogs.oracle.com/slc/entry/javanio_vs_javaio#comment-1257462742000" class="entrypermalink" title="comment permalink">#</a>
+                </p>
+
+            </div>
+
+                                <a name="comment-1260352570000" id="comment-1260352570000"></a>
+            <div class="comment even" id="comment4">
+
+                The new I/O (NIO) APIs introduced in v 1.4 provide new 
+features and improved performance in the areas of buffer management, 
+scalable network and file I/O, character-set support, and 
+regular-expression matching. The NIO APIs supplement the I/O facilities 
+in the java.io package. 
+
+                <p class="comment-details">
+                Posted by
+                                    <a rel="nofollow" href="http://www.vitabits.de/chinesische-kraeuter"><b>ginko</b></a>
+                
+                on December 09, 2009 at 10:56 AM CET
+
+                <a href="https://blogs.oracle.com/slc/entry/javanio_vs_javaio#comment-1260352570000" class="entrypermalink" title="comment permalink">#</a>
+                </p>
+
+            </div>
+
+                                <a name="comment-1306236374303" id="comment-1306236374303"></a>
+            <div class="comment odd" id="comment5">
+
+                It's an excellent article. Just simple and clear.
+
+                <p class="comment-details">
+                Posted by
+                                    <b>guest</b>
+                
+                on May 24, 2011 at 01:26 PM CEST
+
+                <a href="https://blogs.oracle.com/slc/entry/javanio_vs_javaio#comment-1306236374303" class="entrypermalink" title="comment permalink">#</a>
+                </p>
+
+            </div>
+
+                                <a name="comment-1326789079276" id="comment-1326789079276"></a>
+            <div class="comment even" id="comment6">
+
+                
+<p>This is really very nice article.</p>
+
+
+
+                <p class="comment-details">
+                Posted by
+                                    <b>guest</b>
+                
+                on January 17, 2012 at 09:31 AM CET
+
+                <a href="https://blogs.oracle.com/slc/entry/javanio_vs_javaio#comment-1326789079276" class="entrypermalink" title="comment permalink">#</a>
+                </p>
+
+            </div>
+
+                                <a name="comment-1328234901003" id="comment-1328234901003"></a>
+            <div class="comment odd" id="comment7">
+
+                
+<p>Simply put, thanks.</p>
+
+
+
+                <p class="comment-details">
+                Posted by
+                                    <b>Jay</b>
+                
+                on February 03, 2012 at 03:08 AM CET
+
+                <a href="https://blogs.oracle.com/slc/entry/javanio_vs_javaio#comment-1328234901003" class="entrypermalink" title="comment permalink">#</a>
+                </p>
+
+            </div>
+
+                                <a name="comment-1366991396007" id="comment-1366991396007"></a>
+            <div class="comment even" id="comment8">
+
+                
+<p>a very plain and simple way of explaining both io and nio concepts. 
+would have helped more if you had threw in some code samples in between.
+ still great job! thanks much</p>
+
+
+
+                <p class="comment-details">
+                Posted by
+                                    <b>guest</b>
+                
+                on April 26, 2013 at 05:49 PM CEST
+
+                <a href="https://blogs.oracle.com/slc/entry/javanio_vs_javaio#comment-1366991396007" class="entrypermalink" title="comment permalink">#</a>
+                </p>
+
+            </div>
+
+                                <a name="comment-1381697901962" id="comment-1381697901962"></a>
+            <div class="comment odd" id="comment9">
+
+                
+<p>Very good!</p>
+
+
+
+                <p class="comment-details">
+                Posted by
+                                    <b>guest</b>
+                
+                on October 13, 2013 at 10:58 PM CEST
+
+                <a href="https://blogs.oracle.com/slc/entry/javanio_vs_javaio#comment-1381697901962" class="entrypermalink" title="comment permalink">#</a>
+                </p>
+
+            </div>
+
+                                <a name="comment-1385508322937" id="comment-1385508322937"></a>
+            <div class="comment even" id="comment10">
+
+                
+<p>Thanks! Very good article that goes to the point and keep things simple.</p>
+
+
+
+                <p class="comment-details">
+                Posted by
+                                    <b>guest</b>
+                
+                on November 27, 2013 at 12:25 AM CET
+
+                <a href="https://blogs.oracle.com/slc/entry/javanio_vs_javaio#comment-1385508322937" class="entrypermalink" title="comment permalink">#</a>
+                </p>
+
+            </div>
+
+                                <a name="comment-1387851409278" id="comment-1387851409278"></a>
+            <div class="comment odd" id="comment11">
+
+                
+<p>Finally, a simple, to-the-point explanation between IO and NIO. I've 
+been going through stackoverflow, google, youtube, you name it in vain 
+trying to understand just how NIO works and what is the "magic" behind 
+it everyone is talking about. Thanks a lot for taking the time to lay it
+ out in such simple terms.</p>
+
+
+
+                <p class="comment-details">
+                Posted by
+                                    <a rel="nofollow" href="http://creactiviti.com/"><b>guest</b></a>
+                
+                on December 24, 2013 at 03:16 AM CET
+
+                <a href="https://blogs.oracle.com/slc/entry/javanio_vs_javaio#comment-1387851409278" class="entrypermalink" title="comment permalink">#</a>
+                </p>
+
+            </div>
+
+                </div>
+                        
+    <div class="comments-form">
+    <div class="comments-head">Post a Comment:</div>
+    <a name="comment-form"></a>
+
+
+    
+    <form method="post" action="https://blogs.oracle.com/slc/entry/javanio_vs_javaio" focus="name" name="commentForm" onsubmit="fixURL(this); return validateComments(this)">    
+        <input name="method" value="post" type="hidden">
+
+        <ul>
+            <li>
+                <label class="desc">Name:</label>
+                <input name="name" class="text large" value="guest" size="50" maxlength="255" type="text">
+            </li>
+
+            <li><label class="desc">E-Mail:</label>
+                <input name="email" class="text large" size="50" maxlength="255" type="text">
+            </li>
+
+            <li><label class="desc">URL:</label>
+                <input name="url" class="text large" size="50" maxlength="255" type="text">
+            </li>
+
+                    <li><input class="checkbox" id="notify" name="notify" type="checkbox">
+                <label for="notify" class="choice">Notify me by email of new comments</label>
+            </li>
+                    <li>
+                <input class="checkbox" id="rememberInfo" name="rememberInfo" type="checkbox">
+                <label for="rememberInfo" class="choice">Remember Information?</label>
+            </li>
+            <li>
+                <label class="desc">Your Comment:</label>
+             
+            <textarea name="content" class="textarea large" cols="40" rows="10"></textarea>
+
+            </li>
+            <li class="info">
+                <span class="comments-syntax-indicator">
+                HTML Syntax:
+                                    <span class="disabled">NOT allowed</span>
+                                </span>
+            </li>
+            <li class="info">
+               <script type="text/javascript" src="Java.nio%20vs%20Java.io%20%28SpiderLogic%29_files/clientSideInclude.html"></script>
+               <div id="commentAuthenticator"><p>Please answer this simple math question</p><p>0 + 56 = <input name="answer"></p>
+</div>
+            </li>
+            <li>
+               <input class="button" name="post" value="&nbsp;Preview&nbsp;" onclick="this.form.method.value='preview';this.form.submit()" type="button">
+               <input class="button" name="post" value="&nbsp;Post&nbsp;" type="submit">
+            </li>
+        </ul>
+
+    </form>
+
+    <script type="text/javascript" src="Java.nio%20vs%20Java.io%20%28SpiderLogic%29_files/roller.html"></script>
+    <script type="text/javascript">
+    clientSideInclude('commentAuthenticator', '/CommentAuthenticatorServlet');
+
+    var author = getCookie("commentAuthor");
+    var email = getCookie("commentEmail");
+    var url = getCookie("commentUrl");
+    // check each field - IE will render "null"
+   
+    if (author) {
+        document.forms['commentForm'].name.value = author;
+    }else{
+        document.forms['commentForm'].name.value = "guest";
+    }
+
+    if (email) {
+        document.forms['commentForm'].email.value = email;
+    }
+    if (url) {
+        document.forms['commentForm'].url.value = url;
+    }
+
+    if (author || email || url) {
+        document.forms['commentForm'].rememberInfo.checked = true;
+    }
+
+    function fixURL(theForm) {
+        if (theForm.url.value != "" &&
+            theForm.url.value.indexOf("http://") == -1) { //prepend http://
+            theForm.url.value = "http://"+theForm.url.value;
+        }
+        saveUserInformation(theForm);
+    }
+
+    function saveUserInformation(theForm) {
+        if (theForm.rememberInfo.checked) {
+            rememberUser(theForm);
+        } else {
+            forgetUser(theForm);
+        }
+    }
+
+    function validateComments(theForm) {
+        if (theForm.content.value == "") {
+            alert("Please enter a comment.");
+            theForm.content.focus();
+            return false;
+        }
+ 
+        if (document.forms['commentForm'].name.value=="" ) {
+        document.forms['commentForm'].name.value = "guest";
+        }
+
+    }
+    </script>
+
+
+    </div>
+                    				</div>
+
+                <!-- Sidebar -->
+                           <!-- Right Sidebar -->
+<div id="rightColumn">
+
+<!-- About -->
+  <div id="aboutSection">    
+    <h5 class="section-title">About</h5>
+    <div class="section-body">
+                  <p>.. useful blog on java and middleware technologies. </p>
+            </div>
+  </div>  
+<!-- End About -->
+
+<!-- Search -->
+  <div id="searchSection">  
+    <h5 class="section-title">Search</h5>
+    <div class="section-body">
+        <script type="text/javascript">
+    function prepareSearchForm() {
+        document.getElementById("searchForm").searchQuery.name = "oq";
+        document.getElementById("searchFilter").innerHTML = "<input type='hidden' id='searchFilteredQuery' name='q' value=''>" +
+                "<br /><input type='checkbox' id='searchScope' checked='true' /><label for='searchScope'>Search only this blog</label>";
+    }
+    function submitSearchForm() {
+        var form = document.getElementById("searchForm");
+        var query = form.searchQuery.value;
+        var urlSearchOp = form.searchOp.value; //searchOp
+        var urlGroup = form.searchGroup.value; //group
+         
+        if (query == null || query == "") {
+            return false;
+        }
+        var filter = " weblog:slc";
+        var curUrl = window.location.href;
+        if (form.searchScope.checked && form.searchQuery.value.indexOf(filter) == -1) {
+            form.searchFilteredQuery.value = form.searchQuery.value + filter;
+        }
+        else {
+            form.searchFilteredQuery.value = form.searchQuery.value;
+        }
+
+        						 form.action="https://search.oracle.com/search/search";
+				
+        window.location = form.action + "?search_p_main_operator=" + urlSearchOp + "&group=" + urlGroup +"&q=" + form.searchFilteredQuery.value;
+        return false;
+    }
+</script>
+<form id="searchForm" action="http://search.oracle.com/search/search" onsubmit="return submitSearchForm();" method="get">
+    <input id="searchOp" name="search_p_main_operator" value="all" type="hidden">
+    <input id="searchGroup" name="group" value="Blogs" type="hidden">
+    <label for="searchQuery" title="Enter search term">Enter search term:</label>
+    <br>
+    <input id="searchQuery" name="oq" class="text" alt="Enter Search Term" type="text">
+    <input class="input-image" id="searchSubmit" alt="Submit Search" title="Submit Search" src="Java.nio%20vs%20Java.io%20%28SpiderLogic%29_files/search-button.gif" type="image">
+    <span id="searchFilter"><input id="searchFilteredQuery" name="q" value="" type="hidden"><br><input id="searchScope" checked="checked" type="checkbox"><label for="searchScope">Search only this blog</label></span>
+</form>
+<script type="text/javascript">prepareSearchForm();</script>
+    </div>
+  </div>    
+<!-- End Search -->
+
+<!-- Recent Posts -->
+  <div id="recentSection">  
+                <h5 class="section-title">Recent Posts</h5>
+        <div class="section-body">
+            <ul>
+                                    <li><a href="https://blogs.oracle.com/slc/entry/coherence_into_the_cloud_boost">Boost your infrastructure with Coherence into the Cloud</a></li>
+                                    <li><a href="https://blogs.oracle.com/slc/entry/weblogic_12_jmx_feed_log">Wls2Rss: Logs and JMX Alerts from WebLogic 12c (and 11,10) into Feeds </a></li>
+                                    <li><a href="https://blogs.oracle.com/slc/entry/oracle_coherence_and_service_bus">Oracle Coherence &amp; Oracle Service Bus: REST API Integration</a></li>
+                                    <li><a href="https://blogs.oracle.com/slc/entry/javaday_iv_rome_30012010">JavaDay IV Rome 30/01/2010</a></li>
+                                    <li><a href="https://blogs.oracle.com/slc/entry/the_annotation_webserviceref">The annotation @WebServiceRef</a></li>
+                                    <li><a href="https://blogs.oracle.com/slc/entry/servlet_reveal">Servlet Reveal</a></li>
+                                    <li><a href="https://blogs.oracle.com/slc/entry/javanio_vs_javaio">Java.nio vs Java.io</a></li>
+                                    <li><a href="https://blogs.oracle.com/slc/entry/introduction_to_bayeux_protoco">Introduction to Bayeux Protocol (HTTP Publish-Subscribe)</a></li>
+                                    <li><a href="https://blogs.oracle.com/slc/entry/the_bookmark_portlet_locator">The Bookmark Portlet Locator</a></li>
+                            </ul>
+        </div>
+      </div>    
+<!-- End Recent Posts -->
+
+
+<!-- Top Tags -->
+  <div id="tagsSection">  
+            <h5 class="section-title">Top Tags</h5>
+    <div class="tags section-body">
+        <ul class="tag-cloud">
+                    <li><a href="https://blogs.oracle.com/slc/tags/12" title="1" class="weight-1">12</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/alert" title="1" class="weight-1">alert</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/atom" title="1" class="weight-1">atom</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/bus" title="1" class="weight-1">bus</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/cache" title="1" class="weight-1">cache</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/case" title="1" class="weight-1">case</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/cloud" title="1" class="weight-1">cloud</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/cluster" title="1" class="weight-1">cluster</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/cocherence" title="1" class="weight-1">cocherence</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/coherence" title="1" class="weight-1">coherence</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/data" title="1" class="weight-1">data</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/diagnostic" title="1" class="weight-1">diagnostic</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/feed" title="1" class="weight-1">feed</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/framework" title="1" class="weight-1">framework</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/grid" title="2" class="weight-5">grid</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/jmx" title="1" class="weight-1">jmx</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/json" title="1" class="weight-1">json</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/logs" title="1" class="weight-1">logs</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/monitoring" title="1" class="weight-1">monitoring</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/notification" title="1" class="weight-1">notification</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/oracle" title="1" class="weight-1">oracle</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/portal" title="1" class="weight-1">portal</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/portlet" title="1" class="weight-1">portlet</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/presentation_services" title="1" class="weight-1">presentation_services</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/push" title="1" class="weight-1">push</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/replication" title="1" class="weight-1">replication</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/rest" title="1" class="weight-1">rest</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/rss" title="1" class="weight-1">rss</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/service" title="1" class="weight-1">service</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/use" title="1" class="weight-1">use</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/web_services" title="1" class="weight-1">web_services</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/weblogic" title="2" class="weight-5">weblogic</a></li>
+                    <li><a href="https://blogs.oracle.com/slc/tags/wldf" title="1" class="weight-1">wldf</a></li>
+                </ul>
+    </div>
+    </div>    
+<!-- End Top Tags -->
+    
+
+<!-- Categories -->
+  <div id="categoriesSection">
+    <h5 class="section-title">Categories</h5>
+    <div class="section-body">
+                        <ul class="rCategory">
+                                                            <li><a href="https://blogs.oracle.com/slc/category/Oracle">Oracle</a></li>
+            <ul class="rCategory">
+                                                                            <li><a href="https://blogs.oracle.com/slc/category/Oracle/Integration+Solution">Integration Solution</a></li>
+                                                                                                            <li><a href="https://blogs.oracle.com/slc/category/Oracle/Presentation+Services">Presentation Services</a></li>
+                                                                                            <li><a href="https://blogs.oracle.com/slc/category/Oracle/Software">Software</a></li>
+            <ul class="rCategory">
+                                                                            <li><a href="https://blogs.oracle.com/slc/category/Oracle/Software/Portal+and+Portlet">Portal and Portlet</a></li>
+                                                                        </ul>
+                                </ul>
+                                    </ul>
+        </div>
+  </div>
+<!-- End Categories -->
+
+
+<!-- Archives -->
+   <div id="archiveSection">
+    <h5 class="section-title">Archives</h5>
+    <div class="section-body">
+        <table summary="Blog Archive Calendar" class="hCalendarTable" border="0" cellspacing="0"><tbody><tr><td colspan="7" class="hCalendarMonthYearRow" align="center"><a href="https://blogs.oracle.com/slc/date/201206" title="Prev" class="hCalendarNavBar">«</a> September 2015</td></tr><tr><th class="hCalendarDayNameRow" align="center">Sun</th><th class="hCalendarDayNameRow" align="center">Mon</th><th class="hCalendarDayNameRow" align="center">Tue</th><th class="hCalendarDayNameRow" align="center">Wed</th><th class="hCalendarDayNameRow" align="center">Thu</th><th class="hCalendarDayNameRow" align="center">Fri</th><th class="hCalendarDayNameRow" align="center">Sat</th></tr><tr><td class="hCalendarDayNotInMonth">&nbsp;</td><td class="hCalendarDayNotInMonth">&nbsp;</td><td class="hCalendarDay"><div class="hCalendarDayTitle">1</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">2</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">3</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">4</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">5</div></td></tr><tr><td class="hCalendarDay"><div class="hCalendarDayTitle">6</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">7</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">8</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">9</div></td><td class="hCalendarDayCurrent"><div class="hCalendarDayTitle">10</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">11</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">12</div></td></tr><tr><td class="hCalendarDay"><div class="hCalendarDayTitle">13</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">14</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">15</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">16</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">17</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">18</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">19</div></td></tr><tr><td class="hCalendarDay"><div class="hCalendarDayTitle">20</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">21</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">22</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">23</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">24</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">25</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">26</div></td></tr><tr><td class="hCalendarDay"><div class="hCalendarDayTitle">27</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">28</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">29</div></td><td class="hCalendarDay"><div class="hCalendarDayTitle">30</div></td><td class="hCalendarDayNotInMonth">&nbsp;</td><td class="hCalendarDayNotInMonth">&nbsp;</td><td class="hCalendarDayNotInMonth">&nbsp;</td></tr><tr><td class="hCalendarDayNotInMonth">&nbsp;</td><td class="hCalendarDayNotInMonth">&nbsp;</td><td class="hCalendarDayNotInMonth">&nbsp;</td><td class="hCalendarDayNotInMonth">&nbsp;</td><td class="hCalendarDayNotInMonth">&nbsp;</td><td class="hCalendarDayNotInMonth">&nbsp;</td><td class="hCalendarDayNotInMonth">&nbsp;</td></tr><tr class="hCalendarNextPrev"><td colspan="7" align="center"><a href="https://blogs.oracle.com/slc/" class="hCalendarNavBar">Today</a></td></tr></tbody></table>
+    </div>
+  </div>
+<!-- End Archives -->
+
+<!-- Bookmarks -->
+   <div id="bookmarkSection">
+              </div>    
+<!-- End Bookmarks -->
+
+<!-- Blog and Author Menu -->
+   <div id="menuSection">
+    <h5 class="section-title">Menu</h5>
+    <div class="section-body">
+            <ul class="rNavigationBar">
+        <li class="rNavItem">
+            <a href="https://blogs.oracle.com/"><span>Blogs Home</span></a>
+        </li>
+        <li class="rNavItem">
+            <a href="https://blogs.oracle.com/slc/"><span>Weblog</span></a>
+        </li>
+                                                                                                                            <li class="rNavItem">
+                    <a href="https://blogs.oracle.com/roller-ui/login-redirect.rol"><span>Login</span></a>
+                </li>
+                        </ul>
+            </div>
+  </div>    
+<!-- End Blog and Author Menu -->
+
+    
+<!-- Feeds -->
+   <div id="feedsSection">   
+    <h5 class="section-title">Feeds</h5>
+    <div class="section-body">
+        <b>RSS</b>
+            <ul class="rFeeds">
+    <li><a href="https://blogs.oracle.com/slc/feed/entries/rss">All</a></li>
+                        <li><a href="https://blogs.oracle.com/slc/feed/entries/rss?cat=%2FOracle">/Oracle</a></li>
+        <li><a href="https://blogs.oracle.com/slc/feed/comments/rss">Comments</a></li>
+    </ul>
+        <b>Atom</b>    
+            <ul class="rFeeds">
+    <li><a href="https://blogs.oracle.com/slc/feed/entries/atom">All</a></li>
+                        <li><a href="https://blogs.oracle.com/slc/feed/entries/atom?cat=%2FOracle">/Oracle</a></li>
+        <li><a href="https://blogs.oracle.com/slc/feed/comments/atom">Comments</a></li>
+    </ul>
+    </div>
+  </div>          
+<!-- End Feeds -->    
+    
+</div>    			</div>
+
+			<!-- Footer -->
+			<div id="footer">
+				<p>The views expressed on this blog are those of the author and do not necessarily reflect the views of Oracle. <a href="http://www.oracle.com/html/terms.html">Terms of Use</a> | <a href="http://www.oracle.com/html/privacy.html">Your Privacy Rights</a> | <span consent="null" id="teconsent"><script id="truste_0.1899499689399884" type="text/javascript" src="Java.nio%20vs%20Java.io%20%28SpiderLogic%29_files/notice"></script><script src="Java.nio%20vs%20Java.io%20%28SpiderLogic%29_files/get" crossorigin="" type="text/javascript" async="async"></script>   <a style="cursor: pointer;" role="button" tabindex="0" id="icon-id0927561235307587">Cookie Preferences</a></span>  </p>
+			</div>
+			<!-- Omniture Script --> 
+<!-- Start SiteCatalyst code -->
+
+<script language="JavaScript" src="Java.nio%20vs%20Java.io%20%28SpiderLogic%29_files/ora_blogs.html"></script><script type="text/javascript" src="Java.nio%20vs%20Java.io%20%28SpiderLogic%29_files/ora_code_blogs.html"></script><script type="text/javascript" src="Java.nio%20vs%20Java.io%20%28SpiderLogic%29_files/ora_code.html"></script>
+
+<!-- End SiteCatalyst code -->
+		</div>
+	
+</body></html>

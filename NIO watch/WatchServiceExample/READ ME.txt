@@ -1,0 +1,7 @@
+NOTE:
+
+The following variable "watchedDir" defined in the WatchServiceExample1.java source file need to be pointing to an existing directory.
+
+private static final String watchedDir = "D:\\JavaWatchService\\testdir1";
+
+*

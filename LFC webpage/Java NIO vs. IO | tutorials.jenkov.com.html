@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script async="" src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/cbgapi.loaded_1"></script><script async="" src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/cbgapi.loaded_0"></script><script src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/widgets.js" id="twitter-wjs"></script><script gapi_processed="true" src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/platform.js" async="" type="text/javascript"></script><meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="Jakob Jenkov">
+
+    
+    <script src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/analytics.js" async=""></script><script src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/ca-pub-5569543489255665.js" type="text/javascript" async=""></script><script src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/jquery-1.js"></script>
+
+    
+    
+    
+    
+    <script type="text/javascript" src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/jqc-custom-build-mini.js"></script>
+    
+
+    
+    
+    <style>[jqc-row]{margin-left:auto;margin-right:auto;box-sizing:border-box;-moz-box-sizing:border-box}[jqc-cell]{display:inline-block;box-sizing:border-box;-moz-box-sizing:border-box;vertical-align:top}</style>
+
+    
+    
+    <title>Java NIO vs. IO | tutorials.jenkov.com</title>
+    <meta name="description" content="This tutorial discusses the main differences between Java NIO and Java IO.">
+    <meta name="keywords" content="java nio vs io">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java NIO vs. IO">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+    
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-nio/java-nio-teaser-500-300.png">
+    
+
+    
+    <meta name="og:type" content="article">
+    <meta name="og:title" content="Java NIO vs. IO">
+    <meta property="og:url" content="http://tutorials.jenkov.com/java-nio/nio-vs-io.html">
+    <meta property="og:description" content="This tutorial discusses the main differences between Java NIO and Java IO.">
+    
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-nio/java-nio-teaser-500-300.png">
+    
+
+    
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher">
+
+    
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw">
+
+    
+    
+
+<style>
+    #headerBar{background-color:#000;color:#fff;height:42px}#headerBar a,#menu a{color:#fff;padding:10px 20px 10px 0;text-decoration:none;display:inline-block;font-size:1.2em}#topBarNavToggle{margin-top:2px;width:32px;height:32px;overflow:hidden;float:left;display:none}#menu{display:none;background-color:#444;box-shadow:0 6px 6px -6px #999;position:absolute;top:42px;left:0;width:100%;z-index:99999}@media only screen and (max-width:616px){#topBarNavToggle{margin-top:2px;display:inline-block}}
+</style>
+
+    
+    <style>body{margin:0;font-family:Helvetica;font-size:16px;color:#333}a{color:#551A8B;text-decoration:none}a:hover{text-decoration:underline}</style>
+
+    
+
+<style>
+    h2,h3{margin-top:30px}code{font-family:Courier;font-size:1em}.trailhead{font-size:1.2em;font-weight:700}.codeBox{background-color:#f0f0f0;color:#000;border:1px solid #ccc;font-family:Courier;font-size:.8em;padding:10px;margin:20px 0}.diagram{margin:20px 0 30px}.dataTable{border:1px solid #ccc;margin:30px 0}.dataTable th{text-align:left;padding:5px;border-bottom:1px solid #ccc;background-color:#eee}.dataTable td{padding:5px;text-align:left;vertical-align:top}.signupFrame{border:1px solid #ccc}.leftMenuLinkCell{height:24px;font-size:1em;border-bottom:1px solid #f0f0f0;vertical-align:top;padding:8px 0 0 10px}.nextArticleInCategory{font-size:1.2em;border-bottom:1px solid #eee}#articleBody a{font-weight:700}.ul,ol{margin:30px 20px}.pageToc{border:1px solid #e0e0e0;border-radius:5px}.pageToc .pageTocTitle{border-bottom:1px solid #e0e0e0;padding:10px 20px}.pageToc div[itemscope]{padding:10px 20px}.pageToc li{padding-top:0px;margin-bottom:10px}#articleBody img{max-width:100%;}
+</style>
+
+
+<style>
+@media only screen and (max-width: 600px) {
+    .w600 {
+        display: inline;
+    }
+    pre.codeBox {
+        font-size: 0.7em;
+    }
+    #articleBody code {
+        font-size: 0.8em;
+    }
+    .pageToc li {
+        padding-top: 0px;
+        margin-bottom: 12px;
+    }
+}
+@media only screen and (min-width: 600px) {
+    .w600 {
+        display: none;
+    }
+}
+pre.codeBox {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+
+</style>
+
+
+    <style>
+        #cookieMsgDiv {
+            display:none; position:fixed; bottom: 0px;  height: 50px; padding: 20px 80px 20px 20px;  font-size: 0.8em; background-color: #000000; border: 1px solid #cccccc; color: #ffffff;
+        }
+        #cookieOkDiv {
+            position:absolute; top: 0px; right: 0px; padding: 10px 20px 10px 20px; background-color: #009900; border: 2px solid #006600; color: #ffffff; font-weight: bold; cursor: pointer;
+        }
+        @media only screen and (max-width: 390px) {
+            #cookieMsgDiv { height: 154px; }
+        }
+        @media only screen and (min-width: 391px) and (max-width: 440px) {
+            #cookieMsgDiv { height: 124px; }
+        }
+        @media only screen and (min-width: 441px) and (max-width: 630px) {
+            #cookieMsgDiv { height: 94px; }
+        }
+    </style>
+
+<script src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/embed.js" async="" type="text/javascript"></script></head>
+
+
+<body>
+    <span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:16 4:32" jqc-cell-spacings="0:16 4:32"></span>
+
+    
+
+<div id="headerBar">
+  <div style="width: 1200px;" jqc-row="" jqc-row-widths="0:100% 4:1200"><div style="width: 357px; margin-left: 32px;" jqc-cell="0:12c 2:4c">
+      <div id="topBarNavToggle">
+        <a href="#"><svg><svg x="0" y="0"><rect x="0" y="2" width="12" height="3" rx="1" style="fill: #ffffff; stroke: none;"></rect><rect x="0" y="7" width="12" height="3" rx="1" style="fill: #ffffff; stroke: none;"></rect> <rect x="0" y="12" width="12" height="3" rx="1" style="fill: #ffffff; stroke: none;"></rect></svg></svg></a>
+      </div>
+      <a href="http://jenkov.com/">Jenkov.com</a>
+    </div><div style="width: 747px; margin-left: 32px;" jqc-cell="0:0c 2:8c">
+      <a href="http://tutorials.jenkov.com/">Tutorials</a>
+      
+      <a href="http://jenkov.com/about/index.html">About</a>
+    </div></div>
+</div>
+
+<div style="" id="menu">
+  <div style="width: 1200px;" jqc-row=""><div style="display: none;" jqc-cell="0:12c 2:0c">
+      <a href="http://tutorials.jenkov.com/">Tutorials</a>
+      
+      <a href="http://jenkov.com/about/index.html">About</a>
+    </div></div>
+</div>
+
+<span jqc-module="menuModule"></span>
+
+<script>
+function menuModule() {
+  var module = {};
+
+  module.postConfigure = function() {
+    components = module.jqc.pageController.components;
+
+    $("#topBarNavToggle").click(function(e) {
+      $("#menu").toggle();
+        components.layoutManager.layout();
+        e.preventDefault();
+      });
+  }
+
+  return module;
+}
+</script>
+
+    
+
+
+
+
+
+<script>
+articleLen = 10921;
+console.log("article length: " + articleLen);
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+<div style="width: 1200px;" jqc-row="" jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0"><div style="width: 1200px; margin-left: 0px;" jqc-cell="0:12c">
+        <div style="width: 728px; margin: 20px auto;" id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); 
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); 
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script><script async="" src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/adsbygoogle.js"></script><ins data-adsbygoogle-status="done" class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5569543489255665" data-ad-slot="7630855405"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="90" width="728"></iframe></ins></ins></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div></div>
+
+
+<div style="width: 1200px;" jqc-row="" jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24"><div jqc-cell="0:0c  3:7c" style="padding-top: 30px; width: 308px; margin-left: 32px;">
+
+        <div id="trailToc">
+        <span class="trailhead">Java Nio</span> <br><br>
+
+        <table cellpadding="0" cellspacing="0">
+            
+            <tbody><tr>
+                
+                <td class="leftMenuLinkCell" align="right">1</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/index.html">Java NIO Tutorial</a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right">2</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/overview.html">Java NIO Overview</a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right">3</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/channels.html">Java NIO Channel</a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right">4</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/buffers.html">Java NIO Buffer</a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right">5</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/scatter-gather.html">Java NIO Scatter / Gather</a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right">6</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/channel-to-channel-transfers.html">Java NIO Channel to Channel Transfers</a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right">7</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/selectors.html">Java NIO Selector</a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right">8</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/file-channel.html">Java NIO FileChannel</a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right">9</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/socketchannel.html">Java NIO SocketChannel</a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right">10</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/server-socket-channel.html">Java NIO ServerSocketChannel</a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right">11</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/datagram-channel.html">Java NIO DatagramChannel</a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right">12</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/pipe.html">Java NIO Pipe</a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right"><b>13</b></td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/nio-vs-io.html"><b>Java NIO vs. IO</b></a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right">14</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/path.html">Java NIO Path</a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right">15</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/files.html">Java NIO Files</a><br></td>
+                
+            </tr>
+            
+            <tr>
+                
+                <td class="leftMenuLinkCell" align="right">16</td>
+                <td class="leftMenuLinkCell"><a href="http://tutorials.jenkov.com/java-nio/asynchronousfilechannel.html">Java NIO AsynchronousFileChannel</a><br></td>
+                
+            </tr>
+            
+        </tbody></table>
+        </div>
+
+        <br><br>
+
+
+        
+        <div id="side-ads">
+            <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script><script async="" src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/adsbygoogle.js"></script><ins data-adsbygoogle-status="done" class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5569543489255665" data-ad-slot="5873880207"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" frameborder="0" height="600" width="300"></iframe></ins></ins></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+
+        <br><br>
+        
+        <div id="leftMenuSocialLinks">
+            <div id="social-left-bar" class="signupFrame" style="padding:10px;">
+    <form action="http://jenkov.us4.list-manage.com/subscribe/post?u=39844b57926863757a8be6553&amp;id=74bcc45775" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+        <table width="" border="0" cellpadding="5" cellspacing="0">
+            <tbody><tr>
+                
+                <td><font color="red"><b>Get all my free tips &amp; tutorials!</b></font></td>
+                
+            </tr>
+            <tr>
+                <td>
+                    Connect with me, or sign up for my news letter or <a href="http://feeds2.feedburner.com/jenkov-com" target="_blank">RSS feed</a>, and
+                    get all my tips that help you become a more skilled and efficient developer.
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    <div id="leftSocialLinks"><a class="googlePlusIconLink" href="https://plus.google.com/+JakobJenkov?rel=author" style="text-decoration:none;" title="Connect on Google+" target="_blank" rel="author"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"> <path id="google-plus-square-rounded-icon" d="M209.035,235.669c-22.34-0.673-43.568-21.164-47.425-50.498 c-3.858-29.341,11.122-51.789,33.458-51.124c22.329,0.671,41.439,24.737,45.294,54.07 C244.215,217.455,231.363,236.333,209.035,235.669z M204.452,295.702c-33.279-0.366-61.481,21.029-61.481,45.829 c0,25.309,24.033,46.375,57.314,46.375c42.547,0,63.102-19.773,63.102-45.082C263.387,318.698,241.378,295.702,204.452,295.702z M461.945,101v312c0,27.614-22.386,50-50,50h-312c-27.614,0-50-22.386-50-50V101c0-27.614,22.386-50,50-50h312 C439.56,51,461.945,73.386,461.945,101z M292.054,339.882c0-23.364-8.724-38.63-35.119-58.406 c-26.771-19.524-33.313-30.555-7.761-50.31c14.398-11.133,24.488-25.973,24.488-44.295c0-19.961-8.162-38.071-23.51-46.864h21.755 l18.521-19.438c0,0-69.817,0-82.879,0c-51.736,0-77.105,31.01-77.105,65.122c0,34.861,23.915,62.316,70.615,62.316 c-7.24,14.617-4.332,28.117,7.514,37.771c-79.759,0-96.826,34.998-96.826,61.957c0,34.932,40.154,55.699,88.303,55.699  C265.885,403.434,292.054,368.543,292.054,339.882z M400.146,162.626H361.91v-38.235h-19.117v38.235h-38.235v19.117h38.235v38.235 h19.117v-38.235h38.235V162.626z"></path> </svg></a><a class="twitterIconLink" href="https://twitter.com/#%21/jjenkov" title="Follow on Twitter" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">  <path id="twitter-3-icon" d="M412,50H100c-27.614,0-50,22.386-50,50v312c0,27.614,22.386,50,50,50h312c27.614,0,50-22.386,50-50V100    C462,72.386,439.614,50,412,50z M371.942,207.125c3.553,79.059-55.408,167.203-159.768,167.203    c-31.743,0-61.289-9.305-86.164-25.253c29.821,3.515,59.586-4.758,83.218-23.278c-24.596-0.453-45.356-16.703-52.508-39.035    c8.808,1.684,17.473,1.19,25.383-0.962c-27.03-5.433-45.692-29.784-45.083-55.826c7.577,4.211,16.245,6.74,25.46,7.032    c-25.034-16.73-32.12-49.786-17.396-75.045c27.723,34.006,69.143,56.385,115.857,58.729c-8.199-35.16,18.474-69.019,54.755-69.019    c16.168,0,30.776,6.825,41.029,17.75c12.804-2.52,24.833-7.198,35.694-13.639c-4.197,13.126-13.11,24.141-24.715,31.098    c11.37-1.357,22.204-4.379,32.284-8.851C392.454,189.301,382.926,199.201,371.942,207.125z"></path> </svg></a><a class="linkedInIconLink" href="http://www.linkedin.com/pub/jakob-jenkov/0/a8/4a3" title="Connect on LinkedIn" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">   <path id="linkedin-square-rounded-icon" d="M411.945,50h-312c-27.614,0-50,22.386-50,50v312c0,27.614,22.386,50,50,50h312     c27.614,0,50-22.386,50-50V100C461.945,72.386,439.56,50,411.945,50z M180.996,392.99h-56.537V210.336h56.537V392.99z     M152.457,186.417c-18.465,0-33.432-15.09-33.432-33.703c0-18.614,14.967-33.704,33.432-33.704c18.463,0,33.432,15.09,33.432,33.704     C185.889,171.327,170.92,186.417,152.457,186.417z M392.865,392.99h-56.262c0,0,0-69.582,0-95.881     c0-26.296-9.988-40.974-30.781-40.974c-22.629,0-34.453,15.289-34.453,40.974c0,28.133,0,95.881,0,95.881h-54.223V210.336h54.223     v24.599c0,0,16.309-30.171,55.041-30.171s66.455,23.648,66.455,72.572C392.865,326.262,392.865,392.99,392.865,392.99z"></path> </svg></a><a class="youTubeIconLink" href="https://www.youtube.com/user/jjenkov" title="Subscribe on YouTube" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">         <path id="youtube-3-icon" d="M233.709,295.811h14.537v78.188h-14.537v-8.631c-2.68,3.181-5.465,5.604-8.363,7.268 c-7.836,4.488-18.594,4.392-18.594-11.473v-65.352h14.538v59.936c0,3.146,0.763,5.27,3.872,5.27c2.833,0,6.773-3.635,8.547-5.855 V295.811z M206.951,268.006h-50.245v15.384h16.937v90.608h16.371V283.39h16.938V268.006z M304.207,314.422v43.377 c0,9.674-3.619,17.188-13.291,17.188c-5.323,0-9.756-1.945-13.809-6.998v6.01H262.43V268.006h14.678v34.122 c3.281-3.997,7.734-7.306,12.926-7.306C300.681,294.822,304.207,303.816,304.207,314.422z M289.245,315.302 c0-2.638-0.517-4.64-1.554-6.008c-1.758-2.321-5.042-2.571-7.586-1.284c-1.013,0.514-2.011,1.31-2.998,2.383v48.725 c1.184,1.271,2.33,2.188,3.441,2.748c2.365,1.198,5.836,1.293,7.438-0.805c0.838-1.1,1.259-2.896,1.259-5.389V315.302z M246.938,209.69c4.106,0,6.385-3.303,6.385-7.773v-38.188c0-4.594-2.004-7.829-6.685-7.829c-4.288,0-6.356,3.335-6.356,7.829 v38.188C240.281,206.242,242.721,209.69,246.938,209.69z M462,100v312c0,27.614-22.385,50-50,50H100c-27.613,0-50-22.386-50-50V100 c0-27.614,22.387-50,50-50h312C439.615,50,462,72.386,462,100z M281.84,209.615c0,8.11,2.479,14.665,10.662,14.665 c4.618,0,11.028-2.403,17.643-10.249v9.063h15.264v-82.099h-15.264v62.317c-1.86,2.33-5.999,6.148-8.975,6.148 c-3.268,0-4.066-2.229-4.066-5.531v-62.934H281.84V209.615z M224.572,162.375v40.242c0,14.468,7.561,22,22.365,22 c12.275,0,21.944-8.21,21.944-22v-40.242c0-12.85-9.571-22.056-21.944-22.056C233.494,140.319,224.572,149.203,224.572,162.375z M167.703,111.8l20.451,66.153v45.14h17.191v-45.14l20.006-66.153h-17.467l-11.014,44.485L185.018,111.8H167.703z M380.961,276.779 c0-19.331-15.67-35.001-35-35.001H166.039c-19.33,0-35,15.67-35,35.001V365.2c0,19.33,15.67,35,35,35h179.922 c19.33,0,35-15.67,35-35V276.779z M357.938,316.831v19.906h-27.805v14.75c0,5.865,0.496,10.938,6.349,10.938 c6.137,0,6.494-4.13,6.494-10.938v-5.435h14.962v5.873c0,15.066-6.467,24.189-21.786,24.189c-13.881,0-20.979-10.113-20.979-24.189 v-35.095c0-13.573,8.967-22.997,22.08-22.997C351.198,293.834,357.938,302.699,357.938,316.831z M342.976,316.686 c0-5.283-1.12-9.163-6.349-9.163c-5.387,0-6.494,3.79-6.494,9.163v7.916h12.843V316.686z"></path> </svg></a><a class="rssIconLink" href="http://feeds2.feedburner.com/jenkov-com" title="Subscribe to RSS Feed" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">   <path id="rss-square-rounded-icon" d="M412,50H100c-27.614,0-50,22.386-50,50v312c0,27.614,22.386,50,50,50h312     c27.614,0,50-22.386,50-50V100C462,72.386,439.614,50,412,50z M151.005,400.2c-21.554,0-39.026-17.472-39.026-39.026     c0-21.553,17.473-39.024,39.026-39.024s39.024,17.472,39.024,39.024C190.029,382.729,172.559,400.2,151.005,400.2z M244.268,400.2     c-0.747-72.618-59.672-131.542-132.289-132.288v-57.815c104.663,0.747,189.355,85.44,190.104,190.103H244.268z M342.201,400.2     c-0.174-61.521-24.205-119.335-67.728-162.856c-43.436-43.437-101.108-67.456-162.495-67.723V111.8     c158.955,0.556,287.681,129.401,288.043,288.4H342.201z"></path> </svg></a></div>
+                </td>
+            </tr>
+
+            <tr><td>
+                <b>Newsletter</b><br>
+                   
+
+
+    <input name="FNAME" class="" id="mce-FNAME" placeholder="First Name *" size="15" type="text">&nbsp;
+    <input name="LNAME" class="" id="mce-LNAME" placeholder="Last Name *" size="15" type="text">&nbsp;
+    <input name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email *" size="15" type="email">&nbsp;<br>
+    <input value="Yes, give me tips!" name="subscribe" id="mc-embedded-subscribe" class="button" type="submit">
+
+    <input name="listid" value="9579" type="hidden">
+    <input name="specialid:9579" value="SW15" type="hidden">
+
+    <input name="clientid" value="435086" type="hidden">
+    <input name="formid" value="587" type="hidden">
+    <input name="reallistid" value="1" type="hidden">
+    <input name="doubleopt" value="1" type="hidden">
+
+
+                </td>
+            </tr>
+
+        </tbody></table>
+    
+</form></div>
+        </div>
+    </div><div style="width: 796px; margin-left: 32px;" jqc-cell="0:24c 3:17c">
+
+        <h1>Java NIO vs. IO</h1>
+
+        <div id="articleTopDiv" style="height: 163px;"><div style="position:relative; borderx: 1px solid #cccccc; height: 163px;">  <img style="width:111px; height:127px;" src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/small-portrait_mini.jpg"> <br>  <span class="author">By <a target="jakob-jenkov" href="http://jakob.jenkov.com/">Jakob Jenkov</a></span>   <div style="position:absolute; top: 0px; left: 131px;">    &nbsp;Connect with me: <br>    <a class="googlePlusIconLink" href="https://plus.google.com/+JakobJenkov?rel=author" style="text-decoration:none;" title="Connect on Google+" target="_blank" rel="author"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"> <path id="google-plus-square-rounded-icon" d="M209.035,235.669c-22.34-0.673-43.568-21.164-47.425-50.498 c-3.858-29.341,11.122-51.789,33.458-51.124c22.329,0.671,41.439,24.737,45.294,54.07 C244.215,217.455,231.363,236.333,209.035,235.669z M204.452,295.702c-33.279-0.366-61.481,21.029-61.481,45.829 c0,25.309,24.033,46.375,57.314,46.375c42.547,0,63.102-19.773,63.102-45.082C263.387,318.698,241.378,295.702,204.452,295.702z M461.945,101v312c0,27.614-22.386,50-50,50h-312c-27.614,0-50-22.386-50-50V101c0-27.614,22.386-50,50-50h312 C439.56,51,461.945,73.386,461.945,101z M292.054,339.882c0-23.364-8.724-38.63-35.119-58.406 c-26.771-19.524-33.313-30.555-7.761-50.31c14.398-11.133,24.488-25.973,24.488-44.295c0-19.961-8.162-38.071-23.51-46.864h21.755 l18.521-19.438c0,0-69.817,0-82.879,0c-51.736,0-77.105,31.01-77.105,65.122c0,34.861,23.915,62.316,70.615,62.316 c-7.24,14.617-4.332,28.117,7.514,37.771c-79.759,0-96.826,34.998-96.826,61.957c0,34.932,40.154,55.699,88.303,55.699  C265.885,403.434,292.054,368.543,292.054,339.882z M400.146,162.626H361.91v-38.235h-19.117v38.235h-38.235v19.117h38.235v38.235 h19.117v-38.235h38.235V162.626z"></path> </svg></a><a class="twitterIconLink" href="https://twitter.com/#%21/jjenkov" title="Follow on Twitter" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">  <path id="twitter-3-icon" d="M412,50H100c-27.614,0-50,22.386-50,50v312c0,27.614,22.386,50,50,50h312c27.614,0,50-22.386,50-50V100    C462,72.386,439.614,50,412,50z M371.942,207.125c3.553,79.059-55.408,167.203-159.768,167.203    c-31.743,0-61.289-9.305-86.164-25.253c29.821,3.515,59.586-4.758,83.218-23.278c-24.596-0.453-45.356-16.703-52.508-39.035    c8.808,1.684,17.473,1.19,25.383-0.962c-27.03-5.433-45.692-29.784-45.083-55.826c7.577,4.211,16.245,6.74,25.46,7.032    c-25.034-16.73-32.12-49.786-17.396-75.045c27.723,34.006,69.143,56.385,115.857,58.729c-8.199-35.16,18.474-69.019,54.755-69.019    c16.168,0,30.776,6.825,41.029,17.75c12.804-2.52,24.833-7.198,35.694-13.639c-4.197,13.126-13.11,24.141-24.715,31.098    c11.37-1.357,22.204-4.379,32.284-8.851C392.454,189.301,382.926,199.201,371.942,207.125z"></path> </svg></a><a class="linkedInIconLink" href="http://www.linkedin.com/pub/jakob-jenkov/0/a8/4a3" title="Connect on LinkedIn" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">   <path id="linkedin-square-rounded-icon" d="M411.945,50h-312c-27.614,0-50,22.386-50,50v312c0,27.614,22.386,50,50,50h312     c27.614,0,50-22.386,50-50V100C461.945,72.386,439.56,50,411.945,50z M180.996,392.99h-56.537V210.336h56.537V392.99z     M152.457,186.417c-18.465,0-33.432-15.09-33.432-33.703c0-18.614,14.967-33.704,33.432-33.704c18.463,0,33.432,15.09,33.432,33.704     C185.889,171.327,170.92,186.417,152.457,186.417z M392.865,392.99h-56.262c0,0,0-69.582,0-95.881     c0-26.296-9.988-40.974-30.781-40.974c-22.629,0-34.453,15.289-34.453,40.974c0,28.133,0,95.881,0,95.881h-54.223V210.336h54.223     v24.599c0,0,16.309-30.171,55.041-30.171s66.455,23.648,66.455,72.572C392.865,326.262,392.865,392.99,392.865,392.99z"></path> </svg></a><a class="youTubeIconLink" href="https://www.youtube.com/user/jjenkov" title="Subscribe on YouTube" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">         <path id="youtube-3-icon" d="M233.709,295.811h14.537v78.188h-14.537v-8.631c-2.68,3.181-5.465,5.604-8.363,7.268 c-7.836,4.488-18.594,4.392-18.594-11.473v-65.352h14.538v59.936c0,3.146,0.763,5.27,3.872,5.27c2.833,0,6.773-3.635,8.547-5.855 V295.811z M206.951,268.006h-50.245v15.384h16.937v90.608h16.371V283.39h16.938V268.006z M304.207,314.422v43.377 c0,9.674-3.619,17.188-13.291,17.188c-5.323,0-9.756-1.945-13.809-6.998v6.01H262.43V268.006h14.678v34.122 c3.281-3.997,7.734-7.306,12.926-7.306C300.681,294.822,304.207,303.816,304.207,314.422z M289.245,315.302 c0-2.638-0.517-4.64-1.554-6.008c-1.758-2.321-5.042-2.571-7.586-1.284c-1.013,0.514-2.011,1.31-2.998,2.383v48.725 c1.184,1.271,2.33,2.188,3.441,2.748c2.365,1.198,5.836,1.293,7.438-0.805c0.838-1.1,1.259-2.896,1.259-5.389V315.302z M246.938,209.69c4.106,0,6.385-3.303,6.385-7.773v-38.188c0-4.594-2.004-7.829-6.685-7.829c-4.288,0-6.356,3.335-6.356,7.829 v38.188C240.281,206.242,242.721,209.69,246.938,209.69z M462,100v312c0,27.614-22.385,50-50,50H100c-27.613,0-50-22.386-50-50V100 c0-27.614,22.387-50,50-50h312C439.615,50,462,72.386,462,100z M281.84,209.615c0,8.11,2.479,14.665,10.662,14.665 c4.618,0,11.028-2.403,17.643-10.249v9.063h15.264v-82.099h-15.264v62.317c-1.86,2.33-5.999,6.148-8.975,6.148 c-3.268,0-4.066-2.229-4.066-5.531v-62.934H281.84V209.615z M224.572,162.375v40.242c0,14.468,7.561,22,22.365,22 c12.275,0,21.944-8.21,21.944-22v-40.242c0-12.85-9.571-22.056-21.944-22.056C233.494,140.319,224.572,149.203,224.572,162.375z M167.703,111.8l20.451,66.153v45.14h17.191v-45.14l20.006-66.153h-17.467l-11.014,44.485L185.018,111.8H167.703z M380.961,276.779 c0-19.331-15.67-35.001-35-35.001H166.039c-19.33,0-35,15.67-35,35.001V365.2c0,19.33,15.67,35,35,35h179.922 c19.33,0,35-15.67,35-35V276.779z M357.938,316.831v19.906h-27.805v14.75c0,5.865,0.496,10.938,6.349,10.938 c6.137,0,6.494-4.13,6.494-10.938v-5.435h14.962v5.873c0,15.066-6.467,24.189-21.786,24.189c-13.881,0-20.979-10.113-20.979-24.189 v-35.095c0-13.573,8.967-22.997,22.08-22.997C351.198,293.834,357.938,302.699,357.938,316.831z M342.976,316.686 c0-5.283-1.12-9.163-6.349-9.163c-5.387,0-6.494,3.79-6.494,9.163v7.916h12.843V316.686z"></path> </svg></a><a class="rssIconLink" href="http://feeds2.feedburner.com/jenkov-com" title="Subscribe to RSS Feed" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">   <path id="rss-square-rounded-icon" d="M412,50H100c-27.614,0-50,22.386-50,50v312c0,27.614,22.386,50,50,50h312     c27.614,0,50-22.386,50-50V100C462,72.386,439.614,50,412,50z M151.005,400.2c-21.554,0-39.026-17.472-39.026-39.026     c0-21.553,17.473-39.024,39.026-39.024s39.024,17.472,39.024,39.024C190.029,382.729,172.559,400.2,151.005,400.2z M244.268,400.2     c-0.747-72.618-59.672-131.542-132.289-132.288v-57.815c104.663,0.747,189.355,85.44,190.104,190.103H244.268z M342.201,400.2     c-0.174-61.521-24.205-119.335-67.728-162.856c-43.436-43.437-101.108-67.456-162.495-67.723V111.8     c158.955,0.556,287.681,129.401,288.043,288.4H342.201z"></path> </svg></a>  </div>  <div style="position:absolute; top: 70px; left: 131px">   Rate article:   </div>  <div style="position:absolute; top: 88px; left: 131px;">     <script type="text/javascript" src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/plusone.js" async=""></script>    <div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent none repeat scroll 0% 0%; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 106px; height: 24px;"><iframe title="+1" data-gapiattached="true" src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/fastbutton.html" name="I0_1442043333968" id="I0_1442043333968" vspace="0" tabindex="0" style="position: static; top: 0px; width: 106px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div>  </div>  <div style="position:absolute; top: 122px; left: 131px">    Share article:  </div>  <div style="position:absolute; top: 140px; left: 131px">    <div id="___plus_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent none repeat scroll 0% 0%; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 64px; height: 24px;"><iframe title="+Share" data-gapiattached="true" src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/sharebutton.html" name="I1_1442043333972" id="I1_1442043333972" vspace="0" tabindex="0" style="position: static; top: 0px; width: 64px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div>    <script type="text/javascript">     (function() {        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;       po.src = 'https://apis.google.com/js/platform.js';        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);       })();    </script>  </div>  <div style="position:absolute; top: 140px; left: 211px">    <iframe src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/tweet_button.html" title="Twitter Tweet Button" style="position: static; visibility: visible; width: 80px; height: 20px;" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" allowtransparency="true" scrolling="no" id="twitter-widget-0" frameborder="0"></iframe>    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>  </div></div></div>
+        <br>
+
+        
+        <nav>
+            <a name="pageToc"></a>
+            <div class="pageToc">
+                <div class="pageTocTitle">Table of Contents</div>
+                <div itemscope="" itemtype="http://schema.org/SiteNavigationElement"><ul><li><a href="#main-differences-between-java-nio-and-io">Main Differences Betwen Java NIO and IO</a></li><li><a href="#stream-oriented-vs-buffer-oriented">Stream Oriented vs. Buffer Oriented</a></li><li><a href="#blocking-vs-non-blocking">Blocking vs. Non-blocking IO</a></li><li><a href="#selectors">Selectors</a></li><li><a href="#how-nio-and-io-influences-application-design">How NIO and IO Influences Application Design</a></li><ul><li><a href="#the-api-calls">The API Calls</a></li><li><a href="#the-processing-of-data">The Processing of Data</a></li></ul><li><a href="#summary">Summary</a></li>       </ul></div>
+            </div>
+        </nav>
+        
+
+        <div id="articleBody">
+        Last updated: 2014-06-23
+        <p>
+    When studying both the Java NIO and IO API's, a question quickly pops into mind:
+</p>
+
+<p>
+    When should I use IO and when should I use NIO?
+</p>
+
+<p>
+    In this text I will try to shed some light on the differences between Java NIO and IO,
+    their use cases, and how they affect the design of your code.
+</p>
+
+
+
+<a name="main-differences-between-java-nio-and-io"></a>
+<h2>Main Differences Betwen Java NIO and IO</h2>
+
+<p>
+    The table below summarizes the main differences between Java NIO and IO. I will get into
+    more detail about each difference in the sections following the table.
+</p>
+
+
+<table style="border: 1px solid #cccccc; margin-top:20px; margin-bottom:20px;" cellpadding="5" cellspacing="0">
+    <tbody><tr><td><b>IO</b></td>
+        <td><b>NIO</b></td>
+    </tr>
+
+    <tr><td>Stream oriented</td>
+        <td>Buffer oriented</td>
+    </tr>
+
+    <tr><td>Blocking IO</td>
+        <td>Non blocking IO</td>
+    </tr>
+    <tr><td>&nbsp;</td>
+        <td>Selectors</td>
+    </tr>
+</tbody></table>
+
+
+<a name="stream-oriented-vs-buffer-oriented"></a>
+<h2>Stream Oriented vs. Buffer Oriented</h2>
+<p>
+    The first big difference between Java NIO and IO is that IO is stream oriented,
+    where NIO is buffer oriented. So, what does that mean?
+</p>
+
+<p>
+    Java IO being stream oriented means that you read one or more bytes at a time, from a stream.
+    What you do with the read bytes is up to you. They are not cached anywhere. Furthermore,
+    you cannot move forth and back in the data in a stream. If you need to move forth and
+    back in the data read from a stream, you will need to cache it in a buffer first.
+</p>
+
+<p>
+    Java NIO's buffer oriented approach is slightly different. Data is read into a buffer from which
+    it is later processed. You can move forth and back in the buffer as you need to. This gives you
+    a bit more flexibility during processing. However, you also need to check if the buffer contains
+    all the data you need in order to fully process it. And, you need to make sure that when reading
+    more data into the buffer, you do not overwrite data in the buffer you have not yet processed.
+</p>
+
+
+<a name="blocking-vs-non-blocking"></a>
+<h2>Blocking vs. Non-blocking IO</h2>
+
+<p>
+    Java IO's various streams are blocking. That means, that when a thread invokes a <code>read()</code>
+    or <code>write()</code>, that thread is blocked until there is some data to read, or the data is fully written.
+    The thread can do nothing else in the meantime.
+</p>
+
+<p>
+    Java NIO's non-blocking mode enables a thread to request reading data from a channel, and only get what is
+    currently available, or nothing at all, if no data is currently available. Rather than remain blocked until
+    data becomes available for reading, the thread can go on with something else.
+</p>
+
+<p>
+    The same is true for non-blocking writing. A thread can request that some data be written to a channel,
+    but not wait for it to be fully written. The thread can then go on and do something else in the mean time.
+</p>
+
+<p>
+    What threads spend their idle time on when not blocked in IO calls, is usually performing IO on other channels
+    in the meantime. That is, a single thread can now manage multiple channels of input and output.
+</p>
+
+
+
+<a name="selectors"></a>
+<h2>Selectors</h2>
+
+<p>
+    Java NIO's selectors allow a single thread to monitor multiple channels of input. You can register
+    multiple channels with a selector, then use a single thread to "select" the channels that have input
+    available for processing, or select the channels that are ready for writing.
+    This selector mechanism makes it easy for a single thread to manage multiple channels.
+</p>
+
+
+
+<a name="how-nio-and-io-influences-application-design"></a>
+<h2>How NIO and IO Influences Application Design</h2>
+
+<p>
+    Whether you choose NIO or IO as your IO toolkit may impact the following aspects of your
+    application design:
+</p>
+
+<ol>
+    <li>The API calls to the NIO or IO classes.</li>
+    <li>The processing of data.</li>
+    <li>The number of thread used to process the data.</li>
+</ol>
+
+
+
+<a name="the-api-calls"></a>
+<h3>The API Calls</h3>
+<p>
+    Of course the API calls when using NIO look different than when using IO. This is no surprise.
+    Rather than just read the data byte for byte from e.g. an <code>InputStream</code>, the data
+    must first be read into a buffer, and then be processed from there.
+</p>
+
+
+
+<a name="the-processing-of-data"></a>
+<h3>The Processing of Data</h3>
+<p>
+    The processing of the data is also affected when using a pure NIO design, vs. an IO design.
+</p>
+
+<p>
+    In an IO design you read the data byte for byte from an <code>InputStream</code> or
+    a <code>Reader</code>. Imagine you were processing a stream of line based textual data.
+    For instance:
+</p>
+
+<pre class="codeBox">Name: Anna
+Age: 25
+Email: anna@mailserver.com
+Phone: 1234567890
+</pre>
+
+<p>
+    This stream of text lines could be processed like this:
+</p>
+
+<pre class="codeBox">InputStream input = ... ; // get the InputStream from the client socket
+
+BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+
+String nameLine   = reader.readLine();
+String ageLine    = reader.readLine();
+String emailLine  = reader.readLine();
+String phoneLine  = reader.readLine();
+</pre>
+
+<p>
+    Notice how the processing state is determined by how far the program has executed. In other words,
+    once the first <code>reader.readLine()</code> method returns, you know for sure that a full line
+    of text has been read. The <code>readLine()</code> blocks until a full line is read, that's why.
+    You also know that this line contains the name. Similarly, when the second <code>readLine()</code>
+    call returns, you know that this line contains the age etc.
+</p>
+
+<p>
+    As you can see, the program progresses only when there is new data to read, and for each step you
+    know what that data is. Once the executing thread have progressed past reading a certain piece of data
+    in the code, the thread is not going backwards in the data (mostly not). This principle is also illustrated
+    in this diagram:
+</p>
+
+<center>
+    <table style="padding:10px;">
+        <tbody><tr><td align="center"><img src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/nio-vs-io-1.png" alt="Java IO: Reading data from a blocking stream."></td></tr>
+        <tr><td align="center"><b>Java IO: Reading data from a blocking stream.</b></td></tr>
+    </tbody></table>
+</center>
+
+<p>
+    A NIO implementation would look different. Here is a simplified example:
+</p>
+
+<pre class="codeBox">ByteBuffer buffer = ByteBuffer.allocate(48);
+
+int bytesRead = inChannel.read(buffer);
+</pre>
+
+<p>
+    Notice the second line which reads bytes from the channel into the <code>ByteBuffer</code>.
+    When that method call returns you don't know if all the data you need is inside the buffer.
+    All you know is that the buffer contains some bytes. This makes processing somewhat harder.
+</p>
+
+<p>
+    Imagine if, after the first <code>read(buffer)</code> call, that all what was read into the
+    buffer was half a line. For instance, "Name: An". Can you process that data? Not really.
+    You need to wait until at leas a full line of data has been into the buffer, before it
+    makes sense to process any of the data at all.
+</p>
+
+<p>
+    So how do you know if the buffer contains enough data for it to make sense to be processed?
+    Well, you don't. The only way to find out, is to look at the data in the buffer. The result
+    is, that you may have to inspect the data in the buffer several times before you know if all
+    the data is inthere. This is both inefficient, and can become messy in terms of program design.
+    For instance:
+</p>
+
+<pre class="codeBox">ByteBuffer buffer = ByteBuffer.allocate(48);
+
+int bytesRead = inChannel.read(buffer);
+
+while(! bufferFull(bytesRead) ) {
+    bytesRead = inChannel.read(buffer);
+}
+</pre>
+
+<p>
+    The <code>bufferFull()</code> method has to keep track of how much data is read into the buffer,
+    and return either <code>true</code> or <code>false</code>, depending on whether the buffer is
+    full. In other words, if the buffer is ready for processing, it is considered full.
+</p>
+
+<p>
+    The <code>bufferFull()</code> method scans through the buffer, but must leave the buffer in
+    the same state as before the <code>bufferFull()</code> method was called. If not, the next
+    data read into the buffer might not be read in at the correct location. This is not impossible,
+    but it is yet another issue to watch out for.
+</p>
+
+<p>
+    If the buffer is full, it can be processed. If it is not full, you might be able to partially
+    process whatever data is there, if that makes sense in your particular case. In many cases it
+    doesn't.
+</p>
+
+<p>
+    The is-data-in-buffer-ready loop is illustrated in this diagram:
+</p>
+
+<center>
+    <table style="padding:10px;">
+        <tbody><tr><td align="center"><img src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/nio-vs-io-2.png" alt="Java NIO: Reading data from a channel until all needed data is in buffer."></td></tr>
+        <tr><td align="center"><b>Java NIO: Reading data from a channel until all needed data is in buffer.</b></td></tr>
+    </tbody></table>
+</center>
+
+
+
+
+<a name="summary"></a>
+<h2>Summary</h2>
+<p>
+    NIO allows you to manage multiple channels (network connections or files) using only a single (or few) threads,
+    but the cost is that parsing the data might be somewhat more complicated than when reading data from a blocking
+    stream.
+</p>
+
+<p>
+    If you need to manage thousands of open connections simultanously, which each only send a little data, for
+    instance a chat server, implementing the server in NIO is probably an advantage. Similarly, if you need
+    to keep a lot of open connections to other computers, e.g. in a P2P network, using a single thread to manage
+    all of your outbound connections might be an advantage. This one thread, multiple connections design is
+    illustrated in this diagram:
+</p>
+
+<center>
+    <table style="padding:10px;">
+        <tbody><tr><td align="center"><img src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/nio-vs-io-3.png" alt="Java NIO: A single thread managing multiple connections."></td></tr>
+        <tr><td align="center"><b>Java NIO: A single thread managing multiple connections.</b></td></tr>
+    </tbody></table>
+</center>
+
+
+<p>
+    If you have fewer connections with very high bandwidth, sending a lot of data at a time, perhaps a
+    classic IO server implementation might be the best fit. This diagram illustrates a classic IO server
+    design:
+</p>
+
+<center>
+    <table style="padding:10px;">
+        <tbody><tr><td align="center"><img src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/nio-vs-io-4.png" alt="Java IO: A classic IO server design - one connection handled by one thread."></td></tr>
+        <tr><td align="center"><b>Java IO: A classic IO server design - one connection handled by one thread.</b></td></tr>
+    </tbody></table>
+</center>
+        </div>
+
+        
+        <br><br>
+        
+        <nav>
+            <a href="http://tutorials.jenkov.com/java-nio/path.html">
+                <div class="nextArticleInCategory">
+                    <b>Next:</b>&nbsp;&nbsp;&nbsp;Java NIO Path
+                </div>
+            </a>
+        </nav>
+        
+
+        <div style="height: 30px"></div>
+
+        <table>
+            <tbody><tr>
+                <td><b>Connect with me:</b></td>
+                <td style="width:30px;"></td>
+                <td><b>Newsletter</b> - Get all my free tips!</td>
+            </tr>
+            <tr>
+                <td><div id="bottomSocialLinks"><a class="googlePlusIconLink" href="https://plus.google.com/+JakobJenkov?rel=author" style="text-decoration:none;" title="Connect on Google+" target="_blank" rel="author"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"> <path id="google-plus-square-rounded-icon" d="M209.035,235.669c-22.34-0.673-43.568-21.164-47.425-50.498 c-3.858-29.341,11.122-51.789,33.458-51.124c22.329,0.671,41.439,24.737,45.294,54.07 C244.215,217.455,231.363,236.333,209.035,235.669z M204.452,295.702c-33.279-0.366-61.481,21.029-61.481,45.829 c0,25.309,24.033,46.375,57.314,46.375c42.547,0,63.102-19.773,63.102-45.082C263.387,318.698,241.378,295.702,204.452,295.702z M461.945,101v312c0,27.614-22.386,50-50,50h-312c-27.614,0-50-22.386-50-50V101c0-27.614,22.386-50,50-50h312 C439.56,51,461.945,73.386,461.945,101z M292.054,339.882c0-23.364-8.724-38.63-35.119-58.406 c-26.771-19.524-33.313-30.555-7.761-50.31c14.398-11.133,24.488-25.973,24.488-44.295c0-19.961-8.162-38.071-23.51-46.864h21.755 l18.521-19.438c0,0-69.817,0-82.879,0c-51.736,0-77.105,31.01-77.105,65.122c0,34.861,23.915,62.316,70.615,62.316 c-7.24,14.617-4.332,28.117,7.514,37.771c-79.759,0-96.826,34.998-96.826,61.957c0,34.932,40.154,55.699,88.303,55.699  C265.885,403.434,292.054,368.543,292.054,339.882z M400.146,162.626H361.91v-38.235h-19.117v38.235h-38.235v19.117h38.235v38.235 h19.117v-38.235h38.235V162.626z"></path> </svg></a><a class="twitterIconLink" href="https://twitter.com/#%21/jjenkov" title="Follow on Twitter" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">  <path id="twitter-3-icon" d="M412,50H100c-27.614,0-50,22.386-50,50v312c0,27.614,22.386,50,50,50h312c27.614,0,50-22.386,50-50V100    C462,72.386,439.614,50,412,50z M371.942,207.125c3.553,79.059-55.408,167.203-159.768,167.203    c-31.743,0-61.289-9.305-86.164-25.253c29.821,3.515,59.586-4.758,83.218-23.278c-24.596-0.453-45.356-16.703-52.508-39.035    c8.808,1.684,17.473,1.19,25.383-0.962c-27.03-5.433-45.692-29.784-45.083-55.826c7.577,4.211,16.245,6.74,25.46,7.032    c-25.034-16.73-32.12-49.786-17.396-75.045c27.723,34.006,69.143,56.385,115.857,58.729c-8.199-35.16,18.474-69.019,54.755-69.019    c16.168,0,30.776,6.825,41.029,17.75c12.804-2.52,24.833-7.198,35.694-13.639c-4.197,13.126-13.11,24.141-24.715,31.098    c11.37-1.357,22.204-4.379,32.284-8.851C392.454,189.301,382.926,199.201,371.942,207.125z"></path> </svg></a><a class="linkedInIconLink" href="http://www.linkedin.com/pub/jakob-jenkov/0/a8/4a3" title="Connect on LinkedIn" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">   <path id="linkedin-square-rounded-icon" d="M411.945,50h-312c-27.614,0-50,22.386-50,50v312c0,27.614,22.386,50,50,50h312     c27.614,0,50-22.386,50-50V100C461.945,72.386,439.56,50,411.945,50z M180.996,392.99h-56.537V210.336h56.537V392.99z     M152.457,186.417c-18.465,0-33.432-15.09-33.432-33.703c0-18.614,14.967-33.704,33.432-33.704c18.463,0,33.432,15.09,33.432,33.704     C185.889,171.327,170.92,186.417,152.457,186.417z M392.865,392.99h-56.262c0,0,0-69.582,0-95.881     c0-26.296-9.988-40.974-30.781-40.974c-22.629,0-34.453,15.289-34.453,40.974c0,28.133,0,95.881,0,95.881h-54.223V210.336h54.223     v24.599c0,0,16.309-30.171,55.041-30.171s66.455,23.648,66.455,72.572C392.865,326.262,392.865,392.99,392.865,392.99z"></path> </svg></a><a class="youTubeIconLink" href="https://www.youtube.com/user/jjenkov" title="Subscribe on YouTube" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">         <path id="youtube-3-icon" d="M233.709,295.811h14.537v78.188h-14.537v-8.631c-2.68,3.181-5.465,5.604-8.363,7.268 c-7.836,4.488-18.594,4.392-18.594-11.473v-65.352h14.538v59.936c0,3.146,0.763,5.27,3.872,5.27c2.833,0,6.773-3.635,8.547-5.855 V295.811z M206.951,268.006h-50.245v15.384h16.937v90.608h16.371V283.39h16.938V268.006z M304.207,314.422v43.377 c0,9.674-3.619,17.188-13.291,17.188c-5.323,0-9.756-1.945-13.809-6.998v6.01H262.43V268.006h14.678v34.122 c3.281-3.997,7.734-7.306,12.926-7.306C300.681,294.822,304.207,303.816,304.207,314.422z M289.245,315.302 c0-2.638-0.517-4.64-1.554-6.008c-1.758-2.321-5.042-2.571-7.586-1.284c-1.013,0.514-2.011,1.31-2.998,2.383v48.725 c1.184,1.271,2.33,2.188,3.441,2.748c2.365,1.198,5.836,1.293,7.438-0.805c0.838-1.1,1.259-2.896,1.259-5.389V315.302z M246.938,209.69c4.106,0,6.385-3.303,6.385-7.773v-38.188c0-4.594-2.004-7.829-6.685-7.829c-4.288,0-6.356,3.335-6.356,7.829 v38.188C240.281,206.242,242.721,209.69,246.938,209.69z M462,100v312c0,27.614-22.385,50-50,50H100c-27.613,0-50-22.386-50-50V100 c0-27.614,22.387-50,50-50h312C439.615,50,462,72.386,462,100z M281.84,209.615c0,8.11,2.479,14.665,10.662,14.665 c4.618,0,11.028-2.403,17.643-10.249v9.063h15.264v-82.099h-15.264v62.317c-1.86,2.33-5.999,6.148-8.975,6.148 c-3.268,0-4.066-2.229-4.066-5.531v-62.934H281.84V209.615z M224.572,162.375v40.242c0,14.468,7.561,22,22.365,22 c12.275,0,21.944-8.21,21.944-22v-40.242c0-12.85-9.571-22.056-21.944-22.056C233.494,140.319,224.572,149.203,224.572,162.375z M167.703,111.8l20.451,66.153v45.14h17.191v-45.14l20.006-66.153h-17.467l-11.014,44.485L185.018,111.8H167.703z M380.961,276.779 c0-19.331-15.67-35.001-35-35.001H166.039c-19.33,0-35,15.67-35,35.001V365.2c0,19.33,15.67,35,35,35h179.922 c19.33,0,35-15.67,35-35V276.779z M357.938,316.831v19.906h-27.805v14.75c0,5.865,0.496,10.938,6.349,10.938 c6.137,0,6.494-4.13,6.494-10.938v-5.435h14.962v5.873c0,15.066-6.467,24.189-21.786,24.189c-13.881,0-20.979-10.113-20.979-24.189 v-35.095c0-13.573,8.967-22.997,22.08-22.997C351.198,293.834,357.938,302.699,357.938,316.831z M342.976,316.686 c0-5.283-1.12-9.163-6.349-9.163c-5.387,0-6.494,3.79-6.494,9.163v7.916h12.843V316.686z"></path> </svg></a><a class="rssIconLink" href="http://feeds2.feedburner.com/jenkov-com" title="Subscribe to RSS Feed" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">   <path id="rss-square-rounded-icon" d="M412,50H100c-27.614,0-50,22.386-50,50v312c0,27.614,22.386,50,50,50h312     c27.614,0,50-22.386,50-50V100C462,72.386,439.614,50,412,50z M151.005,400.2c-21.554,0-39.026-17.472-39.026-39.026     c0-21.553,17.473-39.024,39.026-39.024s39.024,17.472,39.024,39.024C190.029,382.729,172.559,400.2,151.005,400.2z M244.268,400.2     c-0.747-72.618-59.672-131.542-132.289-132.288v-57.815c104.663,0.747,189.355,85.44,190.104,190.103H244.268z M342.201,400.2     c-0.174-61.521-24.205-119.335-67.728-162.856c-43.436-43.437-101.108-67.456-162.495-67.723V111.8     c158.955,0.556,287.681,129.401,288.043,288.4H342.201z"></path> </svg></a></div></td>
+                <td></td>
+                <td>
+<form action="http://jenkov.us4.list-manage.com/subscribe/post?u=39844b57926863757a8be6553&amp;id=74bcc45775" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+
+    <input name="FNAME" class="" id="mce-FNAME" placeholder="First Name *" size="15" type="text">&nbsp;
+    <input name="LNAME" class="" id="mce-LNAME" placeholder="Last Name *" size="15" type="text">&nbsp;
+    <input name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email *" size="15" type="email">&nbsp;<br>
+    <input value="Yes, give me tips!" name="subscribe" id="mc-embedded-subscribe" class="button" type="submit">
+
+    <input name="listid" value="9579" type="hidden">
+    <input name="specialid:9579" value="SW15" type="hidden">
+
+    <input name="clientid" value="435086" type="hidden">
+    <input name="formid" value="587" type="hidden">
+    <input name="reallistid" value="1" type="hidden">
+    <input name="doubleopt" value="1" type="hidden">
+
+</form></td>
+            </tr>
+            <tr><td></td></tr>
+        </tbody></table>
+        
+
+        <div id="articleBottomAds">
+        <script>
+        if(articleLen < 4000){
+            if(window.innerWidth >= 1200){
+                writeAd("7776167002", 728, 90);
+                bottomAdStyles("articleBottomAds", 728, 20, 20);
+            } else {
+                if(adRandom < 50) {
+                    writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                } else {
+                    writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                }
+            }
+        }
+        </script>
+        </div>
+
+        <div style="height: 30px"></div>
+        <div id="disqussComments">
+            <div id="disqus_thread"><iframe verticalscrolling="no" horizontalscrolling="no" src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/a.html" style="width: 100% ! important; border: medium none ! important; overflow: hidden ! important; height: 788px ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" data-disqus-uid="1" id="dsq-1" frameborder="0" width="100%"></iframe><iframe style="width: 796px ! important; border: medium none ! important; overflow: hidden ! important; top: 0px ! important; min-width: 796px ! important; max-width: 796px ! important; position: fixed ! important; z-index: 2147483646 ! important; height: 29px ! important; min-height: 29px ! important; max-height: 29px ! important; display: none ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" data-disqus-uid="indicator-north" id="dsq-indicator-north" frameborder="0"></iframe><iframe style="width: 796px ! important; border: medium none ! important; overflow: hidden ! important; bottom: 0px ! important; min-width: 796px ! important; max-width: 796px ! important; position: fixed ! important; z-index: 2147483646 ! important; height: 29px ! important; min-height: 29px ! important; max-height: 29px ! important; display: none ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" data-disqus-uid="indicator-south" id="dsq-indicator-south" frameborder="0"></iframe></div>
+<script type="text/javascript">
+    
+    var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+    
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+        </div>
+</div><div style="width: 1200px;" jqc-row="" jqc-row-paddings="0:0"><div style="width: 1200px; margin-left: 0px;" jqc-cell="0:12c">
+            <div style="width: 970px; margin: 20px auto;" id="pageBottomAds">
+                <script>
+                    if(articleLen >= 4000){ 
+                        if(window.innerWidth >= 728 ) {  
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script><script async="" src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/adsbygoogle.js"></script><ins data-adsbygoogle-status="done" class="adsbygoogle" style="display:inline-block;width:970px;height:250px" data-ad-client="ca-pub-5569543489255665" data-ad-slot="9547200207"><ins id="aswift_2_expand" style="display:inline-table;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:970px;background-color:transparent"><ins id="aswift_2_anchor" style="display:block;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:970px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;" frameborder="0" height="250" width="970"></iframe></ins></ins></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                <br><br><br>
+            </div>
+        </div></div></div>
+
+<style>
+#trailTocFixedDiv{
+    position: fixed;  top : 0px; left : 0px; width : 100%; height : 100%;  display : none; background-color: #ffffff;
+}
+#trailTocFixedInnerDiv{
+    width    : 400px; max-width: 94%; height: calc(100% - 72px); overflow : auto; margin : 20px auto 20px auto; padding : 0px 0px 80px 0px;
+ }
+#trailTocFixedCloseButton {
+    width : 72px; padding: 10px 20px; background-color: #009900; border: 2px solid #006600; color: #ffffff; font-size: 0.8em; font-weight: bold; position: absolute; right: 0px; cursor: pointer; box-shadow: 2px 2px 2px 2px #cccccc;
+}
+</style>
+
+<div id="trailTocFixedDiv">
+<div id="trailTocFixedCloseButton">Close TOC</div>
+<div id="trailTocFixedInnerDiv"></div>
+</div>
+
+
+<style>
+    #bottomNavBarDiv {
+        position:fixed; bottom: 0px; width: 100%;  background-color: #202020; border-top: 1px solid #444444;
+    }
+    .buttonNavBarButtonDivActive {
+        background-color: #404040;
+    }
+    #bottomNavBarDiv [jqc-cell] {
+        border-left: 1px solid #404040; border-right: 1px solid #000000;  height: 48px;  padding-top:16px; text-align: center; cursor: pointer;
+    }
+    #bottomNavBarDiv a {
+        color: #ffffff; font-weight: bold;
+    }
+    #bottomNavBarDiv br {
+        display:none;
+    }
+    #bottomNavBarDiv img {
+        height: 20px;
+    }
+    #nextButton2 {
+        display:none;
+    }
+
+    @media only screen and (max-width: 700px){
+        #bottomNavBarDiv, #bottomNavBarDiv [jqc-cell] {
+            height: 58px;
+        }
+        #bottomNavBarDiv [jqc-cell] {
+            padding-top: 12px;
+        }
+        #bottomNavBarDiv a {
+            font-size: 0.8em;
+        }
+        #bottomNavBarDiv br {
+            display: inline;
+        }
+        #nextButton1 {
+            display: none;
+        }
+        #nextButton2 {
+            display: inline;
+        }
+    }
+    @media only screen and (max-width: 400px){
+        #bottomNavBarDiv [jqc-cell] {
+            padding-top: 10px;
+        }
+        #bottomNavBarDiv a {
+            font-size: 0.5em;
+        }
+        #bottomNavBarDiv img {
+            height: 24px;
+        }
+    }
+</style>
+
+<nav>
+<div id="bottomNavBarDiv">
+    <div style="width: 1200px;" jqc-row="" jqc-cell-spacings="0:0" jqc-row-paddings="0:0"><div style="width: 200px; margin-left: 0px;" jqc-cell="0:2c">
+            <div id="allTrailsButtonDiv">
+            <a href="#" title="Show all tutorial trails (larger topics) on tutorials.jenkov.com ."><img src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/iconmonstr-home-4-icon.svg"></a> <br>
+            <a href="#" title="Show all tutorial trails (larger topics) on tutorials.jenkov.com ." style="position:relative; top:-4px;">All Trails</a>
+            </div>
+        </div><div style="width: 200px; margin-left: 0px;" jqc-cell="0:2c">
+            <div id="trailTocButtonDiv">
+                <a href="#" title="Table of contents for trail (larger topic)."><img src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/iconmonstr-note-16-icon.svg"></a> <br>
+                <a href="#" title="Table of contents for trail (larger topic)." style="position:relative; top:-4px;">Trail TOC</a>
+            </div>
+        </div><div style="width: 200px; margin-left: 0px;" jqc-cell="0:2c">
+            <div id="pageTocButtonDiv">
+            <a href="" title="Table of contents for this page (article)."><img src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/iconmonstr-note-2-icon.svg"></a> <br>
+            <a href="" title="Table of contents for this page (article)." style="position:relative; top:-4px;">Page TOC</a>
+            </div>
+        </div><div style="width: 200px; margin-left: 0px;" jqc-cell="0:2c">
+            <div id="prevButtonDiv">
+            <a href="" title="Go to previous article in this trail."><img src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/iconmonstr-arrow-30-left-icon.svg"></a> <br>
+            <a href="" title="Go to previous article in this trail." style="position:relative; top:-4px;">Previous</a>
+            </div>
+        </div><div style="width: 400px; margin-left: 0px;" jqc-cell="0:4c">
+            <div id="nextButtonDiv">
+                <a id="nextButton1" href="#" title="Go to next article in this trail." style="position:relative; top:-4px;">Next</a>
+                <a href="" title="Go to next article in this trail."><img src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/iconmonstr-arrow-30-icon.svg"></a> <br>
+                <a id="nextButton2" href="#" title="Go to next article in this trail." style="position:relative; top:-4px;">Next</a>
+            </div>
+        </div></div>
+</div>
+</nav>
+
+
+<script jqc-module="bottomNavBarModule">
+    function bottomNavBarModule(){
+        var module = {};
+
+        module.postConfigure = function() {
+            $("#allTrailsButtonDiv, #allTrailsButtonDiv a").click(function(e) {
+                $("#allTrailsButtonDiv").parent().toggleClass("buttonNavBarButtonDivActive");
+                location.href="/";
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            $("#trailTocButtonDiv").click(function(e) {
+                $("#trailTocButtonDiv").parent().toggleClass("buttonNavBarButtonDivActive");
+                $("#trailTocFixedInnerDiv").html($("#trailToc").html() + "<br><br/>");
+                $("#trailTocFixedDiv").toggle();
+                e.preventDefault();
+                e.stopPropagation();
+            });
+            $("#trailTocFixedCloseButton").click(function(){
+                $("#trailTocFixedDiv").hide();
+                $("#trailTocButtonDiv").parent().removeClass("buttonNavBarButtonDivActive");
+            });
+
+            $("#pageTocButtonDiv, #pageTocButtonDiv a").click(function(e){
+                location.href="#pageToc";
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            $("#prevButtonDiv, #prevButtonDiv a").click(function(e) {
+                
+                $("#prevButtonDiv").parent().addClass("buttonNavBarButtonDivActive");
+                location.href= "/java-nio/pipe.html";
+                
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            $("#nextButtonDiv, #nextButtonDiv a").click(function(e) {
+                
+                $("#nextButtonDiv").parent().addClass("buttonNavBarButtonDivActive");
+                location.href= "/java-nio/path.html";
+                
+                e.preventDefault();
+                e.stopPropagation();
+            });
+        }
+
+        return module;
+    }
+</script>
+
+
+<svg id="googlePlusIconSvg"></svg>
+
+
+<script>
+    googlePlusLink =
+"<a class='googlePlusIconLink' href='https://plus.google.com/+JakobJenkov?rel=author' style='text-decoration:none;' title='Connect on Google+'  target='_blank' rel='author'>"
+        + "<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' "
+        + "width='40px' height='40px' viewBox='0 0 512 512' enable-background='new 0 0 512 512' xml:space='preserve'> "
+        + "<path id='google-plus-square-rounded-icon' d='M209.035,235.669c-22.34-0.673-43.568-21.164-47.425-50.498 "
+        + "c-3.858-29.341,11.122-51.789,33.458-51.124c22.329,0.671,41.439,24.737,45.294,54.07 "
+        + "C244.215,217.455,231.363,236.333,209.035,235.669z M204.452,295.702c-33.279-0.366-61.481,21.029-61.481,45.829 "
+        + "c0,25.309,24.033,46.375,57.314,46.375c42.547,0,63.102-19.773,63.102-45.082C263.387,318.698,241.378,295.702,204.452,295.702z "
+        + "M461.945,101v312c0,27.614-22.386,50-50,50h-312c-27.614,0-50-22.386-50-50V101c0-27.614,22.386-50,50-50h312 "
+        + "C439.56,51,461.945,73.386,461.945,101z M292.054,339.882c0-23.364-8.724-38.63-35.119-58.406 "
+        + "c-26.771-19.524-33.313-30.555-7.761-50.31c14.398-11.133,24.488-25.973,24.488-44.295c0-19.961-8.162-38.071-23.51-46.864h21.755 "
+        + "l18.521-19.438c0,0-69.817,0-82.879,0c-51.736,0-77.105,31.01-77.105,65.122c0,34.861,23.915,62.316,70.615,62.316 "
+        + "c-7.24,14.617-4.332,28.117,7.514,37.771c-79.759,0-96.826,34.998-96.826,61.957c0,34.932,40.154,55.699,88.303,55.699  "
+        + "C265.885,403.434,292.054,368.543,292.054,339.882z M400.146,162.626H361.91v-38.235h-19.117v38.235h-38.235v19.117h38.235v38.235 "
+        + "h19.117v-38.235h38.235V162.626z'/> "
+        + "</svg></a>"
+    ;
+
+    twitterLink =
+          "<a class='twitterIconLink' href='https://twitter.com/#!/jjenkov' title='Follow on Twitter' target='_blank'>"
+        + "<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' "
+        + "width='40px' height='40px' viewBox='0 0 512 512' enable-background='new 0 0 512 512' xml:space='preserve'> "
+        + " <path id='twitter-3-icon' d='M412,50H100c-27.614,0-50,22.386-50,50v312c0,27.614,22.386,50,50,50h312c27.614,0,50-22.386,50-50V100 "
+        + "   C462,72.386,439.614,50,412,50z M371.942,207.125c3.553,79.059-55.408,167.203-159.768,167.203 "
+        + "   c-31.743,0-61.289-9.305-86.164-25.253c29.821,3.515,59.586-4.758,83.218-23.278c-24.596-0.453-45.356-16.703-52.508-39.035 "
+        + "   c8.808,1.684,17.473,1.19,25.383-0.962c-27.03-5.433-45.692-29.784-45.083-55.826c7.577,4.211,16.245,6.74,25.46,7.032 "
+        + "   c-25.034-16.73-32.12-49.786-17.396-75.045c27.723,34.006,69.143,56.385,115.857,58.729c-8.199-35.16,18.474-69.019,54.755-69.019 "
+        + "   c16.168,0,30.776,6.825,41.029,17.75c12.804-2.52,24.833-7.198,35.694-13.639c-4.197,13.126-13.11,24.141-24.715,31.098 "
+        + "   c11.37-1.357,22.204-4.379,32.284-8.851C392.454,189.301,382.926,199.201,371.942,207.125z'/> "
+        + "</svg></a>"
+    ;
+
+    linkedInLink =
+          "<a class='linkedInIconLink' href='http://www.linkedin.com/pub/jakob-jenkov/0/a8/4a3' title='Connect on LinkedIn' target='_blank'>"
+        + "<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' "
+        + "  width='40px' height='40px' viewBox='0 0 512 512' enable-background='new 0 0 512 512' xml:space='preserve'> "
+        + "  <path id='linkedin-square-rounded-icon' d='M411.945,50h-312c-27.614,0-50,22.386-50,50v312c0,27.614,22.386,50,50,50h312 "
+        + "    c27.614,0,50-22.386,50-50V100C461.945,72.386,439.56,50,411.945,50z M180.996,392.99h-56.537V210.336h56.537V392.99z "
+        + "    M152.457,186.417c-18.465,0-33.432-15.09-33.432-33.703c0-18.614,14.967-33.704,33.432-33.704c18.463,0,33.432,15.09,33.432,33.704 "
+        + "    C185.889,171.327,170.92,186.417,152.457,186.417z M392.865,392.99h-56.262c0,0,0-69.582,0-95.881 "
+        + "    c0-26.296-9.988-40.974-30.781-40.974c-22.629,0-34.453,15.289-34.453,40.974c0,28.133,0,95.881,0,95.881h-54.223V210.336h54.223 "
+        + "    v24.599c0,0,16.309-30.171,55.041-30.171s66.455,23.648,66.455,72.572C392.865,326.262,392.865,392.99,392.865,392.99z'/> "
+        + "</svg></a>"
+    ;
+
+
+    youTubeLink =
+          "<a class='youTubeIconLink' href='https://www.youtube.com/user/jjenkov' title='Subscribe on YouTube' target='_blank'>"
+        + "<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' "
+        + "width='40px' height='40px' viewBox='0 0 512 512' enable-background='new 0 0 512 512' xml:space='preserve'> "
+        + "        <path id='youtube-3-icon' d='M233.709,295.811h14.537v78.188h-14.537v-8.631c-2.68,3.181-5.465,5.604-8.363,7.268 "
+        + "c-7.836,4.488-18.594,4.392-18.594-11.473v-65.352h14.538v59.936c0,3.146,0.763,5.27,3.872,5.27c2.833,0,6.773-3.635,8.547-5.855 "
+        + "V295.811z M206.951,268.006h-50.245v15.384h16.937v90.608h16.371V283.39h16.938V268.006z M304.207,314.422v43.377 "
+        + "c0,9.674-3.619,17.188-13.291,17.188c-5.323,0-9.756-1.945-13.809-6.998v6.01H262.43V268.006h14.678v34.122 "
+        + "c3.281-3.997,7.734-7.306,12.926-7.306C300.681,294.822,304.207,303.816,304.207,314.422z M289.245,315.302 "
+        + "c0-2.638-0.517-4.64-1.554-6.008c-1.758-2.321-5.042-2.571-7.586-1.284c-1.013,0.514-2.011,1.31-2.998,2.383v48.725 "
+        + "c1.184,1.271,2.33,2.188,3.441,2.748c2.365,1.198,5.836,1.293,7.438-0.805c0.838-1.1,1.259-2.896,1.259-5.389V315.302z "
+        + "M246.938,209.69c4.106,0,6.385-3.303,6.385-7.773v-38.188c0-4.594-2.004-7.829-6.685-7.829c-4.288,0-6.356,3.335-6.356,7.829 "
+        + "v38.188C240.281,206.242,242.721,209.69,246.938,209.69z M462,100v312c0,27.614-22.385,50-50,50H100c-27.613,0-50-22.386-50-50V100 "
+        + "c0-27.614,22.387-50,50-50h312C439.615,50,462,72.386,462,100z M281.84,209.615c0,8.11,2.479,14.665,10.662,14.665 "
+        + "c4.618,0,11.028-2.403,17.643-10.249v9.063h15.264v-82.099h-15.264v62.317c-1.86,2.33-5.999,6.148-8.975,6.148 "
+        + "c-3.268,0-4.066-2.229-4.066-5.531v-62.934H281.84V209.615z M224.572,162.375v40.242c0,14.468,7.561,22,22.365,22 "
+        + "c12.275,0,21.944-8.21,21.944-22v-40.242c0-12.85-9.571-22.056-21.944-22.056C233.494,140.319,224.572,149.203,224.572,162.375z "
+        + "M167.703,111.8l20.451,66.153v45.14h17.191v-45.14l20.006-66.153h-17.467l-11.014,44.485L185.018,111.8H167.703z M380.961,276.779 "
+        + "c0-19.331-15.67-35.001-35-35.001H166.039c-19.33,0-35,15.67-35,35.001V365.2c0,19.33,15.67,35,35,35h179.922 "
+        + "c19.33,0,35-15.67,35-35V276.779z M357.938,316.831v19.906h-27.805v14.75c0,5.865,0.496,10.938,6.349,10.938 "
+        + "c6.137,0,6.494-4.13,6.494-10.938v-5.435h14.962v5.873c0,15.066-6.467,24.189-21.786,24.189c-13.881,0-20.979-10.113-20.979-24.189 "
+        + "v-35.095c0-13.573,8.967-22.997,22.08-22.997C351.198,293.834,357.938,302.699,357.938,316.831z M342.976,316.686 "
+        + "c0-5.283-1.12-9.163-6.349-9.163c-5.387,0-6.494,3.79-6.494,9.163v7.916h12.843V316.686z'/> "
+        + "</svg></a>"
+    ;
+
+
+    rssLink =
+          "<a class='rssIconLink' href='http://feeds2.feedburner.com/jenkov-com' title='Subscribe to RSS Feed' target='_blank'>"
+        + "<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' "
+        + "  width='40px' height='40px' viewBox='0 0 512 512' enable-background='new 0 0 512 512' xml:space='preserve'> "
+        + "  <path id='rss-square-rounded-icon' d='M412,50H100c-27.614,0-50,22.386-50,50v312c0,27.614,22.386,50,50,50h312 "
+        + "    c27.614,0,50-22.386,50-50V100C462,72.386,439.614,50,412,50z M151.005,400.2c-21.554,0-39.026-17.472-39.026-39.026 "
+        + "    c0-21.553,17.473-39.024,39.026-39.024s39.024,17.472,39.024,39.024C190.029,382.729,172.559,400.2,151.005,400.2z M244.268,400.2 "
+        + "    c-0.747-72.618-59.672-131.542-132.289-132.288v-57.815c104.663,0.747,189.355,85.44,190.104,190.103H244.268z M342.201,400.2 "
+        + "    c-0.174-61.521-24.205-119.335-67.728-162.856c-43.436-43.437-101.108-67.456-162.495-67.723V111.8 "
+        + "    c158.955,0.556,287.681,129.401,288.043,288.4H342.201z'/> "
+        + "</svg></a>"
+    ;
+
+
+
+
+
+</script>
+<script>
+    var socialConnectLinks = googlePlusLink + twitterLink + linkedInLink + youTubeLink + rssLink;
+    ;
+
+    var photoWidth  = 111;
+    var photoHeight = 127;
+    var authorStr   = "Jakob Jenkov";
+    var afterPhotoX = photoWidth + 20;
+    if(window.innerWidth <= 400){
+        photoWidth  = 72;
+        photoHeight = 82;
+        afterPhotoX = photoWidth + 10;
+        authorStr   = "<br/>Jakob<br/>Jenkov";
+    }
+    var articleTopHtmlStr =
+            "<div style='position:relative; borderx: 1px solid #cccccc; height: 163px;'>"
+          + "  <img style='width:" + photoWidth + "px; height:" + photoHeight+ "px;' src='/images/layout/small-portrait_mini.jpg'> <br/>"
+          + "  <span class='author'>By <a target='jakob-jenkov' href='http://jakob.jenkov.com'>" + authorStr + "</a></span>"
+          + " "
+          + "  <div style='position:absolute; top: 0px; left: " + afterPhotoX +"px;'>"
+          + "    &nbsp;Connect with me: <br/>"
+          + "    " + socialConnectLinks
+          + "  </div>"
+
+          ;
+    articleTopHtmlStr +=
+            "  <div style='position:absolute; top: 70px; left: " + afterPhotoX + "px'>"
+          + "   Rate article: "
+          + "  </div>"
+
+          + "  <div style='position:absolute; top: 88px; left: " + afterPhotoX + "px;'> "
+          + "    <script type='text/javascript' src='https://apis.google.com/js/plusone.js' async>"
+          + "<\/script>"
+          + "    <g:plusone><\/g:plusone>"
+          + "  </div>"
+          
+          + "  <div style='position:absolute; top: 122px; left: " + afterPhotoX + "px'>"
+          + "    Share article:"
+          + "  </div>"
+
+          + "  <div style='position:absolute; top: 140px; left: " + afterPhotoX + "px'>"
+          + "    <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>"
+          + "    <script type='text/javascript'>"
+          + "     (function() { "
+          + "       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;"
+          + "       po.src = 'https://apis.google.com/js/platform.js'; "
+          + "       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);"
+          + "       })();"
+          + "    <\/script>"
+          + "  </div>"
+
+          + "  <div style='position:absolute; top: 140px; left: " + (afterPhotoX + 80) + "px'>"
+          + "    <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov'>Tweet</a>"
+          + "    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');<\/script>"
+          + "  </div>"
+          
+;
+
+//console.log(articleTopHtmlStr);
+</script>
+
+<span jqc-module="mobileAdaptModule"></span>
+
+<script>
+function mobileAdaptModule() {
+
+   var module = {};
+
+    module.postRender = function() {
+        console.log("Mobile Adaptation Running");
+
+        var articleTopDiv = $("#articleTopDiv");
+
+        articleTopDiv.html( articleTopHtmlStr );
+
+        //articleTopDiv.html( $("#articleTopTemplate").html() );
+
+        //$("#googlePlusIconSvg").html( rssIcon );
+        $("#bottomSocialLinks").html(socialConnectLinks);
+        $("#leftSocialLinks").html(socialConnectLinks);
+
+    }
+
+   return module;
+}
+
+</script>
+
+
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-4036229-3', 'auto');
+    ga('send', 'pageview');
+
+</script>
+    
+
+    <div id="cookieMsgDiv">
+        This website uses <b>cookies</b> to improve the user experience and gather statistics. Our advertisers use cookies too (3rd party cookies),
+        to provide more relevant ads. Continued use of this website implies that you accept the use of cookies on this
+        website.
+
+        We do not share our cookies with our advertisers, and our advertisers do not share
+        cookies with us.
+
+        <div id="cookieOkDiv">
+            OK
+        </div>
+    </div>
+
+    <script jqc-module="cookieModule">
+        function cookieModule() {
+            var module = {};
+
+            module.postConfigure = function() {
+                $("#cookieOkDiv").click(function() {
+                    localStorage.cookiesAccepted = true;
+                    $("#cookieMsgDiv").hide();
+                });
+            }
+
+            module.postRender = function() {
+                if(!localStorage.cookiesAccepted){
+                    $("#cookieMsgDiv").show();
+                }
+            }
+
+
+            return module;
+        }
+    </script>
+
+
+
+
+<iframe tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;" src="Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com_files/postmessageRelay.html" id="oauth2relay405693194" name="oauth2relay405693194"></iframe></body></html>

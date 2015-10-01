@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html lang="en" dir="ltr" class="ie8"><![endif]-->
+<!--[if IE 9]><html lang="en" dir="ltr" class="ie9"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="js no-touch localstorage sessionstorage contenteditable use-opacity-transitions" dir="ltr" lang="en"><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Disqus Comments</title>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+    
+    <style>
+        html {
+            overflow: hidden;
+        }
+
+        
+    </style>
+
+<link media="all" href="a_data/lounge.css" rel="stylesheet"><script src="a_data/config.js" data-requiremodule="remote/config" data-requirecontext="_" async="" charset="utf-8" type="text/javascript"></script><script src="a_data/common.js" data-requiremodule="common.bundle" data-requirecontext="_" async="" charset="utf-8" type="text/javascript"></script><script src="a_data/lounge_002.js" data-requiremodule="lounge.bundle" data-requirecontext="_" async="" charset="utf-8" type="text/javascript"></script><script src="a_data/ga.js" data-requiremodule="ga" data-requirecontext="_" async="" charset="utf-8" type="text/javascript"></script><style id="css_1442043344234"></style><!-- base href="http://disqus.com/embed/comments/?base=default&version=6cc4c98c21f8de6512de891569464884&f=tutorials-jenkov-com&t_u=http%3A%2F%2Ftutorials.jenkov.com%2Fjava-nio%2Fnio-vs-io.html&t_d=Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com&t_t=Java%20NIO%20vs.%20IO%20%7C%20tutorials.jenkov.com&s_o=default" --><script charset="UTF-8" async="" src="a_data/event.js"></script><link media="all" href="a_data/discovery.css" rel="stylesheet"><script src="a_data/discovery.js" data-requiremodule="discovery/main" data-requirecontext="_" async="" charset="utf-8" type="text/javascript"></script></head>
+<body>
+    
+
+    
+    <!--[if lt IE 10]><p style="color: #fff; background-color: #f05f70; padding: 10px; margin-top: 20px;">
+        You're using a browser that Disqus plans to stop supporting soon. For more information, visit our list of 
+        <a href="https://help.disqus.com/customer/portal/articles/466228-which-browsers-does-disqus-work-with-" style="color: #fff; text-decoration: underline;">supported browsers</a>
+        and consider upgrading.
+    </p><![endif]-->
+    <div id="error" style="display:none; text-align: center">
+        <p>We were unable to load Disqus. If you are a moderator please see our <a href="https://docs.disqus.com/help/83/"> troubleshooting guide</a>. </p>
+    </div>
+
+    
+    <script type="text/json" id="disqus-forumData">{"session":{"canModerate":false,"audienceSyncVerified":false,"canReply":true,"mustVerifyEmail":false},"features":{},"forum":{"category":"Tech","description":"\u003cp>Tutorials for software developers and software entrepreneurs.\u003c/p>","founder":"90400732","settings":{"supportLevel":1,"adsDRNativeEnabled":false,"disable3rdPartyTrackers":false,"moderatorText":"","ssoRequired":false,"linkAffiliationEnabled":false,"hasCustomAvatar":false,"organicDiscoveryEnabled":true,"colorScheme":"auto","discoveryMax":true,"discoverySettingsUrl":"https://tutorials-jenkov-com.disqus.com/admin/settings/ads/","adsVideoEnabled":false,"allowAnonPost":false,"allowMedia":false,"promotedDiscoveryEnabled":false,"allowAnonVotes":false,"mustVerifyEmail":false,"discoveryVariant":"default","adsBannerEnabled":false,"audienceSyncEnabled":false,"typeface":"auto","discoveryLocked":false,"discoveryThumbnailsEnabled":true,"isVIP":false},"url":"http://tutorials.jenkov.com","guidelines":null,"favicon":{"permalink":"http://disqus.com/api/forums/favicons/tutorials-jenkov-com.jpg","cache":"//a.disquscdn.com/1441998532/images/favicon-default.png"},"language":"en","avatar":{"small":{"permalink":"http://disqus.com/api/forums/avatars/tutorials-jenkov-com.jpg?size=32","cache":"//a.disquscdn.com/1441998532/images/noavatar32.png"},"large":{"permalink":"http://disqus.com/api/forums/avatars/tutorials-jenkov-com.jpg?size=92","cache":"//a.disquscdn.com/1441998532/images/noavatar92.png"}},"pk":"3259545","signedUrl":"http://disq.us/?url=http%3A%2F%2Ftutorials.jenkov.com&key=7hsJsIoznCEEvYFxEXEhNw","raw_guidelines":null,"id":"tutorials-jenkov-com","channel":null,"name":"tutorials.jenkov.com"}}</script>
+
+    
+    <script type="text/json" id="disqus-threadData">{"cursor":{"hasPrev":false,"prev":null,"total":4,"hasNext":false,"next":"1:0:0"},"code":0,"response":{"lastModified":1441817395,"posts":[{"forum":"tutorials-jenkov-com","parent":null,"isApproved":true,"author":{"username":"tomerbendavid","about":"","name":"Tomer Ben David","disable3rdPartyTrackers":false,"url":"","isAnonymous":false,"rep":1.265529,"profileUrl":"https://disqus.com/by/tomerbendavid/","isPowerContributor":false,"reputation":1.265529,"location":"","isPrivate":false,"isPrimary":true,"joinedAt":"2013-09-24T09:07:17","id":"74574582","avatar":{"small":{"permalink":"http://disqus.com/api/users/avatars/tomerbendavid.jpg","cache":"//a.disquscdn.com/uploads/users/7457/4582/avatar32.jpg?1381076574"},"isCustom":true,"permalink":"http://disqus.com/api/users/avatars/tomerbendavid.jpg","cache":"//a.disquscdn.com/uploads/users/7457/4582/avatar92.jpg?1381076574","large":{"permalink":"http://disqus.com/api/users/avatars/tomerbendavid.jpg","cache":"//a.disquscdn.com/uploads/users/7457/4582/avatar92.jpg?1381076574"}}},"media":[],"isDeleted":false,"isFlagged":false,"dislikes":0,"raw_message":"Perfect! So Clear!","createdAt":"2014-11-03T15:59:29","id":"1674003650","thread":"3112340416","depth":0,"numReports":0,"isDeletedByAuthor":false,"likes":2,"isEdited":false,"message":"\u003cp>Perfect! So Clear!\u003c/p>","isSpam":false,"isHighlighted":false,"points":2},{"forum":"tutorials-jenkov-com","parent":null,"isApproved":true,"author":{"username":"bharathpaturi","about":"Programming lover","name":"Bharath Paturi","disable3rdPartyTrackers":false,"url":"","isAnonymous":false,"rep":1.245047,"profileUrl":"https://disqus.com/by/bharathpaturi/","isPowerContributor":false,"reputation":1.245047,"location":"Bangalore ","isPrivate":false,"isPrimary":true,"joinedAt":"2014-10-14T08:55:22","id":"125620369","avatar":{"small":{"permalink":"http://disqus.com/api/users/avatars/bharathpaturi.jpg","cache":"//a.disquscdn.com/uploads/users/12562/369/avatar32.jpg?1414240754"},"isCustom":true,"permalink":"http://disqus.com/api/users/avatars/bharathpaturi.jpg","cache":"//a.disquscdn.com/uploads/users/12562/369/avatar92.jpg?1414240754","large":{"permalink":"http://disqus.com/api/users/avatars/bharathpaturi.jpg","cache":"//a.disquscdn.com/uploads/users/12562/369/avatar92.jpg?1414240754"}}},"media":[],"isDeleted":false,"isFlagged":false,"dislikes":0,"raw_message":"nice examples regarding when to apply NIO or IO","createdAt":"2014-10-25T12:39:11","id":"1653168028","thread":"3112340416","depth":0,"numReports":0,"isDeletedByAuthor":false,"likes":1,"isEdited":false,"message":"\u003cp>nice examples regarding when to apply NIO or IO\u003c/p>","isSpam":false,"isHighlighted":false,"points":1},{"forum":"tutorials-jenkov-com","parent":null,"isApproved":true,"author":{"username":"disqus_1hsuaIDMHY","about":"Web Developer","name":"Sai Dubbaka","disable3rdPartyTrackers":false,"url":"","isAnonymous":false,"rep":1.2339689999999999,"profileUrl":"https://disqus.com/by/disqus_1hsuaIDMHY/","isPowerContributor":false,"reputation":1.2339689999999999,"location":"Woodbridge, NJ","isPrivate":false,"isPrimary":true,"joinedAt":"2014-12-08T18:02:23","id":"134923937","avatar":{"small":{"permalink":"http://disqus.com/api/users/avatars/disqus_1hsuaIDMHY.jpg","cache":"//a.disquscdn.com/1441998532/images/noavatar32.png"},"isCustom":false,"permalink":"http://disqus.com/api/users/avatars/disqus_1hsuaIDMHY.jpg","cache":"//a.disquscdn.com/1441998532/images/noavatar92.png","large":{"permalink":"http://disqus.com/api/users/avatars/disqus_1hsuaIDMHY.jpg","cache":"//a.disquscdn.com/1441998532/images/noavatar92.png"}}},"media":[],"isDeleted":false,"isFlagged":false,"dislikes":0,"raw_message":"Nice post, Thanks","createdAt":"2015-09-08T16:58:09","id":"2242731380","thread":"3112340416","depth":0,"numReports":0,"isDeletedByAuthor":false,"likes":0,"isEdited":false,"message":"\u003cp>Nice post, Thanks\u003c/p>","isSpam":false,"isHighlighted":false,"points":0},{"forum":"tutorials-jenkov-com","parent":null,"isApproved":true,"author":{"username":"cognoschen","about":"","name":"Cognos Chen","disable3rdPartyTrackers":false,"url":"","isAnonymous":false,"rep":1.24085,"profileUrl":"https://disqus.com/by/cognoschen/","isPowerContributor":false,"reputation":1.24085,"location":"","isPrivate":false,"isPrimary":true,"joinedAt":"2013-09-13T22:20:26","id":"73042451","avatar":{"small":{"permalink":"http://disqus.com/api/users/avatars/cognoschen.jpg","cache":"//a.disquscdn.com/uploads/users/7304/2451/avatar32.jpg?1441038289"},"isCustom":true,"permalink":"http://disqus.com/api/users/avatars/cognoschen.jpg","cache":"//a.disquscdn.com/uploads/users/7304/2451/avatar92.jpg?1441038289","large":{"permalink":"http://disqus.com/api/users/avatars/cognoschen.jpg","cache":"//a.disquscdn.com/uploads/users/7304/2451/avatar92.jpg?1441038289"}}},"media":[],"isDeleted":false,"isFlagged":false,"dislikes":0,"raw_message":"Helpful ! Thank you!","createdAt":"2015-07-24T14:58:39","id":"2154859139","thread":"3112340416","depth":0,"numReports":0,"isDeletedByAuthor":false,"likes":0,"isEdited":false,"message":"\u003cp>Helpful ! Thank you!\u003c/p>","isSpam":false,"isHighlighted":false,"points":0}],"thread":{"feed":"https://tutorials-jenkov-com.disqus.com/java_nio_vs_io/latest.rss","uploadAdd":"//tutorials-jenkov-com.disqus.com/thread/java_nio_vs_io/async_media_upload/","identifiers":[],"dislikes":0,"likes":0,"message":"","id":"3112340416","createdAt":"2014-10-13T13:52:43","category":"3311932","clean_title":"Java NIO vs. IO","userScore":0,"userSubscription":false,"isSpam":false,"signedLink":"http://disq.us/?url=http%3A%2F%2Ftutorials.jenkov.com%2Fjava-nio%2Fnio-vs-io.html&key=xDpgZzyGm74dKrwB8uDppw","isDeleted":false,"hasStreaming":false,"uploadRemove":"//tutorials-jenkov-com.disqus.com/thread/java_nio_vs_io/async_media_remove/","raw_message":"","isClosed":false,"link":"http://tutorials.jenkov.com/java-nio/nio-vs-io.html","slug":"java_nio_vs_io","forum":"tutorials-jenkov-com","author":"90400732","posts":4,"moderators":[90400732],"title":"Java NIO vs. IO","highlightedPost":null}},"order":"popular"}</script>
+
+    
+
+    <div id="fixed-content"></div>
+
+
+    
+        
+        <!--[if lte IE 8]>
+<script src="//a.disquscdn.com/1441998532/build/vendor/ie8.js"></script>
+<![endif]-->
+<!--[if IE 9]>
+<script src="//a.disquscdn.com/1441998532/build/vendor/ie9.js"></script>
+<![endif]-->
+
+        
+<script type="text/json" id="disqus-urls">{
+    "root":"//disqus.com",
+    "next":"//a.disquscdn.com/next/current/embed"
+}</script>
+
+        <script src="a_data/lounge.js" id="bootstrap-script" data-app="lounge"></script>
+    
+
+
+<div id="layout" data-tracking-area="layout">
+
+<div id="placement-top" data-tracking-area="discovery-north"><div style="height: 0px; visibility: hidden;" class="post-list"></div></div>
+
+<div id="onboard" data-tracking-area="onboard"></div>
+
+<div style="display: none;" id="highlighted-post" data-tracking-area="highlighted" class="highlighted-post"></div>
+
+<div id="global-alert"></div>
+
+<header id="main-nav" data-tracking-area="main-nav">
+<nav class="nav nav-primary">
+<ul>
+<li class="tab-conversation active" data-role="post-count">
+<a class="publisher-nav-color">
+<span class="comment-count">
+4 comments
+</span>
+
+<span class="comment-count-placeholder">
+Comments
+</span>
+</a>
+</li>
+<li class="tab-community">
+<a href="https://disqus.com/home/forums/tutorials-jenkov-com/" class="publisher-nav-color" data-action="community-sidebar" data-forum="tutorials-jenkov-com" id="community-tab">
+<span class="community-name">
+<strong>tutorials.jenkov.com</strong>
+
+</span>
+
+<strong class="community-name-placeholder">Community</strong>
+</a>
+</li>
+<li class="dropdown user-menu" data-role="logout"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+<span class="dropdown-toggle-wrapper">
+
+<span>
+Login
+</span>
+
+</span> <span class="caret"></span>
+</a>
+<ul class="dropdown-menu">
+
+
+<li>
+<a href="#" data-action="auth:disqus">Disqus</a>
+</li>
+<li>
+<a href="#" data-action="auth:facebook">Facebook</a>
+</li>
+<li>
+<a href="#" data-action="auth:twitter">Twitter</a>
+</li>
+<li>
+<a href="#" data-action="auth:google">Google</a>
+</li>
+
+
+
+</ul>
+</li>
+<li class="notification-menu unread" data-role="notification-menu"><a href="https://disqus.com/home/inbox/" class="notification-container" data-action="home" data-home-path="home/inbox/">
+<span class="notification-icon icon-comment" aria-hidden=""></span>
+<span class="notification-count" data-role="notification-count">1</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+
+<section id="conversation" data-role="main" data-tracking-area="main">
+<div class="nav nav-secondary" data-tracking-area="secondary-nav">
+<ul>
+<li id="recommend-button" class="recommend dropdown">
+<div class="thread-likes"><a href="#" data-action="recommend" title="Recommend this discussion" class="dropdown-toggle ">
+<span class="icon-heart"></span>
+<span class="label label-default">Recommend</span>
+<span class="label label-recommended">Recommended</span>
+</a>
+<ul class="dropdown-menu coachmark">
+<li>
+<h2>Discussion Recommended!</h2>
+<p>Recommending means this is a discussion worth sharing. It gets shared
+ to your followers' Disqus feeds, and gives the creator kudos!</p>
+<a href="http://disqus.com/home/?utm_source=disqus_embed&amp;utm_content=recommend_btn" class="btn btn-primary" target="_blank">
+ Find More Discussions 
+</a>
+</li>
+</ul>
+</div></li>
+<li id="thread-share-menu" class="dropdown share-menu hidden-sm"><a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Share">
+<span class="icon-export"></span>
+<span class="label">Share</span>
+</a>
+<ul class="share-menu dropdown-menu">
+<li class="share">Share this discussion on
+<ul>
+<li class="twitter">
+<a data-action="share:twitter" href="#">Twitter</a>
+</li>
+<li class="facebook">
+<a data-action="share:facebook" href="#">Facebook</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-role="post-sort" class="dropdown sorting pull-right">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+Sort by Best
+
+
+<span class="caret"></span>
+</a>
+<ul class="dropdown-menu pull-right">
+<li class="selected">
+<a href="#" data-action="sort" data-sort="popular">Best<i aria-hidden="true" class="icon-checkmark"></i></a>
+</li>
+
+<li>
+<a href="#" data-action="sort" data-sort="desc">Newest<i aria-hidden="true" class="icon-checkmark"></i></a>
+</li>
+
+<li>
+<a href="#" data-action="sort" data-sort="asc">Oldest<i aria-hidden="true" class="icon-checkmark"></i></a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+<div id="posts">
+<div id="form"><form class="reply">
+<div class="postbox">
+<div role="alert"></div>
+<div class="avatar">
+<span class="user">
+<img data-role="user-avatar" src="a_data/noavatar92.png" alt="Avatar">
+</span>
+</div>
+
+<div class="textarea-wrapper" data-role="textarea" dir="auto"><div><span class="placeholder">Join the discussion…</span><div aria-label="Join the discussion…" style="overflow: auto; max-height: 350px;" data-role="editable" aria-multiline="true" role="textbox" tabindex="0" class="textarea" contenteditable="true"><p><br></p></div><div style="display: none;"><ul class="suggestions">
+<li class="header">
+<h5>in this conversation</h5>
+</li>
+</ul>
+</div></div>
+<div data-role="drag-drop-placeholder" class="media-drag-hover" style="display: none">
+<div class="drag-text">
+⬇ Drag and drop your images here to upload them.
+</div>
+</div>
+<div class="edit-alert" role="postbox-alert"></div>
+<div class="post-actions">
+<ul class="wysiwyg">
+</ul>
+</div>
+</div>
+
+<div data-role="login-form"><div><section class="auth-section logged-out">
+<div class="connect">
+<h6>Log in with</h6>
+<ul data-role="login-menu" class="services login-buttons">
+
+
+<li class="auth-disqus">
+<button type="button" data-action="auth:disqus" title="Disqus"><i class="icon-disqus"></i></button>
+</li>
+<li class="auth-facebook">
+<button type="button" data-action="auth:facebook" title="Facebook"><i class="icon-facebook-circle"></i></button>
+</li>
+<li class="auth-twitter">
+<button type="button" data-action="auth:twitter" title="Twitter"><i class="icon-twitter-circle"></i></button>
+</li>
+<li class="auth-google">
+<button type="button" data-action="auth:google" title="Google"><i class="icon-google-plus-circle"></i></button>
+</li>
+</ul>
+</div>
+<div class="guest">
+<h6 class="guest-form-title">
+<span class="register-text"> or sign up with Disqus </span>
+<span class="guest-text"> or pick a name </span>
+</h6>
+
+<div class="what-is-disqus help-icon">
+<div id="rules" class="tooltip show">
+<h3>Disqus is a discussion network</h3>
+<ul>
+<li><span>Disqus never moderates or censors. The rules on this community are its own.</span></li>
+<li><span>Your email is safe with us. It's only used for moderation and optional notifications.</span></li>
+<li><span>Don't be a jerk or do anything illegal. Everything is easier that way.</span></li>
+</ul>
+<p class="clearfix"><a href="https://docs.disqus.com/kb/terms-and-policies/" class="btn btn-small" target="_blank">Read full terms and conditions</a></p>
+</div>
+</div>
+
+<p class="input-wrapper">
+<input dir="auto" placeholder="Name" name="display_name" id="view41_display_name" maxlength="30" type="text">
+</p>
+
+<div class="guest-details " data-role="guest-details">
+<p class="input-wrapper">
+<input dir="auto" placeholder="Email" name="email" id="view41_email" type="email">
+</p>
+
+<p class="input-wrapper">
+<input dir="auto" class="register-text" placeholder="Password" name="password" id="view41_password" type="password">
+</p>
+
+<div class="acceptance-wrapper register-text">
+By signing up, you agree to the Disqus <a target="_blank" href="https://help.disqus.com/customer/portal/articles/1753105-basic-rules-for-disqus-powered-profiles-and-discussions">Basic Rules</a>, <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466260-terms-of-service">Terms of Service</a>, and <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466259-privacy-policy">Privacy Policy</a>.
+</div>
+<div class="acceptance-wrapper guest-text">
+By posting, you agree to the Disqus <a target="_blank" href="https://help.disqus.com/customer/portal/articles/1753105-basic-rules-for-disqus-powered-profiles-and-discussions">Basic Rules</a>, <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466260-terms-of-service">Terms of Service</a>, and <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466259-privacy-policy">Privacy Policy</a>.
+</div>
+
+<input name="author-guest" style="display:none" type="checkbox">
+
+<div class="proceed" data-role="submit-btn-container">
+<button type="submit" class="btn submit" aria-label="Next"><span class="icon-proceed"></span><div class="spinner"></div></button>
+</div>
+</div>
+</div>
+</section>
+
+</div></div>
+</div>
+</form></div>
+
+<button class="alert realtime" style="display: none" data-role="realtime-notification">
+</button>
+
+<div id="no-posts" style="display:none"></div>
+
+<ul id="post-list" class="post-list"><li id="post-1674003650" class="post"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/tomerbendavid/" class="user" data-action="profile" data-username="tomerbendavid">
+<img data-role="user-avatar" data-user="74574582" src="a_data/avatar92.jpg" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/tomerbendavid/" data-action="profile" data-username="tomerbendavid" data-role="username">Tomer Ben David</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://tutorials.jenkov.com/java-nio/nio-vs-io.html#comment-1674003650" data-role="relative-time" class="time-ago" title="Monday, November 3, 2014 9:29 PM">10 months ago</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Perfect! So Clear!</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<a href="#" class="vote-up  count-2" data-action="upvote" title="">
+
+<span class="updatable count" data-role="likes">2</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://tutorials.jenkov.com/java-nio/nio-vs-io.html#comment-1674003650">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:1674003650">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li><li id="post-1653168028" class="post"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/bharathpaturi/" class="user" data-action="profile" data-username="bharathpaturi">
+<img data-role="user-avatar" data-user="125620369" src="a_data/avatar92_002.jpg" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/bharathpaturi/" data-action="profile" data-username="bharathpaturi" data-role="username">Bharath Paturi</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://tutorials.jenkov.com/java-nio/nio-vs-io.html#comment-1653168028" data-role="relative-time" class="time-ago" title="Saturday, October 25, 2014 6:09 PM">a year ago</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>nice examples regarding when to apply NIO or IO</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<a href="#" class="vote-up  count-1" data-action="upvote" title="">
+
+<span class="updatable count" data-role="likes">1</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://tutorials.jenkov.com/java-nio/nio-vs-io.html#comment-1653168028">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:1653168028">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li><li id="post-2242731380" class="post"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/disqus_1hsuaIDMHY/" class="user" data-action="profile" data-username="disqus_1hsuaIDMHY">
+<img data-role="user-avatar" data-user="134923937" src="a_data/noavatar92_002.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/disqus_1hsuaIDMHY/" data-action="profile" data-username="disqus_1hsuaIDMHY" data-role="username">Sai Dubbaka</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://tutorials.jenkov.com/java-nio/nio-vs-io.html#comment-2242731380" data-role="relative-time" class="time-ago" title="Tuesday, September 8, 2015 10:28 PM">4 days ago</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Nice post, Thanks</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<a href="#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://tutorials.jenkov.com/java-nio/nio-vs-io.html#comment-2242731380">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2242731380">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li><li id="post-2154859139" class="post"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/cognoschen/" class="user" data-action="profile" data-username="cognoschen">
+<img data-role="user-avatar" data-user="73042451" src="a_data/avatar92_003.jpg" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/cognoschen/" data-action="profile" data-username="cognoschen" data-role="username">Cognos Chen</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://tutorials.jenkov.com/java-nio/nio-vs-io.html#comment-2154859139" data-role="relative-time" class="time-ago" title="Friday, July 24, 2015 8:28 PM">2 months ago</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Helpful ! Thank you!</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<a href="#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://tutorials.jenkov.com/java-nio/nio-vs-io.html#comment-2154859139">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2154859139">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li></ul>
+
+<div class="load-more" data-role="more" style="display:none">
+<a href="#" data-action="more-posts" class="btn">Load more comments</a>
+</div>
+</div>
+
+</section>
+
+<div id="placement-bottom" data-tracking-area="discovery-south"><div style="height: auto; visibility: visible;" class="post-list"><div style="display: block; width: 100%;"><div id="discovery-main-c129" class="discovery-main discovery-thumbnails doublethumbnails">
+<div id="discovery-note" class="discovery-note">
+<div class="alert">
+<button class="close" data-action="discovery-help-close" title="Close this box">×</button>
+Disqus helps you find new and interesting content, discussions and 
+products. Some sponsors and ecommerce sites may pay us for these 
+recommendations and links. <a href="https://help.disqus.com/customer/portal/articles/2069645-reveal-f-a-q-" target="_blank">Learn more</a>
+ or <a href="mailto:publisher-success@disqus.com" target="_blank">
+give us feedback</a>.
+</div>
+</div>
+
+<div class="discovery-options">
+<button class="discovery-help" data-action="discovery-help">
+What's this?
+</button>
+</div>
+
+<section id="col-organic-c149" class="col-organic discovery-col-0 ">
+<header class="discovery-col-header">
+
+<h2>Also on <strong>tutorials.jenkov.com</strong>
+</h2>
+
+
+</header>
+<ul class="discovery-posts" data-role="discovery-posts"><li class="discovery-post post-0" id="discovery-link-organic-4020161214" data-id="4020161214">
+<a href="http://disq.us/url?url=http%3A%2F%2Ftutorials.jenkov.com%2Fgradle%2Fdependency-management.html%3AUD6L9OOxsPQ1tYGf1BETmetMDJI&amp;imp=1rf0bs115h1snn&amp;prev_imp&amp;forum_id=3259545&amp;forum=tutorials-jenkov-com&amp;thread_id=3112340416&amp;thread=4020161214&amp;zone=thread&amp;area=discovery" class="publisher-anchor-color">
+
+<header class="discovery-post-header">
+<h3 title="Gradle Dependency Management">
+<span data-role="discovery-thread-title" class="title line-truncate" data-line-truncate="4">
+Gradle Dependency Management
+</span>
+
+
+</h3>
+
+<ul class="meta">
+<li class="comments">
+1 comment
+</li>
+<li class="time">a month ago</li>
+</ul>
+</header>
+
+</a><a href="http://disq.us/url?url=http%3A%2F%2Ftutorials.jenkov.com%2Fgradle%2Fdependency-management.html%3AUD6L9OOxsPQ1tYGf1BETmetMDJI&amp;imp=1rf0bs115h1snn&amp;prev_imp&amp;forum_id=3259545&amp;forum=tutorials-jenkov-com&amp;thread_id=3112340416&amp;thread=4020161214&amp;zone=thread&amp;area=discovery" class="top-comment" data-role="discovery-top-comment">
+<img alt="Avatar" data-role="discovery-avatar">
+<p><span class="user" data-role="discovery-top-comment-author">Alps</span> — <span data-role="discovery-top-comment-snippet" class="line-truncate" data-line-truncate="3">Thanks for Gradle tutorial.It's really helpful</span></p>
+</a>
+
+</li>
+<li class="discovery-post post-1" id="discovery-link-organic-3868052764" data-id="3868052764">
+<a href="http://disq.us/url?url=http%3A%2F%2Ftutorials.jenkov.com%2Fjava-json%2Fboon-objectmapper.html%3AQ401q__pP8xzDkf22c2qBEMf77o&amp;imp=1rf0bs115h1snn&amp;prev_imp&amp;forum_id=3259545&amp;forum=tutorials-jenkov-com&amp;thread_id=3112340416&amp;thread=3868052764&amp;zone=thread&amp;area=discovery" class="publisher-anchor-color">
+
+<header class="discovery-post-header">
+<h3 title="Boon - ObjectMapper">
+<span data-role="discovery-thread-title" class="title line-truncate" data-line-truncate="4">
+Boon - ObjectMapper
+</span>
+
+
+</h3>
+
+<ul class="meta">
+<li class="comments">
+2 comments
+</li>
+<li class="time">3 months ago</li>
+</ul>
+</header>
+
+</a><a href="http://disq.us/url?url=http%3A%2F%2Ftutorials.jenkov.com%2Fjava-json%2Fboon-objectmapper.html%3AQ401q__pP8xzDkf22c2qBEMf77o&amp;imp=1rf0bs115h1snn&amp;prev_imp&amp;forum_id=3259545&amp;forum=tutorials-jenkov-com&amp;thread_id=3112340416&amp;thread=3868052764&amp;zone=thread&amp;area=discovery" class="top-comment" data-role="discovery-top-comment">
+<img alt="Avatar" data-role="discovery-avatar">
+<p><span class="user" data-role="discovery-top-comment-author">Jakob Jenkov</span> — <span data-role="discovery-top-comment-snippet" class="line-truncate" data-line-truncate="3">You should do your own measurements to make sure.</span></p>
+</a>
+
+</li>
+<li class="discovery-post post-2" id="discovery-link-organic-3867819564" data-id="3867819564">
+<a href="http://disq.us/url?url=http%3A%2F%2Ftutorials.jenkov.com%2Fvert.x%2Fverticles.html%3AGjKyFitad-vs-se2AENOuIAkWZQ&amp;imp=1rf0bs115h1snn&amp;prev_imp&amp;forum_id=3259545&amp;forum=tutorials-jenkov-com&amp;thread_id=3112340416&amp;thread=3867819564&amp;zone=thread&amp;area=discovery" class="publisher-anchor-color">
+
+<header class="discovery-post-header">
+<h3 title="Vert.x Verticles">
+<span data-role="discovery-thread-title" class="title line-truncate" data-line-truncate="4">
+Vert.x Verticles
+</span>
+
+
+</h3>
+
+<ul class="meta">
+<li class="comments">
+2 comments
+</li>
+<li class="time">3 months ago</li>
+</ul>
+</header>
+
+</a><a href="http://disq.us/url?url=http%3A%2F%2Ftutorials.jenkov.com%2Fvert.x%2Fverticles.html%3AGjKyFitad-vs-se2AENOuIAkWZQ&amp;imp=1rf0bs115h1snn&amp;prev_imp&amp;forum_id=3259545&amp;forum=tutorials-jenkov-com&amp;thread_id=3112340416&amp;thread=3867819564&amp;zone=thread&amp;area=discovery" class="top-comment" data-role="discovery-top-comment">
+<img alt="Avatar" data-role="discovery-avatar">
+<p><span class="user" data-role="discovery-top-comment-author">Jakob Jenkov</span> — <span data-role="discovery-top-comment-snippet" class="line-truncate" data-line-truncate="3">The
+ EventBusReceiverVerticle extends AbstractVerticle. When an 
+AbstractVerticle is deployed to the Vertx instance, the vertx instance 
+is automatically set on it.</span></p>
+</a>
+
+</li>
+<li class="discovery-post post-3" id="discovery-link-organic-3112639730" data-id="3112639730">
+<a href="http://disq.us/url?url=http%3A%2F%2Ftutorials.jenkov.com%2Fsoftware-as-career%2Feducation.html%3ACE34ynMLYccf2amJdpRtmLEY9g8&amp;imp=1rf0bs115h1snn&amp;prev_imp&amp;forum_id=3259545&amp;forum=tutorials-jenkov-com&amp;thread_id=3112340416&amp;thread=3112639730&amp;zone=thread&amp;area=discovery" class="publisher-anchor-color">
+
+<header class="discovery-post-header">
+<h3 title="Does Education Matter?">
+<span data-role="discovery-thread-title" class="title line-truncate" data-line-truncate="4">
+Does Education Matter?
+</span>
+
+
+</h3>
+
+<ul class="meta">
+<li class="comments">
+8 comments
+</li>
+<li class="time">a year ago</li>
+</ul>
+</header>
+
+</a><a href="http://disq.us/url?url=http%3A%2F%2Ftutorials.jenkov.com%2Fsoftware-as-career%2Feducation.html%3ACE34ynMLYccf2amJdpRtmLEY9g8&amp;imp=1rf0bs115h1snn&amp;prev_imp&amp;forum_id=3259545&amp;forum=tutorials-jenkov-com&amp;thread_id=3112340416&amp;thread=3112639730&amp;zone=thread&amp;area=discovery" class="top-comment" data-role="discovery-top-comment">
+<img alt="Avatar" data-role="discovery-avatar">
+<p><span class="user" data-role="discovery-top-comment-author">Syed Umair Umer</span> — <span data-role="discovery-top-comment-snippet" class="line-truncate" data-line-truncate="3">Yes
+ Jakob I agree. Now days it's really difficult to have a job without 
+having a degree or certificate. And that could be the reason people 
+should get education from high schools and universities. But what I'm 
+saying is I'm luckily not from one of those people having trouble in 
+getting a good job. But not everyone is like me therefore they need 
+education :)</span></p>
+</a>
+
+</li>
+</ul>
+</section>
+
+</div>
+</div></div></div>
+
+<div id="footer" data-tracking-area="footer">
+<ul>
+<li class="logo"><a href="https://disqus.com/" rel="nofollow" title="Powered by Disqus">Powered by Disqus</a></li>
+<li id="thread-subscribe-button" class="email"> 
+<div class="default">
+<a href="#" rel="nofollow" data-action="subscribe" title="Subscribe and get email updates from this discussion"><i aria-hidden="true" class="icon-mail"></i><span class="clip">Subscribe</span> <i aria-hidden="true" class="icon-checkmark"></i></a>
+</div>
+<div class="form">
+<div class="input-wrapper"><input id="thread-subscribe-email" placeholder="yourname@email.com" type="email"></div>
+</div>
+</li>
+<li class="install">
+<a href="https://publishers.disqus.com/engage?utm_source=tutorials-jenkov-com&amp;utm_medium=Disqus-Footer" rel="nofollow" target="_blank">
+<i aria-hidden="true" class="icon-disqus"></i>
+<span class="clip">Add Disqus to your site</span>
+</a>
+</li>
+<li class="privacy">
+<a href="https://help.disqus.com/customer/portal/articles/1657951?utm_source=disqus&amp;utm_medium=embed-footer&amp;utm_content=privacy-btn" rel="nofollow" target="_blank">
+<i aria-hidden="true" class="icon-lock"></i>
+<span class="clip">Privacy</span>
+</a>
+</li>
+</ul>
+</div>
+</div></body></html>
